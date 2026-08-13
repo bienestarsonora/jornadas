@@ -1,38 +1,291 @@
-const STORAGE_KEY='bienestar_jornadas_v1';
-const svgPhoto=(label,a='#6d1636',b='#c99b56')=>`data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#g)"/><circle cx="730" cy="100" r="180" fill="rgba(255,255,255,.1)"/><text x="55" y="480" fill="white" font-size="42" font-family="Arial" font-weight="700">${label}</text><text x="58" y="525" fill="white" font-size="20" font-family="Arial">Imagen demostrativa · sustituir desde Administración</text></svg>`)}`;
-const demoData=[
-{id:'j1',title:'Jornada del Bienestar · Insurgentes',date:'2026-03-21',place:'Cancha comunitaria',neighborhood:'Insurgentes',lat:29.1189,lng:-110.9978,servicesCount:604,doorDays:3,speakerDays:2,services:['Atención médica','Orientación social','Registro civil','Asesoría jurídica','Servicios para mujeres'],agencies:['Secretaría de Bienestar','Secretaría de Salud','Registro Civil','Instituto Sonorense de las Mujeres'],summary:'Acercamiento integral de trámites, orientación y servicios gratuitos a familias de la colonia Insurgentes y sectores cercanos.',flyer:svgPhoto('Flyer · Insurgentes'),photos:[svgPhoto('Atención ciudadana'),svgPhoto('Módulos de servicio','#8f244c','#d6aa72'),svgPhoto('Participación vecinal','#344e5c','#9bb5a9')]},
-{id:'j2',title:'Jornada del Bienestar · Real del Carmen',date:'2026-05-17',place:'Parque de la colonia',neighborhood:'Real del Carmen',lat:29.0712,lng:-111.0405,servicesCount:892,doorDays:4,speakerDays:3,services:['Consulta médica','Vacunación','Corte de cabello','Asesoría educativa','Programas sociales'],agencies:['Secretaría de Bienestar','Secretaría de Salud','Instituto de Capacitación para el Trabajo','Secretaría de Educación y Cultura'],summary:'Jornada de alta participación con servicios de salud, orientación, capacitación y vinculación institucional.',flyer:svgPhoto('Flyer · Real del Carmen','#6d1636','#d19b5a'),photos:[svgPhoto('Servicios de salud','#46615b','#c2a165'),svgPhoto('Orientación social','#7a2e4b','#d0a079'),svgPhoto('Actividad comunitaria','#3e536e','#b9a26b')]},
-{id:'j3',title:'Jornada del Bienestar · Los Pinos',date:'2026-06-28',place:'Unidad deportiva',neighborhood:'Los Pinos',lat:29.1455,lng:-110.9568,servicesCount:0,doorDays:0,speakerDays:0,services:['Información por validar'],agencies:['Secretaría de Bienestar'],summary:'Registro preparado para incorporar resultados definitivos y evidencias de la jornada.',flyer:svgPhoto('Flyer · Los Pinos','#5e2640','#aa8760'),photos:[svgPhoto('Evidencia pendiente','#5e2640','#aa8760')]},
-{id:'j4',title:'Jornada del Bienestar · Insurgentes II',date:'2026-07-19',place:'Espacio comunitario',neighborhood:'Insurgentes',lat:29.1242,lng:-111.0034,servicesCount:0,doorDays:0,speakerDays:0,services:['Información por validar'],agencies:['Secretaría de Bienestar'],summary:'Segunda intervención territorial registrada en la colonia Insurgentes. Datos finales pendientes de validación.',flyer:svgPhoto('Flyer · Insurgentes II','#762243','#c69358'),photos:[svgPhoto('Evidencia pendiente','#762243','#c69358')]}
-];
-let events=loadData();let selectedId=null;let tempPhotos=[];let tempFlyer='';
-if(typeof L==='undefined'){document.getElementById('map').innerHTML='<div class="map-error"><strong>No fue posible cargar el mapa.</strong><span>Verifica la conexión a internet y vuelve a abrir la página.</span></div>';throw new Error('Leaflet no cargó');}
-const map=L.map('map',{scrollWheelZoom:true,zoomControl:true,preferCanvas:true}).setView([29.0892,-110.9613],12);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,minZoom:10,attribution:'&copy; OpenStreetMap',crossOrigin:true}).addTo(map);
-const markerLayer=L.layerGroup().addTo(map);const icon=L.divIcon({className:'',html:'<div class="custom-marker"></div>',iconSize:[34,34],iconAnchor:[17,34]});
-const $=id=>document.getElementById(id);const fmt=n=>new Intl.NumberFormat('es-MX').format(Number(n)||0);const split=s=>s.split(',').map(x=>x.trim()).filter(Boolean);const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
-function loadData(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||structuredClone(demoData)}catch{return structuredClone(demoData)}}function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(events))}
-function filtered(){const q=$('searchInput').value.toLowerCase().trim(),y=$('yearFilter').value;return events.filter(e=>(y==='all'||e.date.startsWith(y))&&(!q||[e.title,e.place,e.neighborhood,...e.services,...e.agencies].join(' ').toLowerCase().includes(q)))}
-function render(){renderStats();renderYears();renderMap();renderGallery();renderAdminList()}
-function renderStats(){const services=events.reduce((a,e)=>a+(+e.servicesCount||0),0),outreach=events.reduce((a,e)=>a+(+e.doorDays||0)+(+e.speakerDays||0),0),neigh=new Set(events.map(e=>e.neighborhood)).size,agencies=new Set(events.flatMap(e=>e.agencies)).size;$('heroServices').textContent=fmt(services);$('heroEvents').textContent=events.length;$('heroAgencies').textContent=agencies;$('heroNeighborhoods').textContent=neigh;$('statEvents').textContent=events.length;$('statServices').textContent=fmt(services);$('statNeighborhoods').textContent=neigh;$('statOutreach').textContent=outreach}
-function renderYears(){const current=$('yearFilter').value||'all',years=[...new Set(events.map(e=>e.date.slice(0,4)))].sort().reverse();$('yearFilter').innerHTML='<option value="all">Todos los años</option>'+years.map(y=>`<option>${y}</option>`).join('');$('yearFilter').value=years.includes(current)?current:'all'}
-function renderMap(){markerLayer.clearLayers();const list=filtered();list.forEach(e=>L.marker([e.lat,e.lng],{icon}).addTo(markerLayer).on('click',()=>showEvent(e.id)).bindTooltip(`${e.neighborhood} · ${fmt(e.servicesCount)} servicios`));$('visibleCount').textContent=`${list.length} jornadas visibles`;if(list.length&&list.length<events.length){const group=L.featureGroup(list.map(e=>L.marker([e.lat,e.lng])));map.fitBounds(group.getBounds().pad(.25))}}
-function showEvent(id){selectedId=id;const e=events.find(x=>x.id===id);if(!e)return;map.flyTo([e.lat,e.lng],14,{duration:.8});const photo=e.photos?.[0]||e.flyer;$('eventPanel').innerHTML=`<div class="event-cover">${photo?`<img src="${photo}" alt="${esc(e.title)}">`:''}<span class="event-date">${new Date(e.date+'T12:00:00').toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric'})}</span></div><div class="event-body"><h3>${esc(e.title)}</h3><div class="event-place">${esc(e.place)} · Col. ${esc(e.neighborhood)}</div><div class="event-metrics"><div><b>${fmt(e.servicesCount)}</b><small>Servicios</small></div><div><b>${e.services.length}</b><small>Tipos de servicio</small></div><div><b>${(+e.doorDays||0)+(+e.speakerDays||0)}</b><small>Días difusión</small></div></div><p style="font-size:12px;line-height:1.65;color:#6f666b">${esc(e.summary)}</p><div class="detail-block"><h4>Servicios ofrecidos</h4><div class="tag-list">${e.services.map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div></div><div class="detail-block"><h4>Dependencias participantes</h4><div class="agency-list">${e.agencies.map(x=>`<div class="agency">${esc(x)}</div>`).join('')}</div></div><div class="detail-block"><h4>Difusión territorial</h4><div class="agency-list"><div class="agency">Casa por casa: ${e.doorDays||0} día(s)</div><div class="agency">Perifoneo: ${e.speakerDays||0} día(s)</div></div></div>${e.flyer?`<div class="detail-block"><h4>Flyer de la jornada</h4><img class="flyer-thumb zoomable" src="${e.flyer}" data-caption="Flyer · ${esc(e.title)}"></div>`:''}${e.photos?.length?`<div class="detail-block"><h4>Galería fotográfica</h4><div class="panel-gallery">${e.photos.map((p,i)=>`<img class="zoomable" src="${p}" data-caption="${esc(e.title)} · Evidencia ${i+1}" alt="Evidencia ${i+1}">`).join('')}</div></div>`:''}</div>`;bindZoom()}
-function renderGallery(){const photos=events.flatMap(e=>(e.photos||[]).map((src,i)=>({src,caption:`${e.neighborhood} · ${e.title}`}))).slice(0,9);$('globalGallery').innerHTML=photos.map(p=>`<figure class="zoomable" data-src="${p.src}" data-caption="${esc(p.caption)}"><img src="${p.src}" alt="${esc(p.caption)}"><figcaption>${esc(p.caption)}</figcaption></figure>`).join('')||'<p>No hay fotografías registradas.</p>';bindZoom()}
-function bindZoom(){document.querySelectorAll('.zoomable').forEach(el=>el.onclick=()=>{const src=el.dataset.src||el.src;$('lightboxImage').src=src;$('lightboxCaption').textContent=el.dataset.caption||'';$('lightbox').showModal()})}
-function renderAdminList(){if(!$('adminList'))return;$('adminCount').textContent=events.length;$('adminList').innerHTML=events.map(e=>`<div class="admin-item ${e.id===selectedId?'active':''}" data-id="${e.id}"><b>${esc(e.title)}</b><span>${esc(e.neighborhood)} · ${e.date} · ${fmt(e.servicesCount)} servicios</span><div class="admin-item-actions"><button data-edit="${e.id}">Editar</button><button data-delete="${e.id}">Eliminar</button></div></div>`).join('');document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();editEvent(b.dataset.edit)});document.querySelectorAll('[data-delete]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();deleteEvent(b.dataset.delete)});document.querySelectorAll('.admin-item').forEach(x=>x.onclick=()=>editEvent(x.dataset.id))}
-function resetForm(){selectedId=null;tempPhotos=[];tempFlyer='';$('eventForm').reset();$('eventId').value='';$('formTitle').textContent='Nueva jornada';$('flyerStatus').textContent='';renderPhotoPreview();renderAdminList()}
-function editEvent(id){const e=events.find(x=>x.id===id);if(!e)return;selectedId=id;tempPhotos=[...(e.photos||[])];tempFlyer=e.flyer||'';$('eventId').value=e.id;$('fTitle').value=e.title;$('fDate').value=e.date;$('fPlace').value=e.place;$('fNeighborhood').value=e.neighborhood;$('fLat').value=e.lat;$('fLng').value=e.lng;$('fServicesCount').value=e.servicesCount;$('fDoorDays').value=e.doorDays;$('fSpeakerDays').value=e.speakerDays;$('fServices').value=e.services.join(', ');$('fAgencies').value=e.agencies.join(', ');$('fSummary').value=e.summary;$('formTitle').textContent='Editar jornada';$('flyerStatus').textContent=tempFlyer?'Flyer registrado':'Sin flyer';renderPhotoPreview();renderAdminList()}
-function renderPhotoPreview(){$('photoPreview').innerHTML=tempPhotos.map((p,i)=>`<div class="photo-chip"><img src="${p}"><button type="button" data-remove-photo="${i}">×</button></div>`).join('');document.querySelectorAll('[data-remove-photo]').forEach(b=>b.onclick=()=>{tempPhotos.splice(+b.dataset.removePhoto,1);renderPhotoPreview()})}
-function fileToData(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)})}
-$('fFlyer').onchange=async e=>{if(e.target.files[0]){tempFlyer=await fileToData(e.target.files[0]);$('flyerStatus').textContent='Flyer listo para guardar'}};
-$('fPhotos').onchange=async e=>{for(const f of [...e.target.files])tempPhotos.push(await fileToData(f));renderPhotoPreview()};
-$('eventForm').onsubmit=e=>{e.preventDefault();const id=$('eventId').value||`j${Date.now()}`;const obj={id,title:$('fTitle').value.trim(),date:$('fDate').value,place:$('fPlace').value.trim(),neighborhood:$('fNeighborhood').value.trim(),lat:+$('fLat').value,lng:+$('fLng').value,servicesCount:+$('fServicesCount').value||0,doorDays:+$('fDoorDays').value||0,speakerDays:+$('fSpeakerDays').value||0,services:split($('fServices').value),agencies:split($('fAgencies').value),summary:$('fSummary').value.trim(),flyer:tempFlyer,photos:tempPhotos};const i=events.findIndex(x=>x.id===id);if(i>=0)events[i]=obj;else events.unshift(obj);save();render();resetForm();showEvent(id);alert('Jornada guardada correctamente.')};
-function deleteEvent(id){const e=events.find(x=>x.id===id);if(!confirm(`¿Eliminar "${e.title}"?`))return;events=events.filter(x=>x.id!==id);save();resetForm();render();$('eventPanel').innerHTML='<div class="empty-state"><div class="pulse-pin">●</div><h3>Selecciona una jornada</h3><p>Consulta su ficha técnica y evidencias.</p></div>'}
-$('openAdmin').onclick=()=>{$('adminDialog').showModal();renderAdminList()};$('closeAdmin').onclick=()=>$('adminDialog').close();$('newEvent').onclick=resetForm;$('cancelEdit').onclick=resetForm;$('closeLightbox').onclick=()=>$('lightbox').close();
-$('searchInput').oninput=renderMap;$('yearFilter').onchange=renderMap;
-$('exportData').onclick=()=>{const blob=new Blob([JSON.stringify(events,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='jornadas-bienestar.json';a.click();URL.revokeObjectURL(a.href)};
-$('importData').onchange=async e=>{try{const data=JSON.parse(await e.target.files[0].text());if(!Array.isArray(data))throw Error();events=data;save();render();resetForm();alert('Datos importados correctamente.')}catch{alert('El archivo no tiene un formato válido.')}};
-$('resetData').onclick=()=>{if(confirm('¿Restablecer todos los datos demostrativos?')){events=structuredClone(demoData);save();resetForm();render()}};
-render();setTimeout(()=>map.invalidateSize(),300);
+(() => {
+  'use strict';
+
+  if (/type=(invite|recovery)/.test(location.hash)) { location.replace(`admin/${location.hash}`); return; }
+
+  const cfg = window.JORNADAS_CONFIG;
+  document.querySelectorAll('[data-logo]').forEach(img => { img.src = cfg.LOGO_DATA_URI; });
+  const client = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_PUBLISHABLE_KEY, {
+    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
+  });
+
+  const $ = (id) => document.getElementById(id);
+  const fmt = (n) => new Intl.NumberFormat('es-MX').format(Number(n) || 0);
+  const esc = (s = '') => String(s).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+  const dateLabel = (iso) => new Date(`${iso}T12:00:00`).toLocaleDateString('es-MX', { day:'numeric', month:'long', year:'numeric' });
+  const shortDate = (iso) => new Date(`${iso}T12:00:00`).toLocaleDateString('es-MX', { day:'2-digit', month:'short', year:'numeric' });
+
+  let jornadas = [];
+  let evidencias = [];
+  let selectedId = null;
+  let map;
+  let markerLayer;
+  const objectUrls = new Map();
+
+  function toast(message) {
+    const el = $('toast');
+    el.textContent = message;
+    el.classList.add('show');
+    clearTimeout(toast.t);
+    toast.t = setTimeout(() => el.classList.remove('show'), 2800);
+  }
+
+  function initMap() {
+    if (!window.L) {
+      $('map').innerHTML = '<div class="panel-empty"><h3>No fue posible cargar el mapa</h3><p>Verifica la conexión e intenta nuevamente.</p></div>';
+      return;
+    }
+    map = L.map('map', { scrollWheelZoom: true, zoomControl: true, preferCanvas: true }).setView([29.0892, -110.9613], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19, minZoom: 10, attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
+    markerLayer = L.layerGroup().addTo(map);
+  }
+
+  async function loadData() {
+    try {
+      const { data: js, error: je } = await client
+        .from('jornadas')
+        .select('*')
+        .eq('status', 'published')
+        .order('event_date', { ascending: false });
+      if (je) throw je;
+      jornadas = js || [];
+
+      if (jornadas.length) {
+        const ids = jornadas.map(j => j.id);
+        const { data: ev, error: ee } = await client
+          .from('jornadas_evidencias')
+          .select('*')
+          .in('jornada_id', ids)
+          .order('sort_order', { ascending: true });
+        if (ee) throw ee;
+        evidencias = ev || [];
+      } else {
+        evidencias = [];
+      }
+
+      renderAll();
+      hydrateVisibleImages();
+    } catch (err) {
+      console.error(err);
+      toast('No fue posible consultar la información.');
+      renderAll();
+    }
+  }
+
+  function evidenceFor(id, kind) {
+    return evidencias.filter(e => e.jornada_id === id && (!kind || e.kind === kind));
+  }
+
+  async function blobUrl(path) {
+    if (!path) return '';
+    if (objectUrls.has(path)) return objectUrls.get(path);
+    const { data, error } = await client.storage.from(cfg.STORAGE_BUCKET).download(path);
+    if (error || !data) return '';
+    const url = URL.createObjectURL(data);
+    objectUrls.set(path, url);
+    return url;
+  }
+
+  function filtered() {
+    const q = ($('searchInput')?.value || '').trim().toLowerCase();
+    const y = $('yearFilter')?.value || 'all';
+    return jornadas.filter(j => {
+      const text = [j.title, j.place, j.neighborhood, ...(j.services || []), ...(j.agencies || [])].join(' ').toLowerCase();
+      return (y === 'all' || String(j.event_date).startsWith(y)) && (!q || text.includes(q));
+    });
+  }
+
+  function renderAll() {
+    renderStats();
+    renderYears();
+    renderMap();
+    renderJourneys();
+    renderGallery();
+  }
+
+  function renderStats() {
+    const services = jornadas.reduce((a, j) => a + (Number(j.services_count) || 0), 0);
+    const outreach = jornadas.reduce((a, j) => a + (Number(j.door_days) || 0) + (Number(j.speaker_days) || 0), 0);
+    const neighborhoods = new Set(jornadas.map(j => j.neighborhood).filter(Boolean)).size;
+    const agencies = new Set(jornadas.flatMap(j => j.agencies || [])).size;
+
+    [['heroEvents', jornadas.length], ['heroServices', services], ['heroNeighborhoods', neighborhoods],
+     ['heroAgencies', agencies], ['heroOutreach', outreach], ['statEvents', jornadas.length],
+     ['statServices', services], ['statNeighborhoods', neighborhoods], ['statOutreach', outreach]]
+      .forEach(([id, value]) => { const el = $(id); if (el) el.textContent = fmt(value); });
+  }
+
+  function renderYears() {
+    const select = $('yearFilter');
+    if (!select) return;
+    const current = select.value || 'all';
+    const years = [...new Set(jornadas.map(j => String(j.event_date).slice(0,4)))].sort().reverse();
+    select.innerHTML = '<option value="all">Todos los años</option>' + years.map(y => `<option value="${esc(y)}">${esc(y)}</option>`).join('');
+    select.value = years.includes(current) ? current : 'all';
+  }
+
+  function renderMap() {
+    const list = filtered();
+    $('visibleCount').textContent = list.length;
+    if (!markerLayer) return;
+    markerLayer.clearLayers();
+    const icon = L.divIcon({ className:'', html:'<div class="custom-marker"></div>', iconSize:[30,30], iconAnchor:[15,30] });
+
+    list.forEach(j => {
+      if (!Number.isFinite(Number(j.lat)) || !Number.isFinite(Number(j.lng))) return;
+      L.marker([Number(j.lat), Number(j.lng)], { icon })
+        .addTo(markerLayer)
+        .bindTooltip(`${esc(j.neighborhood)} · ${fmt(j.services_count)} servicios`)
+        .on('click', () => showEvent(j.id));
+    });
+
+    if (list.length > 1) {
+      const pts = list.filter(j => Number.isFinite(Number(j.lat)) && Number.isFinite(Number(j.lng))).map(j => [Number(j.lat), Number(j.lng)]);
+      if (pts.length > 1) map.fitBounds(pts, { padding:[45,45], maxZoom:14 });
+    } else if (list.length === 1) {
+      map.setView([Number(list[0].lat), Number(list[0].lng)], 14);
+    } else {
+      map.setView([29.0892, -110.9613], 12);
+    }
+  }
+
+  async function showEvent(id) {
+    const j = jornadas.find(x => x.id === id);
+    if (!j) return;
+    selectedId = id;
+    if (map && Number.isFinite(Number(j.lat))) map.flyTo([Number(j.lat), Number(j.lng)], 14, { duration:.8 });
+
+    const flyer = evidenceFor(id, 'flyer')[0];
+    const photos = evidenceFor(id, 'photo');
+    const coverEvidence = photos[0] || flyer;
+    const coverUrl = coverEvidence ? await blobUrl(coverEvidence.storage_path) : '';
+    const flyerUrl = flyer ? await blobUrl(flyer.storage_path) : '';
+    const photoUrls = await Promise.all(photos.slice(0,6).map(async p => ({ ...p, url: await blobUrl(p.storage_path) })));
+
+    $('eventPanel').innerHTML = `
+      <div class="event-cover">${coverUrl ? `<img src="${coverUrl}" alt="${esc(j.title)}">` : ''}<span class="event-date">${esc(dateLabel(j.event_date))}</span></div>
+      <div class="event-body">
+        <span class="event-kicker">Jornada del Bienestar</span>
+        <h3>${esc(j.title)}</h3>
+        <div class="event-place">${esc(j.place)} · Col. ${esc(j.neighborhood)}</div>
+        <div class="event-metrics">
+          <div><b>${fmt(j.services_count)}</b><small>Servicios</small></div>
+          <div><b>${fmt((j.services || []).length)}</b><small>Tipos</small></div>
+          <div><b>${fmt((j.door_days || 0) + (j.speaker_days || 0))}</b><small>Días difusión</small></div>
+        </div>
+        ${j.summary ? `<p class="event-summary">${esc(j.summary)}</p>` : ''}
+        ${(j.services || []).length ? `<div class="detail-block"><h4>Servicios ofrecidos</h4><div class="tag-list">${j.services.map(x => `<span class="tag">${esc(x)}</span>`).join('')}</div></div>` : ''}
+        ${(j.agencies || []).length ? `<div class="detail-block"><h4>Dependencias participantes</h4><div class="agency-list">${j.agencies.map(x => `<div class="agency">${esc(x)}</div>`).join('')}</div></div>` : ''}
+        <div class="detail-block"><h4>Difusión territorial</h4><div class="agency-list"><div class="agency">Casa por casa: ${fmt(j.door_days)} día(s)</div><div class="agency">Perifoneo: ${fmt(j.speaker_days)} día(s)</div></div></div>
+        ${flyerUrl ? `<div class="detail-block"><h4>Flyer de la jornada</h4><img class="flyer-thumb zoomable" src="${flyerUrl}" data-caption="Flyer · ${esc(j.title)}" alt="Flyer de ${esc(j.title)}"></div>` : ''}
+        ${photoUrls.some(p => p.url) ? `<div class="detail-block"><h4>Galería fotográfica</h4><div class="panel-gallery">${photoUrls.filter(p => p.url).map((p,i) => `<img class="zoomable" src="${p.url}" data-caption="${esc(p.caption || `${j.title} · Evidencia ${i+1}`)}" alt="Evidencia ${i+1}">`).join('')}</div></div>` : ''}
+      </div>`;
+    bindZoomables();
+  }
+
+  function renderJourneys() {
+    const grid = $('journeyGrid');
+    const empty = $('journeyEmpty');
+    if (!jornadas.length) {
+      grid.innerHTML = '';
+      empty.hidden = false;
+      return;
+    }
+    empty.hidden = true;
+    grid.innerHTML = jornadas.slice(0,9).map(j => {
+      const cover = evidenceFor(j.id, 'photo')[0] || evidenceFor(j.id, 'flyer')[0];
+      return `<article class="journey-card" data-open-event="${j.id}">
+        <div class="journey-media" ${cover ? `data-image-path="${esc(cover.storage_path)}"` : ''}><span>${esc(shortDate(j.event_date))}</span></div>
+        <div class="journey-card-body"><small>${esc(j.neighborhood)}</small><h3>${esc(j.title)}</h3><p>${esc(j.place)}${j.summary ? ` · ${esc(j.summary).slice(0,105)}${j.summary.length > 105 ? '…' : ''}` : ''}</p>
+        <div class="journey-card-foot"><span>Servicios brindados</span><b>${fmt(j.services_count)}</b></div></div>
+      </article>`;
+    }).join('');
+    document.querySelectorAll('[data-open-event]').forEach(card => card.addEventListener('click', () => {
+      document.querySelector('#mapa').scrollIntoView({ behavior:'smooth', block:'start' });
+      setTimeout(() => showEvent(card.dataset.openEvent), 500);
+    }));
+  }
+
+  function renderGallery() {
+    const gallery = $('globalGallery');
+    const empty = $('galleryEmpty');
+    const photos = evidencias.filter(e => e.kind === 'photo').slice(0,12);
+    if (!photos.length) {
+      gallery.innerHTML = '';
+      empty.hidden = false;
+      return;
+    }
+    empty.hidden = true;
+    gallery.innerHTML = photos.map(p => {
+      const j = jornadas.find(x => x.id === p.jornada_id);
+      return `<figure class="gallery-item" data-image-path="${esc(p.storage_path)}" data-caption="${esc(p.caption || (j ? `${j.neighborhood} · ${j.title}` : 'Evidencia'))}"><figcaption>${esc(p.caption || (j ? `${j.neighborhood} · ${j.title}` : 'Evidencia'))}</figcaption></figure>`;
+    }).join('');
+  }
+
+  async function hydrateVisibleImages() {
+    const mediaEls = [...document.querySelectorAll('[data-image-path]')];
+    await Promise.all(mediaEls.map(async el => {
+      const url = await blobUrl(el.dataset.imagePath);
+      if (!url) return;
+      if (el.classList.contains('gallery-item')) {
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = el.dataset.caption || 'Evidencia';
+        el.prepend(img);
+        el.classList.add('zoomable');
+        el.dataset.src = url;
+      } else if (el.classList.contains('journey-media')) {
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = 'Evidencia de jornada';
+        el.prepend(img);
+      }
+    }));
+    bindZoomables();
+  }
+
+  function bindZoomables() {
+    document.querySelectorAll('.zoomable').forEach(el => {
+      el.onclick = (ev) => {
+        ev.stopPropagation();
+        const src = el.dataset.src || el.src || el.querySelector('img')?.src;
+        if (!src) return;
+        $('lightboxImage').src = src;
+        $('lightboxCaption').textContent = el.dataset.caption || '';
+        $('lightbox').showModal();
+      };
+    });
+  }
+
+  function setupUI() {
+    $('searchInput').addEventListener('input', renderMap);
+    $('yearFilter').addEventListener('change', renderMap);
+    $('closeLightbox').addEventListener('click', () => $('lightbox').close());
+    $('lightbox').addEventListener('click', e => { if (e.target === $('lightbox')) $('lightbox').close(); });
+
+    const menu = $('menuToggle');
+    menu.addEventListener('click', () => {
+      const nav = document.querySelector('.site-header nav');
+      const open = nav.classList.toggle('open');
+      menu.setAttribute('aria-expanded', String(open));
+      menu.textContent = open ? '×' : '☰';
+    });
+    document.querySelectorAll('.site-header nav a').forEach(a => a.addEventListener('click', () => {
+      document.querySelector('.site-header nav').classList.remove('open');
+      menu.setAttribute('aria-expanded', 'false');
+      menu.textContent = '☰';
+    }));
+
+    const io = new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')), { threshold:.11 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  }
+
+  window.addEventListener('beforeunload', () => objectUrls.forEach(url => URL.revokeObjectURL(url)));
+
+  setupUI();
+  initMap();
+  loadData();
+  setTimeout(() => map?.invalidateSize(), 350);
+})();

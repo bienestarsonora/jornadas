@@ -1,22 +1,26 @@
-# Jornadas del Bienestar · Micrositio territorial
+# Jornadas del Bienestar · Secretaría de Bienestar Sonora
 
-Micrositio estático en HTML5, CSS3 y JavaScript con OpenStreetMap/Leaflet.
+Micrositio institucional para consulta territorial, resultados y evidencias de las Jornadas del Bienestar en Hermosillo, Sonora.
 
-## Incluye
-- Mapa interactivo de Hermosillo.
-- Ficha técnica por jornada.
-- Servicios, dependencias, colonia, sede y resultados.
-- Volanteo, perifoneo y difusión casa por casa.
-- Flyer y galería de fotografías.
-- Buscador y filtro por año.
-- Panel de administración CRUD.
-- Importación y exportación JSON.
-- Persistencia local con `localStorage`.
+## Arquitectura
+- Frontend estático: HTML5, CSS3 y JavaScript.
+- Mapa: Leaflet + OpenStreetMap.
+- Backend independiente: Supabase **JORNADAS**.
+- Auth: Supabase Auth con perfiles `admin` y `capturista`.
+- Autorización: Row Level Security (RLS) en PostgreSQL.
+- Evidencias: Supabase Storage privado, con acceso regulado por políticas.
+- Trazabilidad: bitácora de cambios en base de datos.
 
-## Uso
-Abre `index.html` o publícalo directamente en GitHub Pages.
+## Roles
+- **Administrador:** administración integral, publicación, eliminación, usuarios y bitácora.
+- **Capturista:** creación y edición de borradores y carga de evidencias.
+- **Público:** lectura exclusiva de jornadas publicadas.
 
-## Importante
-El panel incluido es funcional para prototipo y guarda datos solamente en el navegador donde se capturan. No tiene autenticación real ni sincronización multiusuario. Para una versión institucional, conectar el formulario a Supabase (Auth + Database + Storage) y configurar permisos por roles.
+## Seguridad
+La web utiliza únicamente una **publishable key** de Supabase. No contiene `service_role`, secret keys ni credenciales con privilegios elevados. La autorización se hace en Supabase mediante Auth y RLS; no depende de ocultar controles en el navegador.
 
-Las imágenes incorporadas son marcadores visuales demostrativos. Sustitúyelas desde Administración por flyers y fotografías reales.
+## Acceso
+- Sitio público: `/jornadas/`
+- Panel interno: `/jornadas/admin/`
+
+La primera cuenta administrativa se activa únicamente con el correo autorizado configurado para el sistema.
