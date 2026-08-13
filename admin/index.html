@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#741238">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.tile.openstreetmap.org https://zaticxkysgobkyhebmhf.supabase.co; connect-src 'self' https://zaticxkysgobkyhebmhf.supabase.co wss://zaticxkysgobkyhebmhf.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <title>Administración | Jornadas del Bienestar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <section class="auth-screen" id="authScreen">
+    <div class="auth-backdrop"></div>
+    <a class="back-site" href="../">← Volver al sitio público</a>
+    <div class="auth-card">
+      <div class="auth-brand"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-logo alt="Secretaría de Bienestar"><div><strong>Jornadas del Bienestar</strong><span>Acceso institucional</span></div></div>
+      <div id="loginView">
+        <span class="kicker">Panel interno</span>
+        <h1>Administración territorial.</h1>
+        <p>Ingresa con la cuenta autorizada para capturar y administrar jornadas.</p>
+        <form id="loginForm" class="auth-form" autocomplete="on">
+          <label>Correo institucional o autorizado<input id="loginEmail" type="email" autocomplete="username" required></label>
+          <label>Contraseña<input id="loginPassword" type="password" autocomplete="current-password" required></label>
+          <button class="primary-btn" type="submit">Ingresar al panel <span>→</span></button>
+        </form>
+        <button class="text-btn" id="forgotPassword" type="button">¿Olvidaste tu contraseña?</button>
+        <div class="auth-note">El acceso y los permisos se validan directamente en Supabase Auth.</div>
+      </div>
+      <div id="setupView" hidden>
+        <span class="kicker">Activación inicial</span>
+        <h1>Crear primera cuenta administrativa.</h1>
+        <p>Esta activación solo funcionará con el correo autorizado y confirmado para el primer administrador.</p>
+        <form id="setupForm" class="auth-form">
+          <label>Correo<input id="setupEmail" type="email" autocomplete="username" required></label>
+          <label>Contraseña nueva<input id="setupPassword" type="password" minlength="12" autocomplete="new-password" required></label>
+          <label>Confirmar contraseña<input id="setupPassword2" type="password" minlength="12" autocomplete="new-password" required></label>
+          <button class="primary-btn" type="submit">Crear cuenta segura <span>→</span></button>
+        </form>
+        <button class="text-btn" id="backToLogin" type="button">Volver al inicio de sesión</button>
+      </div>
+      <div id="recoveryView" hidden>
+        <span class="kicker">Recuperar acceso</span>
+        <h1>Restablecer contraseña.</h1>
+        <p>Escribe el correo asociado a tu cuenta. Recibirás un enlace seguro de Supabase.</p>
+        <form id="recoveryForm" class="auth-form">
+          <label>Correo<input id="recoveryEmail" type="email" required></label>
+          <button class="primary-btn" type="submit">Enviar enlace <span>→</span></button>
+        </form>
+        <button class="text-btn" id="recoveryBack" type="button">Volver</button>
+      </div>
+      <div id="newPasswordView" hidden>
+        <span class="kicker">Nueva contraseña</span>
+        <h1>Protege tu cuenta.</h1>
+        <p>Utiliza al menos 12 caracteres y evita reutilizar contraseñas de otros servicios.</p>
+        <form id="newPasswordForm" class="auth-form">
+          <label>Nueva contraseña<input id="newPassword" type="password" minlength="12" autocomplete="new-password" required></label>
+          <label>Confirmar contraseña<input id="newPassword2" type="password" minlength="12" autocomplete="new-password" required></label>
+          <button class="primary-btn" type="submit">Guardar contraseña <span>✓</span></button>
+        </form>
+      </div>
+      <div class="auth-message" id="authMessage" role="status" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="app-shell" id="appShell" hidden>
+    <aside class="sidebar">
+      <div class="sidebar-brand"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-logo alt="Bienestar"><div><strong>Jornadas</strong><span>Centro de administración</span></div></div>
+      <nav id="sideNav">
+        <button class="nav-item active" data-view="overview"><span>⌂</span>Resumen</button>
+        <button class="nav-item" data-view="jornadas"><span>◇</span>Jornadas</button>
+        <button class="nav-item admin-only" data-view="usuarios"><span>◎</span>Usuarios</button>
+        <button class="nav-item admin-only" data-view="bitacora"><span>≡</span>Bitácora</button>
+      </nav>
+      <div class="sidebar-user">
+        <div class="avatar" id="userInitial">A</div>
+        <div><strong id="userName">Usuario</strong><span id="userRole">—</span></div>
+        <button id="signOut" title="Cerrar sesión">↗</button>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <header class="workspace-head">
+        <div><span class="workspace-kicker" id="viewKicker">Operación territorial</span><h1 id="viewTitle">Resumen ejecutivo</h1></div>
+        <div class="head-actions"><a class="ghost-btn" href="../" target="_blank" rel="noopener">Ver sitio público ↗</a><button class="primary-btn small" id="quickNew">+ Nueva jornada</button></div>
+      </header>
+
+      <section class="view active" id="view-overview">
+        <div class="kpi-grid">
+          <article><span>Jornadas publicadas</span><strong id="kpiPublished">0</strong><small>Visibles al público</small></article>
+          <article><span>Borradores</span><strong id="kpiDrafts">0</strong><small>Pendientes de publicación</small></article>
+          <article class="accent"><span>Servicios acumulados</span><strong id="kpiServices">0</strong><small>En jornadas publicadas</small></article>
+          <article><span>Evidencias</span><strong id="kpiEvidence">0</strong><small>Flyers y fotografías</small></article>
+        </div>
+        <div class="overview-grid">
+          <article class="panel large"><div class="panel-head"><div><span class="mini-kicker">Actividad reciente</span><h2>Últimas jornadas</h2></div><button class="link-btn" data-go="jornadas">Ver todas →</button></div><div id="recentJourneys" class="recent-list"></div></article>
+          <article class="panel"><div class="panel-head"><div><span class="mini-kicker">Estado del sistema</span><h2>Supabase</h2></div><span class="status-ok">● Operativo</span></div><div class="security-list"><div><span>Auth</span><b>Activo</b></div><div><span>RLS</span><b>Aplicado</b></div><div><span>Storage</span><b>Privado</b></div><div><span>Bitácora</span><b>Activa</b></div></div><p class="security-note">Los permisos se validan en la base de datos; ocultar botones en la interfaz no sustituye las políticas de seguridad.</p></article>
+        </div>
+      </section>
+
+      <section class="view" id="view-jornadas">
+        <div class="toolbar"><label class="search-box">⌕ <input id="adminSearch" type="search" placeholder="Buscar jornada, colonia o sede"></label><select id="adminStatus"><option value="all">Todos los estados</option><option value="published">Publicadas</option><option value="draft">Borradores</option></select><button class="primary-btn small" id="newJourney">+ Nueva jornada</button></div>
+        <div class="table-card"><table><thead><tr><th>Jornada</th><th>Fecha</th><th>Colonia</th><th>Servicios</th><th>Estado</th><th></th></tr></thead><tbody id="journeysTable"></tbody></table><div class="table-empty" id="journeysTableEmpty" hidden>No hay jornadas que coincidan con los filtros.</div></div>
+      </section>
+
+      <section class="view admin-only" id="view-usuarios">
+        <div class="toolbar"><div><span class="mini-kicker">Control de acceso</span><p>Los capturistas pueden crear y editar jornadas, pero no eliminarlas ni administrar usuarios.</p></div><button class="primary-btn small" id="inviteUser">+ Invitar capturista</button></div>
+        <div class="users-grid" id="usersGrid"></div>
+      </section>
+
+      <section class="view admin-only" id="view-bitacora">
+        <div class="toolbar"><div><span class="mini-kicker">Trazabilidad</span><p>Registro de altas, cambios y eliminaciones realizadas en el sistema.</p></div><button class="ghost-btn" id="refreshAudit">Actualizar</button></div>
+        <div class="table-card"><table><thead><tr><th>Fecha</th><th>Acción</th><th>Entidad</th><th>Usuario</th></tr></thead><tbody id="auditTable"></tbody></table><div class="table-empty" id="auditEmpty" hidden>Sin movimientos registrados.</div></div>
+      </section>
+    </main>
+  </section>
+
+  <dialog id="journeyDialog" class="modal large-modal">
+    <form id="journeyForm" method="dialog">
+      <header class="modal-head"><div><span class="mini-kicker">Ficha territorial</span><h2 id="formHeading">Nueva jornada</h2></div><button type="button" class="close-btn" data-close="journeyDialog">×</button></header>
+      <div class="modal-body two-col">
+        <div class="form-column">
+          <input id="fId" type="hidden">
+          <div class="field-grid">
+            <label class="full">Nombre de la jornada *<input id="fTitle" required maxlength="180"></label>
+            <label>Fecha *<input id="fDate" type="date" required></label>
+            <label>Estado *<select id="fStatus"><option value="draft">Borrador</option><option value="published">Publicada</option></select></label>
+            <label>Lugar / sede *<input id="fPlace" required maxlength="180"></label>
+            <label>Colonia *<input id="fNeighborhood" required maxlength="120"></label>
+            <label>Servicios brindados<input id="fServicesCount" type="number" min="0" step="1"></label>
+            <label>Días casa por casa<input id="fDoorDays" type="number" min="0" step="1"></label>
+            <label>Días de perifoneo<input id="fSpeakerDays" type="number" min="0" step="1"></label>
+            <label class="full">Tipos de servicios <small>Separados por coma</small><textarea id="fServices" rows="2"></textarea></label>
+            <label class="full">Dependencias participantes <small>Separadas por coma</small><textarea id="fAgencies" rows="2"></textarea></label>
+            <label class="full">Resumen de la jornada<textarea id="fSummary" rows="4" maxlength="1200"></textarea></label>
+          </div>
+        </div>
+        <div class="form-column side-form">
+          <div class="map-box"><div class="map-box-head"><div><span class="mini-kicker">Ubicación</span><h3>Marca la sede en el mapa</h3></div></div><div id="formMap"></div><div class="coord-grid"><label>Latitud<input id="fLat" type="number" step="any" required></label><label>Longitud<input id="fLng" type="number" step="any" required></label></div></div>
+          <div class="evidence-box"><div class="map-box-head"><div><span class="mini-kicker">Evidencia</span><h3>Flyer y fotografías</h3></div></div><label class="upload-zone">Flyer<input id="fFlyer" type="file" accept="image/jpeg,image/png,image/webp"><span>JPG, PNG o WebP · máximo 8 MB</span></label><label class="upload-zone">Fotografías<input id="fPhotos" type="file" multiple accept="image/jpeg,image/png,image/webp"><span>Selecciona una o varias imágenes</span></label><div class="evidence-preview" id="evidencePreview"></div></div>
+        </div>
+      </div>
+      <footer class="modal-foot"><button type="button" class="ghost-btn" data-close="journeyDialog">Cancelar</button><button type="submit" class="primary-btn" id="saveJourney">Guardar jornada</button></footer>
+    </form>
+  </dialog>
+
+  <dialog id="userDialog" class="modal small-modal">
+    <form id="userForm" method="dialog">
+      <header class="modal-head"><div><span class="mini-kicker">Nuevo acceso</span><h2>Invitar capturista</h2></div><button type="button" class="close-btn" data-close="userDialog">×</button></header>
+      <div class="modal-body"><div class="field-grid one"><label>Nombre completo *<input id="inviteName" required maxlength="120"></label><label>Correo *<input id="inviteEmail" type="email" required></label><div class="permission-card"><b>Rol: Capturista</b><span>Podrá crear y editar borradores y sus evidencias. La publicación, eliminación de jornadas y administración de usuarios quedan reservadas al administrador.</span></div></div></div>
+      <footer class="modal-foot"><button type="button" class="ghost-btn" data-close="userDialog">Cancelar</button><button type="submit" class="primary-btn">Enviar invitación</button></footer>
+    </form>
+  </dialog>
+
+  <dialog id="confirmDialog" class="modal confirm-modal"><div class="confirm-wrap"><span class="confirm-icon">!</span><h3 id="confirmTitle">Confirmar acción</h3><p id="confirmText"></p><div><button class="ghost-btn" id="confirmCancel">Cancelar</button><button class="danger-btn" id="confirmAccept">Confirmar</button></div></div></dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
