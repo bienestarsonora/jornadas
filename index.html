@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#7a1038">
+  <meta name="theme-color" content="#741238">
   <meta name="description" content="Mapa territorial, resultados y evidencias de las Jornadas del Bienestar en Hermosillo, Sonora.">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.tile.openstreetmap.org https://zaticxkysgobkyhebmhf.supabase.co; connect-src 'self' https://zaticxkysgobkyhebmhf.supabase.co wss://zaticxkysgobkyhebmhf.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self';">
@@ -13,63 +13,97 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="premium-v2.css?v=20260814">
 </head>
 <body>
   <header class="site-header" id="top">
-    <a class="brand" href="#top" aria-label="Jornadas del Bienestar, inicio">
-      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-logo alt="Gobierno de Sonora · Secretaría de Bienestar">
-      <span class="brand-copy"><strong>Jornadas del Bienestar</strong><small>Secretaría de Bienestar · Sonora</small></span>
-    </a>
-    <nav aria-label="Navegación principal">
-      <a href="#mapa">Mapa</a>
-      <a href="#resultados">Resultados</a>
-      <a href="#jornadas">Jornadas</a>
-      <a href="#evidencias">Evidencias</a>
-      <a class="admin-link" href="admin/">Acceso interno <span aria-hidden="true">↗</span></a>
-    </nav>
-    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    <div class="header-shell">
+      <a class="brand" href="#top" aria-label="Jornadas del Bienestar, inicio">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-logo alt="Gobierno de Sonora · Secretaría de Bienestar">
+        <span class="brand-divider" aria-hidden="true"></span>
+        <span class="brand-copy">
+          <small>Seguimiento institucional</small>
+          <strong>Jornadas del Bienestar</strong>
+        </span>
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <a href="#resultados">Resultados</a>
+        <a href="#mapa">Mapa</a>
+        <a href="#jornadas">Jornadas</a>
+        <a href="#evidencias">Evidencias</a>
+        <a class="admin-link" href="admin/">
+          <span class="admin-dot" aria-hidden="true"></span>
+          Acceso interno
+        </a>
+      </nav>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
   </header>
 
   <main>
-    <section class="hero" id="inicio">
+    <section class="hero hero-impact" id="inicio">
       <div class="hero-grid">
         <div class="hero-copy reveal">
-          <div class="hero-badge"><span></span> Presencia institucional en territorio</div>
-          <h1>Bienestar que se <em>ve</em>, se mide y se comparte.</h1>
-          <p class="hero-lead">Explora las Jornadas del Bienestar realizadas en Hermosillo: dónde estuvimos, qué servicios acercamos y la evidencia del trabajo desplegado en cada colonia.</p>
+          <div class="hero-badge"><span></span> Resultados de las Jornadas del Bienestar</div>
+          <h1>Servicios que llegan <em>directamente</em> a la gente.</h1>
+          <p class="hero-lead">Consulta el impacto acumulado de las Jornadas del Bienestar en Hermosillo, las colonias atendidas y la evidencia territorial de cada intervención.</p>
           <div class="hero-actions">
             <a class="btn btn-light" href="#mapa">Explorar mapa <span>↘</span></a>
             <a class="btn btn-glass" href="#jornadas">Ver jornadas</a>
           </div>
-          <div class="hero-meta">
-            <div><strong id="heroEvents">0</strong><span>jornadas registradas</span></div>
-            <div><strong id="heroServices">0</strong><span>servicios brindados</span></div>
-            <div><strong id="heroNeighborhoods">0</strong><span>colonias atendidas</span></div>
+          <div class="hero-trust">
+            <span><i>✓</i> Datos institucionales</span>
+            <span><i>✓</i> Evidencia por jornada</span>
+            <span><i>✓</i> Actualización continua</span>
           </div>
         </div>
 
-        <div class="hero-visual reveal delay-1" aria-label="Resumen territorial">
-          <div class="orb orb-a"></div><div class="orb orb-b"></div>
-          <div class="territory-card">
-            <div class="territory-card-head">
-              <span class="live-dot"></span>
-              <span>Memoria territorial</span>
-              <small>Hermosillo, Sonora</small>
+        <div class="hero-visual impact-visual reveal delay-1" aria-label="Impacto acumulado">
+          <div class="impact-halo halo-a"></div>
+          <div class="impact-halo halo-b"></div>
+
+          <div class="impact-card">
+            <div class="impact-card-top">
+              <div>
+                <span class="impact-eyebrow">Impacto acumulado</span>
+                <small>Hermosillo, Sonora</small>
+              </div>
+              <span class="impact-live"><i></i> Datos publicados</span>
             </div>
-            <div class="territory-map-art" aria-hidden="true">
-              <svg viewBox="0 0 520 360" role="img">
-                <path d="M38 286C83 225 111 263 149 210C177 172 194 126 244 135C295 145 307 84 358 77C419 68 461 112 477 166C494 224 441 274 386 267C333 260 306 318 245 302C187 288 136 322 84 313Z" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".3"/>
-                <path d="M70 271C118 219 157 253 185 205C214 155 237 160 274 148C324 132 329 98 380 95C423 93 453 132 457 174C461 219 419 247 379 242C332 237 310 280 264 275C215 270 182 291 137 291C110 291 90 284 70 271Z" fill="none" stroke="currentColor" stroke-width="2" opacity=".65"/>
-                <path d="M118 245L168 210L213 226L259 182L305 198L355 146L411 171" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="5 7" opacity=".9"/>
-                <circle cx="168" cy="210" r="7" fill="currentColor"/><circle cx="259" cy="182" r="7" fill="currentColor"/><circle cx="355" cy="146" r="7" fill="currentColor"/><circle cx="411" cy="171" r="7" fill="currentColor"/>
-              </svg>
-              <div class="map-label label-a"><b id="heroAgencies">0</b><span>dependencias</span></div>
-              <div class="map-label label-b"><b id="heroOutreach">0</b><span>acciones de difusión</span></div>
+
+            <div class="impact-primary">
+              <strong id="heroServices">0</strong>
+              <span>servicios brindados</span>
+              <p>Atenciones acercadas a la ciudadanía a través de las Jornadas del Bienestar.</p>
             </div>
-            <div class="territory-card-foot"><span>Datos institucionales</span><span>•</span><span>Actualización continua</span></div>
+
+            <div class="impact-secondary">
+              <div>
+                <strong id="heroEvents">0</strong>
+                <span>Jornadas</span>
+              </div>
+              <div>
+                <strong id="heroNeighborhoods">0</strong>
+                <span>Colonias</span>
+              </div>
+              <div>
+                <strong id="heroAgencies">0</strong>
+                <span>Dependencias</span>
+              </div>
+            </div>
+
+            <div class="impact-foot">
+              <span>Difusión territorial</span>
+              <b><span id="heroOutreach">0</span> acciones registradas</b>
+            </div>
           </div>
-          <div class="floating-chip chip-a"><i>●</i><span>Información territorial</span></div>
-          <div class="floating-chip chip-b"><i>✓</i><span>Evidencia organizada</span></div>
+
+          <div class="impact-chip chip-services">
+            <span class="chip-icon">＋</span>
+            <div><small>Indicador principal</small><b>Servicios a la ciudadanía</b></div>
+          </div>
         </div>
       </div>
     </section>
@@ -80,10 +114,10 @@
         <p>Los indicadores se actualizan automáticamente con cada jornada publicada.</p>
       </div>
       <div class="stats-grid">
-        <article class="stat-card reveal"><span class="stat-icon">01</span><strong id="statEvents">0</strong><h3>Jornadas</h3><p>Intervenciones registradas</p></article>
-        <article class="stat-card featured reveal delay-1"><span class="stat-icon">02</span><strong id="statServices">0</strong><h3>Servicios</h3><p>Atenciones brindadas</p></article>
+        <article class="stat-card featured reveal"><span class="stat-icon">01</span><strong id="statServices">0</strong><h3>Servicios</h3><p>Atenciones brindadas</p></article>
+        <article class="stat-card reveal delay-1"><span class="stat-icon">02</span><strong id="statEvents">0</strong><h3>Jornadas</h3><p>Intervenciones registradas</p></article>
         <article class="stat-card reveal delay-2"><span class="stat-icon">03</span><strong id="statNeighborhoods">0</strong><h3>Colonias</h3><p>Cobertura territorial</p></article>
-        <article class="stat-card reveal delay-3"><span class="stat-icon">04</span><strong id="statOutreach">0</strong><h3>Acciones</h3><p>Casa por casa y perifoneo</p></article>
+        <article class="stat-card reveal delay-3"><span class="stat-icon">04</span><strong id="statOutreach">0</strong><h3>Difusión</h3><p>Casa por casa y perifoneo</p></article>
       </div>
     </section>
 

@@ -1,0 +1,21 @@
+ACTUALIZACIÓN VISUAL · JORNADAS DEL BIENESTAR
+
+Archivos:
+1. index.html
+2. premium-v2.css
+
+Para aplicar:
+- Sustituye el index.html de la raíz del repositorio por este.
+- Sube premium-v2.css a la raíz, junto a styles.css.
+- NO reemplaces app.js, config.js ni la carpeta admin/.
+- Haz recarga dura del navegador (Ctrl+F5).
+
+Cambios:
+- Header institucional más limpio y compacto.
+- Logo con mejor proporción y separación visual.
+- Navegación con jerarquía premium.
+- Acceso interno más discreto y profesional.
+- Hero reconstruido alrededor del KPI principal: Servicios brindados.
+- Jornadas, colonias y dependencias pasan a segundo nivel.
+- Difusión territorial queda como dato terciario.
+- Todo conserva los mismos IDs que app.js actualiza desde Supabase.
