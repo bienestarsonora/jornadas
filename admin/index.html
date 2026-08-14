@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260814-2">
 </head>
 <body>
   <section class="auth-screen" id="authScreen">
@@ -128,7 +128,7 @@
           <input id="fId" type="hidden">
           <div class="field-grid">
             <label class="full">Nombre de la jornada *<input id="fTitle" required maxlength="180"></label>
-            <label>Fecha *<input id="fDate" type="date" required></label>
+            <label>Fecha *<input id="fDate" type="date" required><small id="datePreview">Selecciona una fecha válida.</small></label>
             <label>Estado *<select id="fStatus"><option value="draft">Borrador</option><option value="published">Publicada</option></select></label>
             <label>Lugar / sede *<input id="fPlace" required maxlength="180"></label>
             <label>Colonia *<input id="fNeighborhood" required maxlength="120"></label>
@@ -163,7 +163,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="../config.js"></script>
-  <script src="app.js"></script>
+  <script src="../config.js?v=20260814-2"></script>
+  <script src="app.js?v=20260814-2"></script>
 </body>
 </html>

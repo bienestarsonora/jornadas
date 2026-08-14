@@ -14,6 +14,26 @@
   const split = s => String(s||'').split(',').map(x=>x.trim()).filter(Boolean);
   const dateLabel = iso => new Date(`${iso}T12:00:00`).toLocaleDateString('es-MX',{day:'2-digit',month:'short',year:'numeric'});
   const fullDate = iso => new Date(iso).toLocaleString('es-MX',{dateStyle:'medium',timeStyle:'short'});
+  const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+  function normalizeDateValue(value){
+    const raw=String(value||'').trim();
+    if(!DATE_RE.test(raw))return '';
+    const [y,m,d]=raw.split('-').map(Number);
+    const test=new Date(y,m-1,d,12,0,0,0);
+    if(test.getFullYear()!==y||test.getMonth()!==m-1||test.getDate()!==d)return '';
+    return `${String(y).padStart(4,'0')}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  }
+  function dateLongLabel(value){
+    const safe=normalizeDateValue(value);if(!safe)return '';
+    const [y,m,d]=safe.split('-').map(Number);
+    return new Date(y,m-1,d,12,0,0,0).toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric'});
+  }
+  function renderDatePreview(){
+    const preview=$('datePreview');if(!preview)return;
+    const safe=normalizeDateValue($('fDate')?.value);
+    preview.textContent=safe?`Se guardará: ${dateLongLabel(safe)}`:'Selecciona una fecha válida.';
+    preview.dataset.valid=safe?'1':'0';
+  }
 
   let currentUser = null;
   let profile = null;
@@ -178,6 +198,7 @@
     $('fServices').value=(j?.services||[]).join(', ');$('fAgencies').value=(j?.agencies||[]).join(', ');$('fSummary').value=j?.summary||'';
     $('fStatus').value=j?.status||'draft';
     if(profile.role!=='admin'){$('fStatus').value='draft';$('fStatus').disabled=true}else $('fStatus').disabled=false;
+    renderDatePreview();
     $('journeyDialog').showModal();document.body.classList.add('modal-open');
     await ensureMap(Number(j?.lat)||29.0892,Number(j?.lng)||-110.9613);renderEvidencePreview();
   }
@@ -212,11 +233,21 @@
     ev.preventDefault();const btn=$('saveJourney');setBusy(btn,true,'Guardando…');
     try{
       const id=$('fId').value||null;
+      const selectedDate=normalizeDateValue($('fDate').value);
+      if(!selectedDate)throw new Error('Selecciona una fecha válida antes de guardar.');
       const status=profile.role==='admin'?$('fStatus').value:'draft';
-      const payload={title:$('fTitle').value.trim(),event_date:$('fDate').value,place:$('fPlace').value.trim(),neighborhood:$('fNeighborhood').value.trim(),lat:+$('fLat').value,lng:+$('fLng').value,services_count:+$('fServicesCount').value||0,door_days:+$('fDoorDays').value||0,speaker_days:+$('fSpeakerDays').value||0,services:split($('fServices').value),agencies:split($('fAgencies').value),summary:$('fSummary').value.trim(),status,updated_by:currentUser.id};
+      const payload={title:$('fTitle').value.trim(),event_date:selectedDate,place:$('fPlace').value.trim(),neighborhood:$('fNeighborhood').value.trim(),lat:+$('fLat').value,lng:+$('fLng').value,services_count:+$('fServicesCount').value||0,door_days:+$('fDoorDays').value||0,speaker_days:+$('fSpeakerDays').value||0,services:split($('fServices').value),agencies:split($('fAgencies').value),summary:$('fSummary').value.trim(),status,updated_by:currentUser.id};
       let jornadaId=id;
-      if(id){const {error}=await db.from('jornadas').update(payload).eq('id',id);if(error)throw error}
-      else{payload.created_by=currentUser.id;const {data,error}=await db.from('jornadas').insert(payload).select('id').single();if(error)throw error;jornadaId=data.id}
+      let savedRow=null;
+      if(id){
+        const {data,error}=await db.from('jornadas').update(payload).eq('id',id).select('id,event_date').single();if(error)throw error;savedRow=data;
+      }else{
+        payload.created_by=currentUser.id;
+        const {data,error}=await db.from('jornadas').insert(payload).select('id,event_date').single();if(error)throw error;jornadaId=data.id;savedRow=data;
+      }
+      if(!savedRow||String(savedRow.event_date)!==selectedDate){
+        throw new Error(`La fecha no coincidió después de guardar. Elegiste ${dateLongLabel(selectedDate)} y el registro devolvió ${savedRow?.event_date||'una fecha inválida'}. No continúes hasta revisar el dato.`);
+      }
 
       if(pendingFlyer){
         const oldFlyer=existingEvidence.find(e=>e.kind==='flyer');
@@ -228,7 +259,7 @@
         const {error:insErr}=await db.from('jornadas_evidencias').insert({jornada_id:jornadaId,kind:'flyer',storage_path:path,caption:'',sort_order:0,created_by:currentUser.id});if(insErr)throw insErr;
       }
       for(let i=0;i<pendingPhotos.length;i++)await uploadEvidence(jornadaId,pendingPhotos[i],'photo',i+1);
-      $('journeyDialog').close();document.body.classList.remove('modal-open');toast('Jornada guardada correctamente.','success');await loadAll();
+      $('journeyDialog').close();document.body.classList.remove('modal-open');toast(`Jornada guardada · ${dateLongLabel(selectedDate)}.`,'success');await loadAll();
     }catch(err){console.error(err);toast(err.message||'No fue posible guardar la jornada.','error')}finally{setBusy(btn,false)}
   }
 
@@ -282,7 +313,7 @@
     $('signOut').onclick=async()=>{await db.auth.signOut();location.reload()};
     document.querySelectorAll('.nav-item').forEach(b=>b.onclick=()=>switchView(b.dataset.view));document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>switchView(b.dataset.go));
     $('quickNew').onclick=()=>openJourney();$('newJourney').onclick=()=>openJourney();$('adminSearch').oninput=renderJourneysTable;$('adminStatus').onchange=renderJourneysTable;
-    $('journeyForm').onsubmit=saveJourney;$('fLat').onchange=()=>{if(formMap)setFormPoint(+$('fLat').value,+$('fLng').value)};$('fLng').onchange=()=>{if(formMap)setFormPoint(+$('fLat').value,+$('fLng').value)};
+    $('journeyForm').onsubmit=saveJourney;$('fDate').oninput=renderDatePreview;$('fDate').onchange=renderDatePreview;$('fLat').onchange=()=>{if(formMap)setFormPoint(+$('fLat').value,+$('fLng').value)};$('fLng').onchange=()=>{if(formMap)setFormPoint(+$('fLat').value,+$('fLng').value)};
     $('fFlyer').onchange=e=>{const f=e.target.files[0];if(f&&validateFile(f))pendingFlyer=f};$('fPhotos').onchange=e=>{pendingPhotos=[...e.target.files].filter(validateFile)};
     document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>{const d=$(b.dataset.close);d.close();document.body.classList.remove('modal-open')});
     $('inviteUser').onclick=()=>$('userDialog').showModal();$('userForm').onsubmit=inviteUser;$('refreshAudit').onclick=loadAll;
