@@ -194,7 +194,7 @@
       return;
     }
     empty.hidden = true;
-    grid.innerHTML = jornadas.slice(0,9).map(j => {
+    grid.innerHTML = jornadas.map(j => {
       const cover = evidenceFor(j.id, 'photo')[0] || evidenceFor(j.id, 'flyer')[0];
       return `<article class="journey-card" data-open-event="${j.id}">
         <div class="journey-media" ${cover ? `data-image-path="${esc(cover.storage_path)}"` : ''}><span>${esc(shortDate(j.event_date))}</span></div>
