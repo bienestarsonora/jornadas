@@ -185,3 +185,61 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   background:rgba(220,247,183,.12)!important;
 }
 .public-site-page .impact-primary span{color:var(--gov-lime)!important}
+
+
+/* Ajuste de contraste y fondos institucionales */
+.public-site-page .results-shell,
+.public-site-page .journeys-section,
+.public-site-page .evidence-section{
+  background:#fff!important;
+}
+.public-site-page .value-section{
+  background:var(--gov-surface)!important;
+}
+.public-site-page .section-intro:not(.inverse) h2,
+.public-site-page .value-heading h2{
+  color:var(--gov-wine)!important;
+}
+.public-site-page .section-intro:not(.inverse) p,
+.public-site-page .value-grid p,
+.public-site-page .journey-card-body p{
+  color:#555!important;
+}
+.public-site-page .section-intro.inverse h2{
+  color:#fff!important;
+}
+.public-site-page .section-intro.inverse p{
+  color:rgba(255,255,255,.78)!important;
+}
+.public-site-page .section-intro.inverse .eyebrow{
+  color:var(--gov-lime)!important;
+}
+.public-site-page .map-section{
+  background:#292929!important;
+}
+.public-site-page .stat-card,
+.public-site-page .journey-card,
+.public-site-page .value-grid article{
+  background:#fff!important;
+}
+.public-site-page .stat-card.featured{
+  background:var(--gov-wine)!important;
+}
+.public-site-page .stat-card h3,
+.public-site-page .journey-card-body h3,
+.public-site-page .value-grid h3{
+  color:var(--gov-wine)!important;
+}
+.public-site-page .stat-card.featured h3{
+  color:#fff!important;
+}
+.public-site-page .stat-card.featured p{
+  color:rgba(255,255,255,.78)!important;
+}
+.public-site-page .event-panel{
+  background:#fff!important;
+}
+.public-site-page .event-panel h3,
+.public-site-page .event-panel h4{
+  color:var(--gov-wine)!important;
+}
