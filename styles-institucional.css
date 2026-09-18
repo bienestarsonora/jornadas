@@ -152,3 +152,36 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 @media(max-width:780px){.public-site-page .hero-grid{padding:52px 20px!important}}
 @media(max-width:600px){h1{font-size:1.75rem!important}h2{font-size:1.5rem!important}h3{font-size:1.35rem!important}.gov-official-footer{gap:16px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1!important;transform:none!important}}
+
+
+/* Ajuste de hero: tarjeta de impacto integrada al fondo institucional */
+.public-site-page .impact-card{
+  background:rgba(255,255,255,.07)!important;
+  color:#fff!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(3px);
+}
+.public-site-page .impact-card:before,
+.public-site-page .impact-card:after{display:none!important}
+.public-site-page .impact-eyebrow,
+.public-site-page .impact-primary strong,
+.public-site-page .impact-secondary strong{color:#fff!important}
+.public-site-page .impact-card small,
+.public-site-page .impact-primary p,
+.public-site-page .impact-secondary span,
+.public-site-page .impact-foot{color:rgba(255,255,255,.78)!important}
+.public-site-page .impact-live{color:var(--gov-lime)!important}
+.public-site-page .impact-chip{
+  background:rgba(255,255,255,.10)!important;
+  color:#fff!important;
+  border:1px solid rgba(255,255,255,.24)!important;
+  backdrop-filter:blur(3px);
+}
+.public-site-page .impact-chip small{color:rgba(255,255,255,.70)!important}
+.public-site-page .impact-chip b{color:#fff!important}
+.public-site-page .chip-icon{
+  color:var(--gov-lime)!important;
+  background:rgba(220,247,183,.12)!important;
+}
+.public-site-page .impact-primary span{color:var(--gov-lime)!important}
