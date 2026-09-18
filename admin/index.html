@@ -82,7 +82,7 @@
       <div class="sidebar-user">
         <div class="avatar" id="userInitial">A</div>
         <div><strong id="userName">Usuario</strong><span id="userRole">—</span></div>
-        <button id="signOut" title="Cerrar sesión">↗</button>
+        <button id="signOut" title="Cerrar sesión" aria-label="Cerrar sesión">↗</button>
       </div>
     </aside>
 
@@ -106,7 +106,7 @@
       </section>
 
       <section class="view" id="view-jornadas">
-        <div class="toolbar"><label class="search-box">⌕ <input id="adminSearch" type="search" placeholder="Buscar jornada, colonia o sede"></label><select id="adminStatus"><option value="all">Todos los estados</option><option value="published">Publicadas</option><option value="draft">Borradores</option></select><button class="primary-btn small" id="newJourney">+ Nueva jornada</button></div>
+        <div class="toolbar"><label class="search-box">⌕ <input id="adminSearch" type="search" aria-label="Buscar jornada, colonia o sede" placeholder="Buscar jornada, colonia o sede"></label><select id="adminStatus"><option value="all">Todos los estados</option><option value="published">Publicadas</option><option value="draft">Borradores</option></select><button class="primary-btn small" id="newJourney">+ Nueva jornada</button></div>
         <div class="table-card"><table><thead><tr><th>Jornada</th><th>Fecha</th><th>Colonia</th><th>Servicios</th><th>Estado</th><th></th></tr></thead><tbody id="journeysTable"></tbody></table><div class="table-empty" id="journeysTableEmpty" hidden>No hay jornadas que coincidan con los filtros.</div></div>
       </section>
 
@@ -124,7 +124,7 @@
 
   <dialog id="journeyDialog" class="modal large-modal">
     <form id="journeyForm" method="dialog">
-      <header class="modal-head"><div><span class="mini-kicker">Ficha territorial</span><h2 id="formHeading">Nueva jornada</h2></div><button type="button" class="close-btn" data-close="journeyDialog">×</button></header>
+      <header class="modal-head"><div><span class="mini-kicker">Ficha territorial</span><h2 id="formHeading">Nueva jornada</h2></div><button type="button" class="close-btn" data-close="journeyDialog" aria-label="Cerrar formulario de jornada">×</button></header>
       <div class="modal-body two-col">
         <div class="form-column">
           <input id="fId" type="hidden">
@@ -153,7 +153,7 @@
 
   <dialog id="userDialog" class="modal small-modal">
     <form id="userForm" method="dialog">
-      <header class="modal-head"><div><span class="mini-kicker">Nuevo acceso</span><h2>Invitar capturista</h2></div><button type="button" class="close-btn" data-close="userDialog">×</button></header>
+      <header class="modal-head"><div><span class="mini-kicker">Nuevo acceso</span><h2>Invitar capturista</h2></div><button type="button" class="close-btn" data-close="userDialog" aria-label="Cerrar formulario de usuario">×</button></header>
       <div class="modal-body"><div class="field-grid one"><label>Nombre completo *<input id="inviteName" required maxlength="120"></label><label>Correo *<input id="inviteEmail" type="email" required></label><div class="permission-card"><b>Rol: Capturista</b><span>Podrá crear y editar borradores y sus evidencias. La publicación, eliminación de jornadas y administración de usuarios quedan reservadas al administrador.</span></div></div></div>
       <footer class="modal-foot"><button type="button" class="ghost-btn" data-close="userDialog">Cancelar</button><button type="submit" class="primary-btn">Enviar invitación</button></footer>
     </form>
