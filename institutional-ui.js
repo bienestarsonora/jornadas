@@ -19,6 +19,7 @@
     root.querySelectorAll?.('button,a').forEach(classify);
     root.querySelectorAll?.('input[required],select[required],textarea[required]').forEach(el => el.setAttribute('aria-required','true'));
     root.querySelectorAll?.('.table-card table').forEach((table,i) => {
+      table.querySelectorAll('thead th').forEach(th => th.setAttribute('scope','col'));
       if (!table.querySelector('caption')) {
         const cap=document.createElement('caption');
         cap.textContent = i === 0 ? 'Listado administrativo de jornadas' : 'Tabla de información administrativa';
