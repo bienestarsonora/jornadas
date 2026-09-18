@@ -243,3 +243,34 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .public-site-page .event-panel h4{
   color:var(--gov-wine)!important;
 }
+
+
+/* Ajuste final: mapa en fondo institucional claro conforme a lineamientos */
+.public-site-page .map-section{
+  background:var(--gov-surface)!important;
+  color:var(--gov-text)!important;
+}
+.public-site-page .map-section .section-intro.inverse h2{
+  color:var(--gov-wine)!important;
+}
+.public-site-page .map-section .section-intro.inverse p{
+  color:#555!important;
+}
+.public-site-page .map-section .section-intro.inverse .eyebrow{
+  color:var(--gov-magenta)!important;
+}
+.public-site-page .map-filter-bar select,
+.public-site-page .visible-pill{
+  background:#fff!important;
+  color:var(--gov-text)!important;
+  border:1px solid var(--gov-border)!important;
+}
+.public-site-page .search-field{
+  background:#fff!important;
+  color:var(--gov-text)!important;
+  border:1px solid var(--gov-border)!important;
+}
+.public-site-page .map-stage{
+  border:1px solid var(--gov-border)!important;
+  background:#fff!important;
+}
