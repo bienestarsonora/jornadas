@@ -1,43 +1,215 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
-<title>Vista previa institucional · Jornadas del Bienestar</title>
-<style>
-html,body{margin:0;height:100%;background:#eee;font-family:Arial,sans-serif}
-.bar{min-height:44px;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;padding:0 12px;text-align:center}
-.wrap{height:calc(100% - 44px)}
-iframe{width:100%;height:100%;border:0;background:#fff}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#410123">
+  <meta name="description" content="Mapa territorial, resultados y evidencias de las Jornadas del Bienestar en Hermosillo, Sonora.">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.tile.openstreetmap.org https://zaticxkysgobkyhebmhf.supabase.co; connect-src 'self' https://zaticxkysgobkyhebmhf.supabase.co wss://zaticxkysgobkyhebmhf.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <title>Jornadas del Bienestar | Secretaría de Bienestar Sonora</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../premium-v2.css?v=20260814">
+  <link rel="stylesheet" href="styles.css?v=20260918-audit1">
+  <link rel="icon" href="../assets/logo-bienestar.png" type="image/png">
 </head>
-<body>
-<div class="bar"><strong>VISTA PREVIA:</strong>&nbsp; homologación institucional de Jornadas del Bienestar. Producción no se modifica.</div>
-<div class="wrap"><iframe id="site" src="../" title="Vista previa institucional de Jornadas del Bienestar"></iframe></div>
-<script>
-const frame=document.getElementById('site');
-frame.addEventListener('load',()=>{
-  try{
-    const d=frame.contentDocument;if(!d)return;
-    d.body.classList.add('public-site-page');
-    const css=d.createElement('link');css.rel='stylesheet';css.href='preview-identidad/styles.css?v=20260918-3';d.head.appendChild(css);
-    const theme=d.querySelector('meta[name="theme-color"]');if(theme)theme.setAttribute('content','#410123');
-    if(!d.querySelector('.gov-skip')){const a=d.createElement('a');a.className='gov-skip';a.href='#main-content';a.textContent='Saltar al contenido principal';d.body.prepend(a);}
-    if(!d.querySelector('.gov-topbar')){const t=d.createElement('div');t.className='gov-topbar';t.innerHTML='<div class="gov-topbar-inner">Gobierno del Estado de Sonora</div>';d.body.insertBefore(t,d.querySelector('.site-header')||d.body.firstChild);}
-    const main=d.querySelector('main');if(main&&!main.id)main.id='main-content';
-    if(!d.querySelector('.gov-breadcrumb')){
-      const header=d.querySelector('.site-header');
-      if(header){const bc=d.createElement('nav');bc.className='gov-breadcrumb';bc.setAttribute('aria-label','Ruta de navegación');bc.innerHTML='<div class="gov-breadcrumb-inner">Inicio &nbsp;/&nbsp; Secretaría de Bienestar &nbsp;/&nbsp; <strong aria-current="page">Jornadas del Bienestar</strong></div>';header.insertAdjacentElement('afterend',bc);}
-    }
-    const footer=d.querySelector('footer');
-    if(footer&&!d.querySelector('.gov-official-footer')){
-      const extra=d.createElement('div');extra.className='gov-official-footer';
-      extra.innerHTML='<div><strong>Secretaría de Bienestar</strong><span>Micrositio institucional de Jornadas del Bienestar.</span><small>Seguimiento territorial, resultados y evidencia de las jornadas.</small></div><div><strong>Información institucional</strong><span>Política de Uso y Privacidad · Denuncia Ciudadana · Contacto</span><small>Enlaces institucionales por vincular en la etapa de publicación oficial.</small></div><div><strong>Atención ciudadana</strong><span class="gov-911">911</span><small>Emergencias</small></div>';
-      footer.appendChild(extra);
-    }
-  }catch(e){console.error(e)}
-});
-</script>
+<body class="public-site-page">
+  <div style="background:#111;color:#fff;text-align:center;padding:8px 14px;font:600 12px/1.35 Roboto,Arial,sans-serif">VISTA PREVIA · Homologación institucional y auditoría funcional. Producción no se modifica.</div>
+  <a class="gov-skip" href="#main-content">Saltar al contenido principal</a>
+  <div class="gov-topbar"><div class="gov-topbar-inner">Gobierno del Estado de Sonora</div></div>
+  <header class="site-header" id="top">
+    <div class="header-shell">
+      <a class="brand" href="#top" aria-label="Jornadas del Bienestar, inicio">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-logo alt="Gobierno de Sonora · Secretaría de Bienestar">
+        <span class="brand-divider" aria-hidden="true"></span>
+        <span class="brand-copy">
+          <small>Seguimiento institucional</small>
+          <strong>Jornadas del Bienestar</strong>
+        </span>
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <a href="#resultados">Resultados</a>
+        <a href="#mapa">Mapa</a>
+        <a href="#jornadas">Jornadas</a>
+        <a href="#evidencias">Evidencias</a>
+        <a class="admin-link" href="admin/">
+          <span class="admin-dot" aria-hidden="true"></span>
+          Acceso interno
+        </a>
+      </nav>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <nav class="gov-breadcrumb" aria-label="Ruta de navegación"><div class="gov-breadcrumb-inner">Inicio &nbsp;/&nbsp; Secretaría de Bienestar &nbsp;/&nbsp; <strong aria-current="page">Jornadas del Bienestar</strong></div></nav>
+
+  <main id="main-content">
+    <section class="hero hero-impact" id="inicio">
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <div class="hero-badge"><span></span> Resultados de las Jornadas del Bienestar</div>
+          <h1>Servicios que llegan <em>directamente</em> a la gente.</h1>
+          <p class="hero-lead">Consulta el impacto acumulado de las Jornadas del Bienestar en Hermosillo, las colonias atendidas y la evidencia territorial de cada intervención.</p>
+          <div class="hero-actions">
+            <a class="btn btn-light" href="#mapa">Explorar mapa <span>↘</span></a>
+            <a class="btn btn-glass" href="#jornadas">Ver jornadas</a>
+          </div>
+          <div class="hero-trust">
+            <span><i>✓</i> Datos institucionales</span>
+            <span><i>✓</i> Evidencia por jornada</span>
+            <span><i>✓</i> Actualización continua</span>
+          </div>
+        </div>
+
+        <div class="hero-visual impact-visual reveal delay-1" aria-label="Impacto acumulado">
+          <div class="impact-halo halo-a"></div>
+          <div class="impact-halo halo-b"></div>
+
+          <div class="impact-card">
+            <div class="impact-card-top">
+              <div>
+                <span class="impact-eyebrow">Impacto acumulado</span>
+                <small>Hermosillo, Sonora</small>
+              </div>
+              <span class="impact-live"><i></i> Datos publicados</span>
+            </div>
+
+            <div class="impact-primary">
+              <strong id="heroServices">0</strong>
+              <span>servicios brindados</span>
+              <p>Atenciones acercadas a la ciudadanía a través de las Jornadas del Bienestar.</p>
+            </div>
+
+            <div class="impact-secondary">
+              <div>
+                <strong id="heroEvents">0</strong>
+                <span>Jornadas</span>
+              </div>
+              <div>
+                <strong id="heroNeighborhoods">0</strong>
+                <span>Colonias</span>
+              </div>
+              <div>
+                <strong id="heroAgencies">0</strong>
+                <span>Dependencias</span>
+              </div>
+            </div>
+
+            <div class="impact-foot">
+              <span>Difusión territorial</span>
+              <b><span id="heroOutreach">0</span> acciones registradas</b>
+            </div>
+          </div>
+
+          <div class="impact-chip chip-services">
+            <span class="chip-icon">＋</span>
+            <div><small>Indicador principal</small><b>Servicios a la ciudadanía</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results-shell" id="resultados">
+      <div class="section-intro reveal">
+        <div><span class="eyebrow">Resultados acumulados</span><h2>Una lectura clara de nuestra presencia en territorio.</h2></div>
+        <p>Los indicadores se actualizan automáticamente con cada jornada publicada.</p>
+      </div>
+      <div class="stats-grid">
+        <article class="stat-card featured reveal"><span class="stat-icon">01</span><strong id="statServices">0</strong><h3>Servicios</h3><p>Atenciones brindadas</p></article>
+        <article class="stat-card reveal delay-1"><span class="stat-icon">02</span><strong id="statEvents">0</strong><h3>Jornadas</h3><p>Intervenciones registradas</p></article>
+        <article class="stat-card reveal delay-2"><span class="stat-icon">03</span><strong id="statNeighborhoods">0</strong><h3>Colonias</h3><p>Cobertura territorial</p></article>
+        <article class="stat-card reveal delay-3"><span class="stat-icon">04</span><strong id="statOutreach">0</strong><h3>Difusión</h3><p>Casa por casa y perifoneo</p></article>
+      </div>
+    </section>
+
+    <section class="map-section" id="mapa">
+      <div class="section-intro inverse reveal">
+        <div><span class="eyebrow">Mapa territorial</span><h2>Explora dónde hemos estado.</h2></div>
+        <p>Selecciona una jornada para consultar su ficha, resultados, instituciones participantes y evidencia.</p>
+      </div>
+
+      <div class="map-filter-bar reveal">
+        <label class="search-field"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" autocomplete="off" placeholder="Buscar colonia, sede, servicio o dependencia"></label>
+        <select id="yearFilter" aria-label="Filtrar por año"><option value="all">Todos los años</option></select>
+        <div class="visible-pill"><span class="live-dot"></span><b id="visibleCount">0</b> visibles</div>
+      </div>
+
+      <div class="map-stage reveal">
+        <div id="map" role="application" aria-label="Mapa de Jornadas del Bienestar"></div>
+        <aside class="event-panel" id="eventPanel" aria-live="polite">
+          <div class="panel-empty">
+            <div class="panel-pin"><span></span></div>
+            <small>Mapa interactivo</small>
+            <h3>Selecciona una jornada</h3>
+            <p>Haz clic sobre un punto del mapa para descubrir resultados y evidencias.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="journeys-section" id="jornadas">
+      <div class="section-intro reveal">
+        <div><span class="eyebrow">Bitácora territorial</span><h2>Jornadas recientes.</h2></div>
+        <p>Una vista rápida de las intervenciones publicadas por la Secretaría de Bienestar.</p>
+      </div>
+      <div class="journey-grid" id="journeyGrid"></div>
+      <div class="empty-content" id="journeyEmpty" hidden><span>◇</span><h3>Aún no hay jornadas publicadas</h3><p>Cuando se capture y publique la primera jornada, aparecerá aquí automáticamente.</p></div>
+    </section>
+
+    <section class="value-section">
+      <div class="value-heading reveal">
+        <span class="eyebrow">Valor público</span>
+        <h2>Información que convierte territorio en evidencia.</h2>
+      </div>
+      <div class="value-grid">
+        <article class="reveal"><span>01</span><h3>Cobertura territorial</h3><p>Ubica las colonias atendidas y ayuda a reconocer patrones de presencia institucional.</p></article>
+        <article class="reveal delay-1"><span>02</span><h3>Resultados abiertos</h3><p>Concentra servicios, dependencias y cifras clave de cada intervención en un solo lugar.</p></article>
+        <article class="reveal delay-2"><span>03</span><h3>Memoria institucional</h3><p>Organiza fotografías, flyers y actividades de difusión para preservar evidencia verificable.</p></article>
+      </div>
+    </section>
+
+    <section class="evidence-section" id="evidencias">
+      <div class="section-intro reveal">
+        <div><span class="eyebrow">Evidencia visual</span><h2>El territorio también se cuenta con imágenes.</h2></div>
+        <p>Fotografías publicadas desde las fichas de cada jornada.</p>
+      </div>
+      <div class="gallery" id="globalGallery"></div>
+      <div class="empty-content compact" id="galleryEmpty" hidden><span>▧</span><h3>Sin fotografías publicadas</h3><p>Las evidencias aparecerán aquí conforme se integren al sistema.</p></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-logo alt="Secretaría de Bienestar"><div><strong>Jornadas del Bienestar</strong><span>Secretaría de Bienestar del Estado de Sonora</span></div></div>
+      <p>Información territorial y evidencia institucional de las Jornadas del Bienestar en Hermosillo, Sonora.</p>
+      <a href="#top">Volver arriba ↑</a>
+    </div>
+    <div class="gov-official-footer">
+      <div><strong>Secretaría de Bienestar</strong><span>Micrositio institucional de Jornadas del Bienestar.</span><small>Seguimiento territorial, resultados y evidencia de las jornadas.</small></div>
+      <div><strong>Información institucional</strong><span>Política de Uso y Privacidad · Denuncia Ciudadana · Contacto</span><small>Enlaces institucionales por vincular en la etapa de publicación oficial.</small></div>
+      <div><strong>Atención ciudadana</strong><span class="gov-911">911</span><small>Emergencias</small></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Gobierno del Estado de Sonora</span><span>Mapa: OpenStreetMap</span></div>
+  </footer>
+
+  <dialog id="lightbox" class="lightbox">
+    <button id="closeLightbox" aria-label="Cerrar">×</button>
+    <img id="lightboxImage" alt="Evidencia ampliada">
+    <p id="lightboxCaption"></p>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../config.js"></script>
+  <script src="app.js?v=20260918-audit1"></script>
+  <script src="institutional-ui.js?v=20260918-audit1"></script>
 </body>
 </html>
