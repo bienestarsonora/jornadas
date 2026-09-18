@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Vista previa institucional · Administración Jornadas</title>
+<style>
+html,body{margin:0;height:100%;background:#eee;font-family:Arial,sans-serif}
+.bar{min-height:44px;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;padding:0 12px;text-align:center}
+.wrap{height:calc(100% - 44px)}
+iframe{width:100%;height:100%;border:0;background:#fff}
+</style>
+</head>
+<body>
+<div class="bar"><strong>VISTA PREVIA:</strong>&nbsp; panel administrativo homologado de Jornadas. Producción no se modifica.</div>
+<div class="wrap"><iframe id="site" src="../admin/" title="Vista previa del panel administrativo de Jornadas"></iframe></div>
+<script>
+const frame=document.getElementById('site');
+frame.addEventListener('load',()=>{
+  try{
+    const d=frame.contentDocument;if(!d)return;
+    d.body.classList.add('admin-site-page');
+    const css=d.createElement('link');css.rel='stylesheet';css.href='../preview-identidad/styles.css?v=20260918-1';d.head.appendChild(css);
+    const theme=d.querySelector('meta[name="theme-color"]');if(theme)theme.setAttribute('content','#410123');
+    const classify=el=>{
+      if(!el||!el.matches||!el.matches('button,a'))return;
+      const text=(el.textContent||'').trim().toLowerCase();
+      const attrs=['id','class','title','aria-label','data-action','data-go','data-view'].map(n=>el.getAttribute(n)||'').join(' ').toLowerCase();
+      const all=text+' '+attrs;
+      if(/nueva|nuevo|invitar|crear|agregar|subir|guardar/.test(all))el.classList.add('gov-action-add');
+      if(/eliminar|delete|borrar|desactivar/.test(all))el.classList.add('gov-action-delete');
+      if(/ver|abrir|visualizar/.test(all))el.classList.add('gov-action-view');
+      if(!el.getAttribute('aria-label')&&!text){
+        if(/delete|eliminar|borrar/.test(all))el.setAttribute('aria-label','Eliminar');
+        else if(/edit|editar/.test(all))el.setAttribute('aria-label','Editar');
+        else if(/view|ver|abrir/.test(all))el.setAttribute('aria-label','Ver detalle');
+      }
+    };
+    const enhance=root=>{
+      root.querySelectorAll?.('button,a').forEach(classify);
+      root.querySelectorAll?.('input[required],select[required],textarea[required]').forEach(el=>el.setAttribute('aria-required','true'));
+      root.querySelectorAll?.('.table-card table').forEach((table,i)=>{if(!table.querySelector('caption')){const cap=d.createElement('caption');cap.textContent=i===0?'Listado administrativo de jornadas':'Tabla de información administrativa';table.prepend(cap);}});
+    };
+    enhance(d);
+    new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType!==1)return;classify(n);enhance(n);}))).observe(d.body,{childList:true,subtree:true});
+  }catch(e){console.error(e)}
+});
+</script>
+</body>
+</html>
