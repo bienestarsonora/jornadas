@@ -274,3 +274,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   border:1px solid var(--gov-border)!important;
   background:#fff!important;
 }
+
+.admin-site-page .status-error{color:var(--gov-danger)!important;font-size:9px;font-weight:800}
+.admin-site-page .status-ok.checking{color:var(--gov-muted)!important}
