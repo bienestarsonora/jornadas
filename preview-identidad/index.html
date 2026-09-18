@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Vista previa institucional · Jornadas del Bienestar</title>
+<style>
+html,body{margin:0;height:100%;background:#eee;font-family:Arial,sans-serif}
+.bar{min-height:44px;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;padding:0 12px;text-align:center}
+.wrap{height:calc(100% - 44px)}
+iframe{width:100%;height:100%;border:0;background:#fff}
+</style>
+</head>
+<body>
+<div class="bar"><strong>VISTA PREVIA:</strong>&nbsp; homologación institucional de Jornadas del Bienestar. Producción no se modifica.</div>
+<div class="wrap"><iframe id="site" src="../" title="Vista previa institucional de Jornadas del Bienestar"></iframe></div>
+<script>
+const frame=document.getElementById('site');
+frame.addEventListener('load',()=>{
+  try{
+    const d=frame.contentDocument;if(!d)return;
+    d.body.classList.add('public-site-page');
+    const css=d.createElement('link');css.rel='stylesheet';css.href='preview-identidad/styles.css?v=20260918-1';d.head.appendChild(css);
+    const theme=d.querySelector('meta[name="theme-color"]');if(theme)theme.setAttribute('content','#410123');
+    if(!d.querySelector('.gov-skip')){const a=d.createElement('a');a.className='gov-skip';a.href='#main-content';a.textContent='Saltar al contenido principal';d.body.prepend(a);}
+    if(!d.querySelector('.gov-topbar')){const t=d.createElement('div');t.className='gov-topbar';t.innerHTML='<div class="gov-topbar-inner">Gobierno del Estado de Sonora</div>';d.body.insertBefore(t,d.querySelector('.site-header')||d.body.firstChild);}
+    const main=d.querySelector('main');if(main&&!main.id)main.id='main-content';
+    if(!d.querySelector('.gov-breadcrumb')){
+      const header=d.querySelector('.site-header');
+      if(header){const bc=d.createElement('nav');bc.className='gov-breadcrumb';bc.setAttribute('aria-label','Ruta de navegación');bc.innerHTML='<div class="gov-breadcrumb-inner">Inicio &nbsp;/&nbsp; Secretaría de Bienestar &nbsp;/&nbsp; <strong aria-current="page">Jornadas del Bienestar</strong></div>';header.insertAdjacentElement('afterend',bc);}
+    }
+    const footer=d.querySelector('footer');
+    if(footer&&!d.querySelector('.gov-official-footer')){
+      const extra=d.createElement('div');extra.className='gov-official-footer';
+      extra.innerHTML='<div><strong>Secretaría de Bienestar</strong><span>Micrositio institucional de Jornadas del Bienestar.</span><small>Seguimiento territorial, resultados y evidencia de las jornadas.</small></div><div><strong>Información institucional</strong><span>Política de Uso y Privacidad · Denuncia Ciudadana · Contacto</span><small>Enlaces institucionales por vincular en la etapa de publicación oficial.</small></div><div><strong>Atención ciudadana</strong><span class="gov-911">911</span><small>Emergencias</small></div>';
+      footer.appendChild(extra);
+    }
+  }catch(e){console.error(e)}
+});
+</script>
+</body>
+</html>
