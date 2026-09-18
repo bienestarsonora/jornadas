@@ -102,20 +102,33 @@
   }
 
   async function loadAll(){
+    const status=$('systemStatus');
+    if(status){status.textContent='● Verificando';status.className='status-ok checking'}
     const [jr,ev]=await Promise.all([
       db.from('jornadas').select('*').order('event_date',{ascending:false}),
       db.from('jornadas_evidencias').select('*').order('sort_order',{ascending:true})
     ]);
-    if(jr.error){toast('No se pudieron cargar las jornadas.','error');console.error(jr.error);return}
+    if(jr.error||ev.error){
+      if(status){status.textContent='● Incidencia';status.className='status-error'}
+      toast('No se pudo cargar completamente la información.','error');
+      console.error(jr.error||ev.error);
+      return;
+    }
     jornadas=jr.data||[];evidencias=ev.data||[];
     if(profile.role==='admin'){
       const [pr,au]=await Promise.all([
         db.from('jornadas_profiles').select('*').order('created_at',{ascending:true}),
         db.from('jornadas_audit_log').select('*').order('created_at',{ascending:false}).limit(200)
       ]);
+      if(pr.error||au.error){
+        if(status){status.textContent='● Incidencia';status.className='status-error'}
+        toast('Se cargaron las jornadas, pero hubo una incidencia con usuarios o bitácora.','error');
+        console.error(pr.error||au.error);
+      }
       profiles=pr.data||[];audit=au.data||[];
     }
     renderAll();
+    if(status&&!status.classList.contains('status-error')){status.textContent='● Operativo';status.className='status-ok'}
   }
 
   function renderAll(){renderOverview();renderJourneysTable();renderUsers();renderAudit()}
@@ -168,6 +181,11 @@
   }
 
   async function ensureMap(lat=29.0892,lng=-110.9613){
+    if(!window.L){
+      toast('No fue posible cargar el mapa. Captura coordenadas válidas manualmente.','error');
+      return;
+    }
+    if(!Number.isFinite(Number(lat))||!Number.isFinite(Number(lng))) { lat=29.0892; lng=-110.9613; }
     if(!formMap){
       formMap=L.map('formMap',{zoomControl:true}).setView([lat,lng],13);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(formMap);
@@ -177,8 +195,17 @@
     setTimeout(()=>formMap.invalidateSize(),160);
   }
   function setFormPoint(lat,lng){
-    $('fLat').value=Number(lat).toFixed(6);$('fLng').value=Number(lng).toFixed(6);
-    if(formMarker)formMarker.setLatLng([lat,lng]);else formMarker=L.marker([lat,lng],{draggable:true}).addTo(formMap).on('dragend',e=>{const p=e.target.getLatLng();$('fLat').value=p.lat.toFixed(6);$('fLng').value=p.lng.toFixed(6)});
+    lat=Number(lat);lng=Number(lng);
+    if(!Number.isFinite(lat)||!Number.isFinite(lng)||lat < -90||lat > 90||lng < -180||lng > 180){
+      toast('Captura coordenadas válidas.','error');
+      return false;
+    }
+    $('fLat').value=lat.toFixed(6);$('fLng').value=lng.toFixed(6);
+    if(formMap){
+      if(formMarker)formMarker.setLatLng([lat,lng]);
+      else formMarker=L.marker([lat,lng],{draggable:true}).addTo(formMap).on('dragend',e=>{const p=e.target.getLatLng();$('fLat').value=p.lat.toFixed(6);$('fLng').value=p.lng.toFixed(6)});
+    }
+    return true;
   }
 
   async function blobUrl(path){
@@ -236,7 +263,9 @@
       const selectedDate=normalizeDateValue($('fDate').value);
       if(!selectedDate)throw new Error('Selecciona una fecha válida antes de guardar.');
       const status=profile.role==='admin'?$('fStatus').value:'draft';
-      const payload={title:$('fTitle').value.trim(),event_date:selectedDate,place:$('fPlace').value.trim(),neighborhood:$('fNeighborhood').value.trim(),lat:+$('fLat').value,lng:+$('fLng').value,services_count:+$('fServicesCount').value||0,door_days:+$('fDoorDays').value||0,speaker_days:+$('fSpeakerDays').value||0,services:split($('fServices').value),agencies:split($('fAgencies').value),summary:$('fSummary').value.trim(),status,updated_by:currentUser.id};
+      const lat=Number($('fLat').value),lng=Number($('fLng').value);
+      if(!Number.isFinite(lat)||!Number.isFinite(lng)||lat < -90||lat > 90||lng < -180||lng > 180) throw new Error('Captura coordenadas válidas antes de guardar.');
+      const payload={title:$('fTitle').value.trim(),event_date:selectedDate,place:$('fPlace').value.trim(),neighborhood:$('fNeighborhood').value.trim(),lat,lng,services_count:+$('fServicesCount').value||0,door_days:+$('fDoorDays').value||0,speaker_days:+$('fSpeakerDays').value||0,services:split($('fServices').value),agencies:split($('fAgencies').value),summary:$('fSummary').value.trim(),status,updated_by:currentUser.id};
       let jornadaId=id;
       let savedRow=null;
       if(id){
@@ -255,8 +284,12 @@
         const path=`${jornadaId}/flyer-${crypto.randomUUID()}.${ext}`;
         if(!validateFile(pendingFlyer))throw new Error('Flyer inválido');
         const {error:upErr}=await db.storage.from(cfg.STORAGE_BUCKET).upload(path,pendingFlyer,{contentType:pendingFlyer.type});if(upErr)throw upErr;
-        if(oldFlyer){await db.from('jornadas_evidencias').delete().eq('id',oldFlyer.id);await db.storage.from(cfg.STORAGE_BUCKET).remove([oldFlyer.storage_path])}
-        const {error:insErr}=await db.from('jornadas_evidencias').insert({jornada_id:jornadaId,kind:'flyer',storage_path:path,caption:'',sort_order:0,created_by:currentUser.id});if(insErr)throw insErr;
+        const {error:insErr}=await db.from('jornadas_evidencias').insert({jornada_id:jornadaId,kind:'flyer',storage_path:path,caption:'',sort_order:0,created_by:currentUser.id});
+        if(insErr){await db.storage.from(cfg.STORAGE_BUCKET).remove([path]);throw insErr}
+        if(oldFlyer){
+          const {error:delErr}=await db.from('jornadas_evidencias').delete().eq('id',oldFlyer.id);
+          if(!delErr) await db.storage.from(cfg.STORAGE_BUCKET).remove([oldFlyer.storage_path]);
+        }
       }
       for(let i=0;i<pendingPhotos.length;i++)await uploadEvidence(jornadaId,pendingPhotos[i],'photo',i+1);
       $('journeyDialog').close();document.body.classList.remove('modal-open');toast(`Jornada guardada · ${dateLongLabel(selectedDate)}.`,'success');await loadAll();
@@ -285,7 +318,7 @@
     try{
       const {data,error}=await db.functions.invoke('jornadas-manage-users',{body:{action:'invite_capturista',email:$('inviteEmail').value.trim(),full_name:$('inviteName').value.trim()}});
       if(error)throw error;if(data?.error)throw new Error(data.error);
-      $('userDialog').close();$('userForm').reset();toast('Invitación enviada.','success');await loadAll();
+      $('userDialog').close();document.body.classList.remove('modal-open');$('userForm').reset();toast('Invitación enviada.','success');await loadAll();
     }catch(err){console.error(err);toast(err.message||'No fue posible enviar la invitación.','error')}finally{setBusy(btn,false)}
   }
 
@@ -298,8 +331,15 @@
 
   function confirmAction(title,text){
     return new Promise(resolve=>{
-      $('confirmTitle').textContent=title;$('confirmText').textContent=text;$('confirmDialog').showModal();
-      const done=v=>{$('confirmDialog').close();$('confirmAccept').onclick=null;$('confirmCancel').onclick=null;resolve(v)};
+      const dialog=$('confirmDialog');
+      $('confirmTitle').textContent=title;$('confirmText').textContent=text;dialog.showModal();
+      let settled=false;
+      const cleanup=()=>{dialog.removeEventListener('cancel',onCancel);dialog.removeEventListener('close',onClose);$('confirmAccept').onclick=null;$('confirmCancel').onclick=null};
+      const done=v=>{if(settled)return;settled=true;cleanup();if(dialog.open)dialog.close();resolve(v)};
+      const onCancel=e=>{e.preventDefault();done(false)};
+      const onClose=()=>done(false);
+      dialog.addEventListener('cancel',onCancel);
+      dialog.addEventListener('close',onClose);
       $('confirmAccept').onclick=()=>done(true);$('confirmCancel').onclick=()=>done(false);
     });
   }
@@ -309,14 +349,14 @@
     $('setupForm').onsubmit=async e=>{e.preventDefault();if($('setupPassword').value!==$('setupPassword2').value){authMessage('Las contraseñas no coinciden.');return}if($('setupEmail').value.trim().toLowerCase()!==cfg.ADMIN_EMAIL.toLowerCase()){authMessage('Ese correo no está autorizado para la activación inicial.');return}const btn=e.submitter;setBusy(btn,true,'Creando…');const {data,error}=await db.auth.signUp({email:$('setupEmail').value.trim(),password:$('setupPassword').value,options:{emailRedirectTo:location.origin+location.pathname,data:{full_name:'Administrador'}}});if(error){authMessage(error.message);setBusy(btn,false);return}if(data.session){await ensureAccess()}else authMessage('Cuenta creada. Revisa tu correo y confirma la dirección antes de iniciar sesión.','success');setBusy(btn,false)};
     $('forgotPassword').onclick=()=>showAuthView('recoveryView');$('recoveryBack').onclick=()=>showAuthView('loginView');$('backToLogin').onclick=()=>showAuthView('loginView');
     $('recoveryForm').onsubmit=async e=>{e.preventDefault();const btn=e.submitter;setBusy(btn,true,'Enviando…');const {error}=await db.auth.resetPasswordForEmail($('recoveryEmail').value.trim(),{redirectTo:location.origin+location.pathname});if(error)authMessage(error.message);else authMessage('Enlace enviado. Revisa tu correo.','success');setBusy(btn,false)};
-    $('newPasswordForm').onsubmit=async e=>{e.preventDefault();if($('newPassword').value!==$('newPassword2').value){authMessage('Las contraseñas no coinciden.');return}const btn=e.submitter;setBusy(btn,true,'Guardando…');const {error}=await db.auth.updateUser({password:$('newPassword').value});if(error){authMessage(error.message);setBusy(btn,false);return}history.replaceState({},'',location.pathname);authMessage('Contraseña actualizada.','success');setTimeout(()=>{openApp()},600);setBusy(btn,false)};
+    $('newPasswordForm').onsubmit=async e=>{e.preventDefault();if($('newPassword').value!==$('newPassword2').value){authMessage('Las contraseñas no coinciden.');return}const btn=e.submitter;setBusy(btn,true,'Guardando…');const {error}=await db.auth.updateUser({password:$('newPassword').value});if(error){authMessage(error.message);setBusy(btn,false);return}history.replaceState({},'',location.pathname);authMessage('Contraseña actualizada.','success');setTimeout(()=>{ensureAccess()},600);setBusy(btn,false)};
     $('signOut').onclick=async()=>{await db.auth.signOut();location.reload()};
     document.querySelectorAll('.nav-item').forEach(b=>b.onclick=()=>switchView(b.dataset.view));document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>switchView(b.dataset.go));
     $('quickNew').onclick=()=>openJourney();$('newJourney').onclick=()=>openJourney();$('adminSearch').oninput=renderJourneysTable;$('adminStatus').onchange=renderJourneysTable;
     $('journeyForm').onsubmit=saveJourney;$('fDate').oninput=renderDatePreview;$('fDate').onchange=renderDatePreview;$('fLat').onchange=()=>{if(formMap)setFormPoint(+$('fLat').value,+$('fLng').value)};$('fLng').onchange=()=>{if(formMap)setFormPoint(+$('fLat').value,+$('fLng').value)};
-    $('fFlyer').onchange=e=>{const f=e.target.files[0];if(f&&validateFile(f))pendingFlyer=f};$('fPhotos').onchange=e=>{pendingPhotos=[...e.target.files].filter(validateFile)};
+    $('fFlyer').onchange=e=>{const f=e.target.files[0];pendingFlyer=(f&&validateFile(f))?f:null};$('fPhotos').onchange=e=>{pendingPhotos=[...e.target.files].filter(validateFile)};
     document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>{const d=$(b.dataset.close);d.close();document.body.classList.remove('modal-open')});
-    $('inviteUser').onclick=()=>$('userDialog').showModal();$('userForm').onsubmit=inviteUser;$('refreshAudit').onclick=loadAll;
+    $('inviteUser').onclick=()=>{$('userDialog').showModal();document.body.classList.add('modal-open')};$('userForm').onsubmit=inviteUser;$('refreshAudit').onclick=loadAll;
   }
 
   db.auth.onAuthStateChange((event)=>{if(event==='PASSWORD_RECOVERY'){showAuthView('newPasswordView');$('authScreen').hidden=false;$('appShell').hidden=true}});
