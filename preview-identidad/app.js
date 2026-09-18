@@ -135,8 +135,12 @@
     const icon = L.divIcon({ className:'', html:'<div class="custom-marker"></div>', iconSize:[30,30], iconAnchor:[15,30] });
 
     valid.forEach(j => {
-      L.marker([Number(j.lat), Number(j.lng)], { icon })
-        .addTo(markerLayer)
+      L.marker([Number(j.lat), Number(j.lng)], {
+        icon,
+        keyboard:true,
+        title:`${j.title} · ${j.neighborhood}`,
+        alt:`Jornada ${j.title} en ${j.neighborhood}`
+      }).addTo(markerLayer)
         .bindTooltip(`${esc(j.neighborhood)} · ${fmt(j.services_count)} servicios`)
         .on('click', () => showEvent(j.id));
     });
@@ -291,11 +295,13 @@
       const nav = document.querySelector('.site-header nav');
       const open = nav.classList.toggle('open');
       menu.setAttribute('aria-expanded', String(open));
+      menu.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
       menu.textContent = open ? '×' : '☰';
     });
     document.querySelectorAll('.site-header nav a').forEach(a => a.addEventListener('click', () => {
       document.querySelector('.site-header nav').classList.remove('open');
       menu.setAttribute('aria-expanded', 'false');
+      menu.setAttribute('aria-label','Abrir menú');
       menu.textContent = '☰';
     }));
 
@@ -315,6 +321,7 @@
         if (nav?.classList.contains('open')) {
           nav.classList.remove('open');
           menu.setAttribute('aria-expanded','false');
+          menu.setAttribute('aria-label','Abrir menú');
           menu.textContent='☰';
           menu.focus();
         }
