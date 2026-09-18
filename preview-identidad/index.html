@@ -21,7 +21,7 @@ frame.addEventListener('load',()=>{
   try{
     const d=frame.contentDocument;if(!d)return;
     d.body.classList.add('public-site-page');
-    const css=d.createElement('link');css.rel='stylesheet';css.href='preview-identidad/styles.css?v=20260918-1';d.head.appendChild(css);
+    const css=d.createElement('link');css.rel='stylesheet';css.href='preview-identidad/styles.css?v=20260918-2';d.head.appendChild(css);
     const theme=d.querySelector('meta[name="theme-color"]');if(theme)theme.setAttribute('content','#410123');
     if(!d.querySelector('.gov-skip')){const a=d.createElement('a');a.className='gov-skip';a.href='#main-content';a.textContent='Saltar al contenido principal';d.body.prepend(a);}
     if(!d.querySelector('.gov-topbar')){const t=d.createElement('div');t.className='gov-topbar';t.innerHTML='<div class="gov-topbar-inner">Gobierno del Estado de Sonora</div>';d.body.insertBefore(t,d.querySelector('.site-header')||d.body.firstChild);}
