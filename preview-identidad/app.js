@@ -164,6 +164,7 @@
     const coverUrl = coverEvidence ? await blobUrl(coverEvidence.storage_path) : '';
     const flyerUrl = flyer ? await blobUrl(flyer.storage_path) : '';
     const photoUrls = await Promise.all(photos.slice(0,6).map(async p => ({ ...p, url: await blobUrl(p.storage_path) })));
+    if (selectedId !== id) return;
 
     $('eventPanel').innerHTML = `
       <div class="event-cover">${coverUrl ? `<img src="${coverUrl}" alt="${esc(j.title)}">` : ''}<span class="event-date">${esc(dateLabel(j.event_date))}</span></div>
