@@ -10,6 +10,7 @@
   });
 
   const $ = (id) => document.getElementById(id);
+  const scrollBehavior = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
   const fmt = (n) => new Intl.NumberFormat('es-MX').format(Number(n) || 0);
   const esc = (s = '') => String(s).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   const dateLabel = (iso) => new Date(`${iso}T12:00:00`).toLocaleDateString('es-MX', { day:'numeric', month:'long', year:'numeric' });
@@ -128,24 +129,27 @@
 
   function renderMap() {
     const list = filtered();
+    const valid = list.filter(j => Number.isFinite(Number(j.lat)) && Number.isFinite(Number(j.lng)));
     $('visibleCount').textContent = list.length;
-    if (!markerLayer) return;
+    if (!markerLayer || !map) return;
     markerLayer.clearLayers();
     const icon = L.divIcon({ className:'', html:'<div class="custom-marker"></div>', iconSize:[30,30], iconAnchor:[15,30] });
 
-    list.forEach(j => {
-      if (!Number.isFinite(Number(j.lat)) || !Number.isFinite(Number(j.lng))) return;
-      L.marker([Number(j.lat), Number(j.lng)], { icon })
-        .addTo(markerLayer)
+    valid.forEach(j => {
+      L.marker([Number(j.lat), Number(j.lng)], {
+        icon,
+        keyboard:true,
+        title:`${j.title} · ${j.neighborhood}`,
+        alt:`Jornada ${j.title} en ${j.neighborhood}`
+      }).addTo(markerLayer)
         .bindTooltip(`${esc(j.neighborhood)} · ${fmt(j.services_count)} servicios`)
         .on('click', () => showEvent(j.id));
     });
 
-    if (list.length > 1) {
-      const pts = list.filter(j => Number.isFinite(Number(j.lat)) && Number.isFinite(Number(j.lng))).map(j => [Number(j.lat), Number(j.lng)]);
-      if (pts.length > 1) map.fitBounds(pts, { padding:[45,45], maxZoom:14 });
-    } else if (list.length === 1) {
-      map.setView([Number(list[0].lat), Number(list[0].lng)], 14);
+    if (valid.length > 1) {
+      map.fitBounds(valid.map(j => [Number(j.lat), Number(j.lng)]), { padding:[45,45], maxZoom:14 });
+    } else if (valid.length === 1) {
+      map.setView([Number(valid[0].lat), Number(valid[0].lng)], 14);
     } else {
       map.setView([29.0892, -110.9613], 12);
     }
@@ -155,7 +159,9 @@
     const j = jornadas.find(x => x.id === id);
     if (!j) return;
     selectedId = id;
-    if (map && Number.isFinite(Number(j.lat))) map.flyTo([Number(j.lat), Number(j.lng)], 14, { duration:.8 });
+    if (map && Number.isFinite(Number(j.lat)) && Number.isFinite(Number(j.lng))) {
+      map.flyTo([Number(j.lat), Number(j.lng)], 14, { duration:.8, animate:scrollBehavior() === 'smooth' });
+    }
 
     const flyer = evidenceFor(id, 'flyer')[0];
     const photos = evidenceFor(id, 'photo');
@@ -163,6 +169,7 @@
     const coverUrl = coverEvidence ? await blobUrl(coverEvidence.storage_path) : '';
     const flyerUrl = flyer ? await blobUrl(flyer.storage_path) : '';
     const photoUrls = await Promise.all(photos.slice(0,6).map(async p => ({ ...p, url: await blobUrl(p.storage_path) })));
+    if (selectedId !== id) return;
 
     $('eventPanel').innerHTML = `
       <div class="event-cover">${coverUrl ? `<img src="${coverUrl}" alt="${esc(j.title)}">` : ''}<span class="event-date">${esc(dateLabel(j.event_date))}</span></div>
@@ -196,16 +203,25 @@
     empty.hidden = true;
     grid.innerHTML = jornadas.map(j => {
       const cover = evidenceFor(j.id, 'photo')[0] || evidenceFor(j.id, 'flyer')[0];
-      return `<article class="journey-card" data-open-event="${j.id}">
+      return `<article class="journey-card" data-open-event="${j.id}" role="button" tabindex="0" aria-label="Ver ${esc(j.title)} en el mapa">
         <div class="journey-media" ${cover ? `data-image-path="${esc(cover.storage_path)}"` : ''}><span>${esc(shortDate(j.event_date))}</span></div>
         <div class="journey-card-body"><small>${esc(j.neighborhood)}</small><h3>${esc(j.title)}</h3><p>${esc(j.place)}${j.summary ? ` · ${esc(j.summary).slice(0,105)}${j.summary.length > 105 ? '…' : ''}` : ''}</p>
         <div class="journey-card-foot"><span>Servicios brindados</span><b>${fmt(j.services_count)}</b></div></div>
       </article>`;
     }).join('');
-    document.querySelectorAll('[data-open-event]').forEach(card => card.addEventListener('click', () => {
-      document.querySelector('#mapa').scrollIntoView({ behavior:'smooth', block:'start' });
-      setTimeout(() => showEvent(card.dataset.openEvent), 500);
-    }));
+    document.querySelectorAll('[data-open-event]').forEach(card => {
+      const open = () => {
+        document.querySelector('#mapa')?.scrollIntoView({ behavior:scrollBehavior(), block:'start' });
+        setTimeout(() => showEvent(card.dataset.openEvent), 500);
+      };
+      card.addEventListener('click', open);
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open();
+        }
+      });
+    });
   }
 
   function renderGallery() {
@@ -248,13 +264,23 @@
 
   function bindZoomables() {
     document.querySelectorAll('.zoomable').forEach(el => {
-      el.onclick = (ev) => {
-        ev.stopPropagation();
+      el.setAttribute('role','button');
+      el.setAttribute('tabindex','0');
+      if (!el.getAttribute('aria-label')) el.setAttribute('aria-label','Ampliar evidencia');
+      const open = (ev) => {
+        ev?.stopPropagation?.();
         const src = el.dataset.src || el.src || el.querySelector('img')?.src;
         if (!src) return;
         $('lightboxImage').src = src;
         $('lightboxCaption').textContent = el.dataset.caption || '';
         $('lightbox').showModal();
+      };
+      el.onclick = open;
+      el.onkeydown = e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open(e);
+        }
       };
     });
   }
@@ -270,13 +296,39 @@
       const nav = document.querySelector('.site-header nav');
       const open = nav.classList.toggle('open');
       menu.setAttribute('aria-expanded', String(open));
+      menu.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
       menu.textContent = open ? '×' : '☰';
     });
     document.querySelectorAll('.site-header nav a').forEach(a => a.addEventListener('click', () => {
       document.querySelector('.site-header nav').classList.remove('open');
       menu.setAttribute('aria-expanded', 'false');
+      menu.setAttribute('aria-label','Abrir menú');
       menu.textContent = '☰';
     }));
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+      const href = a.getAttribute('href');
+      if (!href || href === '#') return;
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior:scrollBehavior(), block:'start' });
+      if (href === '#top') window.scrollTo({ top:0, behavior:scrollBehavior() });
+      if (a.classList.contains('gov-skip')) target.focus({ preventScroll:true });
+    }));
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        const nav = document.querySelector('.site-header nav');
+        if (nav?.classList.contains('open')) {
+          nav.classList.remove('open');
+          menu.setAttribute('aria-expanded','false');
+          menu.setAttribute('aria-label','Abrir menú');
+          menu.textContent='☰';
+          menu.focus();
+        }
+      }
+    });
 
     const io = new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')), { threshold:.11 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));

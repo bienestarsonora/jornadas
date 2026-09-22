@@ -3,18 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#741238">
+  <meta name="theme-color" content="#410123">
   <meta name="robots" content="noindex,nofollow,noarchive">
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.tile.openstreetmap.org https://zaticxkysgobkyhebmhf.supabase.co; connect-src 'self' https://zaticxkysgobkyhebmhf.supabase.co wss://zaticxkysgobkyhebmhf.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self';">
   <title>Administración | Jornadas del Bienestar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="styles.css?v=20260814-2">
+  <link rel="stylesheet" href="../institutional.css?v=20260922">
+  <link rel="icon" href="../assets/logo-bienestar.png" type="image/png">
 </head>
-<body>
+<body class="admin-site-page">
   <section class="auth-screen" id="authScreen">
     <div class="auth-backdrop"></div>
     <a class="back-site" href="../">← Volver al sitio público</a>
@@ -30,7 +32,7 @@
           <button class="primary-btn" type="submit">Ingresar al panel <span>→</span></button>
         </form>
         <button class="text-btn" id="forgotPassword" type="button">¿Olvidaste tu contraseña?</button>
-        <div class="auth-note">El acceso y los permisos se validan directamente en Supabase Auth.</div>
+        <div class="auth-note">Acceso exclusivo para personal autorizado.</div>
       </div>
       <div id="setupView" hidden>
         <span class="kicker">Activación inicial</span>
@@ -47,9 +49,9 @@
       <div id="recoveryView" hidden>
         <span class="kicker">Recuperar acceso</span>
         <h1>Restablecer contraseña.</h1>
-        <p>Escribe el correo asociado a tu cuenta. Recibirás un enlace seguro de Supabase.</p>
+        <p>Escribe el correo asociado a tu cuenta. Recibirás un enlace para restablecer tu contraseña.</p>
         <form id="recoveryForm" class="auth-form">
-          <label>Correo<input id="recoveryEmail" type="email" required></label>
+          <label>Correo<input id="recoveryEmail" type="email" autocomplete="email" required></label>
           <button class="primary-btn" type="submit">Enviar enlace <span>→</span></button>
         </form>
         <button class="text-btn" id="recoveryBack" type="button">Volver</button>
@@ -71,7 +73,7 @@
   <section class="app-shell" id="appShell" hidden>
     <aside class="sidebar">
       <div class="sidebar-brand"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-logo alt="Bienestar"><div><strong>Jornadas</strong><span>Centro de administración</span></div></div>
-      <nav id="sideNav">
+      <nav id="sideNav" aria-label="Administración de jornadas">
         <button class="nav-item active" data-view="overview"><span>⌂</span>Resumen</button>
         <button class="nav-item" data-view="jornadas"><span>◇</span>Jornadas</button>
         <button class="nav-item admin-only" data-view="usuarios"><span>◎</span>Usuarios</button>
@@ -80,7 +82,7 @@
       <div class="sidebar-user">
         <div class="avatar" id="userInitial">A</div>
         <div><strong id="userName">Usuario</strong><span id="userRole">—</span></div>
-        <button id="signOut" title="Cerrar sesión">↗</button>
+        <button id="signOut" title="Cerrar sesión" aria-label="Cerrar sesión">↗</button>
       </div>
     </aside>
 
@@ -104,8 +106,8 @@
       </section>
 
       <section class="view" id="view-jornadas">
-        <div class="toolbar"><label class="search-box">⌕ <input id="adminSearch" type="search" placeholder="Buscar jornada, colonia o sede"></label><select id="adminStatus"><option value="all">Todos los estados</option><option value="published">Publicadas</option><option value="draft">Borradores</option></select><button class="primary-btn small" id="newJourney">+ Nueva jornada</button></div>
-        <div class="table-card"><table><thead><tr><th>Jornada</th><th>Fecha</th><th>Colonia</th><th>Servicios</th><th>Estado</th><th></th></tr></thead><tbody id="journeysTable"></tbody></table><div class="table-empty" id="journeysTableEmpty" hidden>No hay jornadas que coincidan con los filtros.</div></div>
+        <div class="toolbar"><label class="search-box">⌕ <input id="adminSearch" type="search" aria-label="Buscar jornada, colonia o sede" placeholder="Buscar jornada, colonia o sede"></label><select id="adminStatus" aria-label="Filtrar por estado"><option value="all">Todos los estados</option><option value="published">Publicadas</option><option value="draft">Borradores</option></select><button class="primary-btn small" id="newJourney">+ Nueva jornada</button></div>
+        <div class="table-card"><table><thead><tr><th>Jornada</th><th>Fecha</th><th>Colonia</th><th>Servicios</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="journeysTable"></tbody></table><div class="table-empty" id="journeysTableEmpty" hidden>No hay jornadas que coincidan con los filtros.</div></div>
       </section>
 
       <section class="view admin-only" id="view-usuarios">
@@ -120,9 +122,9 @@
     </main>
   </section>
 
-  <dialog id="journeyDialog" class="modal large-modal">
+  <dialog id="journeyDialog" class="modal large-modal" aria-labelledby="formHeading">
     <form id="journeyForm" method="dialog">
-      <header class="modal-head"><div><span class="mini-kicker">Ficha territorial</span><h2 id="formHeading">Nueva jornada</h2></div><button type="button" class="close-btn" data-close="journeyDialog">×</button></header>
+      <header class="modal-head"><div><span class="mini-kicker">Ficha territorial</span><h2 id="formHeading">Nueva jornada</h2></div><button type="button" class="close-btn" data-close="journeyDialog" aria-label="Cerrar formulario de jornada">×</button></header>
       <div class="modal-body two-col">
         <div class="form-column">
           <input id="fId" type="hidden">
@@ -149,21 +151,22 @@
     </form>
   </dialog>
 
-  <dialog id="userDialog" class="modal small-modal">
+  <dialog id="userDialog" class="modal small-modal" aria-labelledby="inviteHeading">
     <form id="userForm" method="dialog">
-      <header class="modal-head"><div><span class="mini-kicker">Nuevo acceso</span><h2>Invitar capturista</h2></div><button type="button" class="close-btn" data-close="userDialog">×</button></header>
+      <header class="modal-head"><div><span class="mini-kicker">Nuevo acceso</span><h2 id="inviteHeading">Invitar capturista</h2></div><button type="button" class="close-btn" data-close="userDialog" aria-label="Cerrar formulario de usuario">×</button></header>
       <div class="modal-body"><div class="field-grid one"><label>Nombre completo *<input id="inviteName" required maxlength="120"></label><label>Correo *<input id="inviteEmail" type="email" required></label><div class="permission-card"><b>Rol: Capturista</b><span>Podrá crear y editar borradores y sus evidencias. La publicación, eliminación de jornadas y administración de usuarios quedan reservadas al administrador.</span></div></div></div>
       <footer class="modal-foot"><button type="button" class="ghost-btn" data-close="userDialog">Cancelar</button><button type="submit" class="primary-btn">Enviar invitación</button></footer>
     </form>
   </dialog>
 
-  <dialog id="confirmDialog" class="modal confirm-modal"><div class="confirm-wrap"><span class="confirm-icon">!</span><h3 id="confirmTitle">Confirmar acción</h3><p id="confirmText"></p><div><button class="ghost-btn" id="confirmCancel">Cancelar</button><button class="danger-btn" id="confirmAccept">Confirmar</button></div></div></dialog>
+  <dialog id="confirmDialog" class="modal confirm-modal" aria-labelledby="confirmTitle"><div class="confirm-wrap"><span class="confirm-icon">!</span><h3 id="confirmTitle">Confirmar acción</h3><p id="confirmText"></p><div><button class="ghost-btn" id="confirmCancel">Cancelar</button><button class="danger-btn" id="confirmAccept">Confirmar</button></div></div></dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="../config.js?v=20260814-2"></script>
-  <script src="app.js?v=20260814-2"></script>
+  <script src="app.js?v=20260922"></script>
+  <script src="../institutional-ui.js?v=20260922"></script>
 </body>
 </html>

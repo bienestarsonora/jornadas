@@ -3,19 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#741238">
+  <meta name="theme-color" content="#410123">
   <meta name="description" content="Mapa territorial, resultados y evidencias de las Jornadas del Bienestar en Hermosillo, Sonora.">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.tile.openstreetmap.org https://zaticxkysgobkyhebmhf.supabase.co; connect-src 'self' https://zaticxkysgobkyhebmhf.supabase.co wss://zaticxkysgobkyhebmhf.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self';">
   <title>Jornadas del Bienestar | Secretaría de Bienestar Sonora</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="premium-v2.css?v=20260814">
+  <link rel="stylesheet" href="institutional.css?v=20260922">
+  <link rel="icon" href="assets/logo-bienestar.png" type="image/png">
 </head>
-<body>
+<body class="public-site-page">
+  <a class="gov-skip" href="#main-content">Saltar al contenido principal</a>
+  <div class="gov-topbar"><div class="gov-topbar-inner">Gobierno del Estado de Sonora</div></div>
   <header class="site-header" id="top">
     <div class="header-shell">
       <a class="brand" href="#top" aria-label="Jornadas del Bienestar, inicio">
@@ -27,7 +31,7 @@
         </span>
       </a>
 
-      <nav aria-label="Navegación principal">
+      <nav id="primaryNav" aria-label="Navegación principal">
         <a href="#resultados">Resultados</a>
         <a href="#mapa">Mapa</a>
         <a href="#jornadas">Jornadas</a>
@@ -38,11 +42,13 @@
         </a>
       </nav>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="primaryNav">☰</button>
     </div>
   </header>
 
-  <main>
+  <nav class="gov-breadcrumb" aria-label="Ruta de navegación"><div class="gov-breadcrumb-inner">Inicio &nbsp;/&nbsp; Secretaría de Bienestar &nbsp;/&nbsp; <strong aria-current="page">Jornadas del Bienestar</strong></div></nav>
+
+  <main id="main-content" tabindex="-1">
     <section class="hero hero-impact" id="inicio">
       <div class="hero-grid">
         <div class="hero-copy reveal">
@@ -100,10 +106,6 @@
             </div>
           </div>
 
-          <div class="impact-chip chip-services">
-            <span class="chip-icon">＋</span>
-            <div><small>Indicador principal</small><b>Servicios a la ciudadanía</b></div>
-          </div>
         </div>
       </div>
     </section>
@@ -128,7 +130,7 @@
       </div>
 
       <div class="map-filter-bar reveal">
-        <label class="search-field"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" autocomplete="off" placeholder="Buscar colonia, sede, servicio o dependencia"></label>
+        <label class="search-field"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" autocomplete="off" aria-label="Buscar colonia, sede, servicio o dependencia" placeholder="Buscar colonia, sede, servicio o dependencia"></label>
         <select id="yearFilter" aria-label="Filtrar por año"><option value="all">Todos los años</option></select>
         <div class="visible-pill"><span class="live-dot"></span><b id="visibleCount">0</b> visibles</div>
       </div>
@@ -183,10 +185,15 @@
       <p>Información territorial y evidencia institucional de las Jornadas del Bienestar en Hermosillo, Sonora.</p>
       <a href="#top">Volver arriba ↑</a>
     </div>
+    <div class="gov-official-footer">
+      <div><strong>Secretaría de Bienestar</strong><span>Micrositio institucional de Jornadas del Bienestar.</span><small>Seguimiento territorial, resultados y evidencia de las jornadas.</small></div>
+      <nav aria-label="Consulta de jornadas"><strong>Consulta de jornadas</strong><a href="#resultados">Resultados acumulados</a><a href="#mapa">Mapa territorial</a><a href="#evidencias">Evidencia fotográfica</a></nav>
+      <div><strong>Acceso institucional</strong><a href="admin/">Panel de administración</a><small>Captura y actualización para personal autorizado.</small></div>
+    </div>
     <div class="footer-bottom"><span>© 2026 Gobierno del Estado de Sonora</span><span>Mapa: OpenStreetMap</span></div>
   </footer>
 
-  <dialog id="lightbox" class="lightbox">
+  <dialog id="lightbox" class="lightbox" aria-label="Evidencia ampliada">
     <button id="closeLightbox" aria-label="Cerrar">×</button>
     <img id="lightboxImage" alt="Evidencia ampliada">
     <p id="lightboxCaption"></p>
@@ -197,6 +204,7 @@
   <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=20260922"></script>
+  <script src="institutional-ui.js?v=20260922"></script>
 </body>
 </html>
