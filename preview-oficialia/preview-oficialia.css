@@ -191,3 +191,15 @@
   .section-nav a{white-space:nowrap!important}
   .gov-breadcrumb-inner{height:auto!important;min-height:42px!important;flex-wrap:wrap!important;padding:8px 0!important}
 }
+
+
+/* Paisaje institucional preteñido: evita render gris del SVG original */
+.site-header::before{
+  background-image:url('../assets/bk-header-magenta.svg')!important;
+  filter:none!important;
+  opacity:1!important;
+  mix-blend-mode:normal!important;
+}
+.site-header::after{
+  background:rgba(150,14,83,.10)!important;
+}
