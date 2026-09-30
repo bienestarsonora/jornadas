@@ -18,7 +18,7 @@
     if (hasAnimated || finalValue === null || finalValue <= 0) return;
     hasAnimated = true;
 
-    const duration = 1450;
+    const duration = 2600;
     const start = performance.now();
 
     const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
