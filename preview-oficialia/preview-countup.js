@@ -1,68 +1,70 @@
 (() => {
   'use strict';
 
-  const target = document.getElementById('heroServices');
-  if (!target) return;
+  const ids = ['heroServices','statServices','statEvents','statNeighborhoods','statOutreach'];
+  const duration = 2600;
+  const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+  const format = (n) => Math.round(n).toLocaleString('es-MX');
 
-  let finalValue = null;
-  let hasAnimated = false;
+  const states = new Map();
 
   const parseValue = (text) => {
     const n = Number(String(text || '').replace(/[^0-9.-]/g, ''));
     return Number.isFinite(n) ? n : null;
   };
 
-  const format = (n) => Math.round(n).toLocaleString('es-MX');
+  const animate = (el, state) => {
+    if (state.animated || state.finalValue === null || state.finalValue < 0) return;
+    state.animated = true;
 
-  const animate = () => {
-    if (hasAnimated || finalValue === null || finalValue <= 0) return;
-    hasAnimated = true;
-
-    const duration = 2600;
     const start = performance.now();
-
-    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+    el.textContent = '0';
 
     const frame = (now) => {
       const progress = Math.min((now - start) / duration, 1);
-      target.textContent = format(finalValue * easeOutCubic(progress));
-
+      el.textContent = format(state.finalValue * easeOutCubic(progress));
       if (progress < 1) {
         requestAnimationFrame(frame);
       } else {
-        target.textContent = format(finalValue);
+        el.textContent = format(state.finalValue);
       }
     };
 
-    target.textContent = '0';
     requestAnimationFrame(frame);
   };
 
-  const capture = () => {
-    const value = parseValue(target.textContent);
-    if (value !== null && value > 0) {
-      finalValue = value;
-      if (observerEntry?.isIntersecting) animate();
-    }
-  };
+  ids.forEach((id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
 
-  let observerEntry = null;
+    const state = { finalValue: null, animated: false, visible: false };
+    states.set(el, state);
 
-  const io = new IntersectionObserver((entries) => {
-    observerEntry = entries[0];
-    if (observerEntry.isIntersecting) {
-      capture();
-      animate();
-    }
-  }, { threshold: 0.35 });
+    const capture = () => {
+      const value = parseValue(el.textContent);
+      if (value !== null && value >= 0) {
+        state.finalValue = value;
+        if (state.visible) animate(el, state);
+      }
+    };
 
-  io.observe(target);
+    const io = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      state.visible = entry.isIntersecting;
+      if (state.visible) {
+        capture();
+        animate(el, state);
+      }
+    }, { threshold: 0.35 });
 
-  const mo = new MutationObserver(() => {
-    if (!hasAnimated) capture();
+    io.observe(el);
+
+    const mo = new MutationObserver(() => {
+      if (!state.animated) capture();
+    });
+
+    mo.observe(el, { childList: true, characterData: true, subtree: true });
+
+    capture();
   });
-
-  mo.observe(target, { childList: true, characterData: true, subtree: true });
-
-  capture();
 })();
