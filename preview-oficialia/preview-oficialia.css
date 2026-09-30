@@ -275,3 +275,18 @@
     color:#333!important;
   }
 }
+
+
+/* Ajuste fino del paisaje para igualar el portal oficial de Bienestar */
+.site-header::before{
+  background-image:url('../assets/bk-header-magenta.svg')!important;
+  background-repeat:no-repeat!important;
+  background-position:top left!important;
+  background-size:cover!important;
+  opacity:.50!important;
+  filter:blur(.8px)!important;
+  mix-blend-mode:soft-light!important;
+}
+.site-header::after{
+  background:rgba(150,14,83,.22)!important;
+}
