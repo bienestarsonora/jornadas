@@ -329,3 +329,55 @@
   position:relative!important;
   z-index:2!important;
 }
+
+
+/* === Override final estable del header institucional === */
+html body.public-site-page header.site-header{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  height:94px!important;
+  min-height:94px!important;
+  margin:0!important;
+  padding:0!important;
+  background-color:#960E53!important;
+  border:0!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+html body.public-site-page header.site-header::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  background:url('../assets/bk-header-magenta.svg') top left / cover no-repeat!important;
+  opacity:.48!important;
+  filter:blur(.35px)!important;
+  mix-blend-mode:normal!important;
+  visibility:visible!important;
+}
+html body.public-site-page header.site-header::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
+  background:rgba(150,14,83,.24)!important;
+  pointer-events:none!important;
+}
+html body.public-site-page header.site-header .header-shell{
+  position:relative!important;
+  z-index:3!important;
+  height:94px!important;
+  min-height:94px!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+html body.public-site-page header.site-header .brand,
+html body.public-site-page header.site-header #primaryNav{
+  opacity:1!important;
+  visibility:visible!important;
+}
