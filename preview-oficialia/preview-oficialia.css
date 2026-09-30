@@ -430,3 +430,166 @@ html body.public-site-page header.site-header #primaryNav{
 html body.public-site-page header.site-header #primaryNav > a{
   height:92px!important;
 }
+
+
+/* === Footer institucional replicado de Bienestar === */
+.official-footer{
+  margin:0!important;
+  padding:0!important;
+  background:#fff!important;
+  color:#111!important;
+  font-family:'Roboto',Arial,sans-serif!important;
+}
+.official-footer-top{
+  background:#fff!important;
+  min-height:255px!important;
+  display:flex!important;
+  align-items:center!important;
+}
+.official-footer-top-inner{
+  width:calc(100% - 160px)!important;
+  max-width:none!important;
+  margin:0 auto!important;
+  display:grid!important;
+  grid-template-columns:1fr 1.05fr!important;
+  align-items:center!important;
+  gap:64px!important;
+}
+.official-contact{
+  border-left:4px solid #111!important;
+  padding-left:10px!important;
+  font-size:14px!important;
+  line-height:1.5!important;
+}
+.official-contact strong{
+  display:block!important;
+  margin-bottom:8px!important;
+  font-family:'Roboto',Arial,sans-serif!important;
+  font-size:17px!important;
+  font-weight:700!important;
+}
+.official-contact p{
+  margin:2px 0!important;
+  color:#111!important;
+}
+.official-contact b{font-weight:700!important}
+
+.official-links{
+  text-align:center!important;
+  font-size:14px!important;
+}
+.official-social-text{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:6px!important;
+  margin-bottom:14px!important;
+  font-size:16px!important;
+}
+.official-social-text strong{font-size:16px!important}
+.social-dot{
+  width:25px!important;height:25px!important;border-radius:50%!important;
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  background:#9b7642!important;color:#fff!important;font-family:Arial,sans-serif!important;font-size:21px!important;font-weight:700!important;
+}
+.social-x{font-size:25px!important;color:#9b7642!important;line-height:1!important}
+.social-instagram{font-size:27px!important;color:#9b7642!important;line-height:1!important}
+.official-links nav{
+  display:flex!important;
+  justify-content:center!important;
+  gap:36px!important;
+  margin-bottom:8px!important;
+}
+.official-links nav a{
+  color:#111!important;
+  font-weight:700!important;
+  text-decoration:none!important;
+}
+.official-links p{
+  margin:0!important;
+  color:#111!important;
+  font-size:14px!important;
+  line-height:1.5!important;
+}
+
+.official-footer-bottom{
+  min-height:220px!important;
+  background:#4b0026!important;
+  color:#fff!important;
+  display:flex!important;
+  align-items:center!important;
+}
+.official-footer-bottom-inner{
+  width:calc(100% - 160px)!important;
+  max-width:none!important;
+  margin:0 auto!important;
+  display:grid!important;
+  grid-template-columns:1.1fr 1.55fr 1.1fr .85fr!important;
+  gap:40px!important;
+  align-items:center!important;
+}
+.official-sonora-brand img{
+  display:block!important;
+  width:185px!important;
+  max-width:100%!important;
+  height:auto!important;
+}
+.official-pattern{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:16px!important;
+  color:#9a4c72!important;
+  font-size:58px!important;
+  font-weight:300!important;
+  line-height:1!important;
+  opacity:.8!important;
+}
+.official-social-icons{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:14px!important;
+}
+.official-social-icons .icon-row{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:34px!important;
+  font-family:Arial,sans-serif!important;
+  font-size:34px!important;
+  font-weight:700!important;
+}
+.official-social-icons strong{
+  font-size:18px!important;
+  color:#fff!important;
+}
+.official-911{
+  display:flex!important;
+  justify-content:flex-end!important;
+  align-items:center!important;
+}
+.official-911 img{
+  display:block!important;
+  width:165px!important;
+  max-width:100%!important;
+  height:auto!important;
+}
+
+@media(max-width:900px){
+  .official-footer-top{padding:36px 0!important}
+  .official-footer-top-inner,
+  .official-footer-bottom-inner{
+    width:calc(100% - 36px)!important;
+    grid-template-columns:1fr!important;
+    gap:28px!important;
+  }
+  .official-links{text-align:left!important}
+  .official-social-text,
+  .official-links nav{justify-content:flex-start!important;flex-wrap:wrap!important}
+  .official-footer-bottom{padding:36px 0!important}
+  .official-pattern{display:none!important}
+  .official-social-icons{align-items:flex-start!important}
+  .official-911{justify-content:flex-start!important}
+}
