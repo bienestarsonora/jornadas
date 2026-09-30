@@ -593,3 +593,176 @@ html body.public-site-page header.site-header #primaryNav > a{
   .official-social-icons{align-items:flex-start!important}
   .official-911{justify-content:flex-start!important}
 }
+
+
+/* === Hero blanco alineado al lenguaje visual del portal oficial === */
+html body.public-site-page main#main-content section.hero.hero-impact{
+  background:#fff!important;
+  color:#222!important;
+  min-height:auto!important;
+}
+html body.public-site-page main#main-content section.hero.hero-impact::before,
+html body.public-site-page main#main-content section.hero.hero-impact::after{
+  display:none!important;
+}
+html body.public-site-page main#main-content section.hero.hero-impact .hero-grid{
+  padding-top:72px!important;
+  padding-bottom:72px!important;
+}
+html body.public-site-page main#main-content section.hero.hero-impact .hero-badge{
+  background:#f6f1f3!important;
+  border:1px solid #eadde3!important;
+  color:#410324!important;
+}
+html body.public-site-page main#main-content section.hero.hero-impact .hero-badge span{
+  background:#960E53!important;
+  box-shadow:0 0 0 5px rgba(150,14,83,.10)!important;
+}
+html body.public-site-page main#main-content section.hero.hero-impact h1{
+  color:#222!important;
+}
+html body.public-site-page main#main-content section.hero.hero-impact h1 em{
+  color:#960E53!important;
+}
+html body.public-site-page main#main-content section.hero.hero-impact .hero-lead{
+  color:#555!important;
+}
+html body.public-site-page main#main-content section.hero.hero-impact .btn-light{
+  background:#960E53!important;
+  color:#fff!important;
+  border-color:#960E53!important;
+  box-shadow:none!important;
+}
+html body.public-site-page main#main-content section.hero.hero-impact .btn-glass{
+  background:#fff!important;
+  color:#410324!important;
+  border:1px solid #960E53!important;
+}
+html body.public-site-page main#main-content section.hero.hero-impact .hero-trust span{
+  color:#444!important;
+}
+html body.public-site-page main#main-content section.hero.hero-impact .hero-trust i{
+  color:#237469!important;
+  background:#eef7f5!important;
+}
+html body.public-site-page main#main-content section.hero.hero-impact .impact-card{
+  background:#fff!important;
+  border:1px solid #eadde3!important;
+  box-shadow:0 18px 48px rgba(65,3,36,.10)!important;
+  color:#222!important;
+}
+html body.public-site-page main#main-content section.hero.hero-impact .impact-card *{
+  text-shadow:none!important;
+}
+html body.public-site-page main#main-content section.hero.hero-impact .impact-primary strong{
+  color:#410324!important;
+}
+html body.public-site-page main#main-content section.hero.hero-impact .impact-primary span,
+html body.public-site-page main#main-content section.hero.hero-impact .impact-primary p,
+html body.public-site-page main#main-content section.hero.hero-impact .impact-card small,
+html body.public-site-page main#main-content section.hero.hero-impact .impact-secondary span,
+html body.public-site-page main#main-content section.hero.hero-impact .impact-foot{
+  color:#666!important;
+}
+
+/* === Footer oficial aislado de estilos heredados === */
+html body.public-site-page footer.official-footer{
+  margin:0!important;
+  padding:0!important;
+  background:#fff!important;
+  color:#111!important;
+  font-family:'Roboto',Arial,sans-serif!important;
+  border:0!important;
+}
+html body.public-site-page footer.official-footer .official-footer-top{
+  background:#fff!important;
+  color:#111!important;
+  min-height:255px!important;
+  padding:0!important;
+  display:flex!important;
+  align-items:center!important;
+}
+html body.public-site-page footer.official-footer .official-footer-top-inner{
+  width:calc(100% - 160px)!important;
+  max-width:1288px!important;
+  margin:0 auto!important;
+  padding:0!important;
+  display:grid!important;
+  grid-template-columns:1fr 1.05fr!important;
+  gap:64px!important;
+  align-items:center!important;
+}
+html body.public-site-page footer.official-footer .official-contact{
+  border-left:4px solid #111!important;
+  padding-left:10px!important;
+  color:#111!important;
+}
+html body.public-site-page footer.official-footer .official-contact strong,
+html body.public-site-page footer.official-footer .official-contact p,
+html body.public-site-page footer.official-footer .official-contact b,
+html body.public-site-page footer.official-footer .official-links,
+html body.public-site-page footer.official-footer .official-links p,
+html body.public-site-page footer.official-footer .official-links strong,
+html body.public-site-page footer.official-footer .official-links a{
+  color:#111!important;
+}
+html body.public-site-page footer.official-footer .official-links nav{
+  display:flex!important;
+  justify-content:center!important;
+  flex-wrap:wrap!important;
+  gap:10px 36px!important;
+}
+html body.public-site-page footer.official-footer .official-links nav a{
+  display:inline!important;
+  width:auto!important;
+  padding:0!important;
+  text-decoration:none!important;
+}
+html body.public-site-page footer.official-footer .official-footer-bottom{
+  background:#4b0026!important;
+  color:#fff!important;
+  min-height:220px!important;
+  padding:0!important;
+  display:flex!important;
+  align-items:center!important;
+}
+html body.public-site-page footer.official-footer .official-footer-bottom-inner{
+  width:calc(100% - 160px)!important;
+  max-width:1288px!important;
+  margin:0 auto!important;
+  padding:0!important;
+  display:grid!important;
+  grid-template-columns:1.1fr 1.55fr 1.1fr .85fr!important;
+  gap:40px!important;
+  align-items:center!important;
+}
+html body.public-site-page footer.official-footer .official-footer-bottom p,
+html body.public-site-page footer.official-footer .official-footer-bottom span,
+html body.public-site-page footer.official-footer .official-footer-bottom strong,
+html body.public-site-page footer.official-footer .official-footer-bottom a{
+  color:#fff!important;
+}
+html body.public-site-page footer.official-footer .official-sonora-brand img{
+  width:185px!important;
+  max-width:100%!important;
+  height:auto!important;
+  display:block!important;
+}
+html body.public-site-page footer.official-footer .official-911 img{
+  width:165px!important;
+  max-width:100%!important;
+  height:auto!important;
+  display:block!important;
+}
+@media(max-width:900px){
+  html body.public-site-page footer.official-footer .official-footer-top,
+  html body.public-site-page footer.official-footer .official-footer-bottom{
+    padding:36px 0!important;
+  }
+  html body.public-site-page footer.official-footer .official-footer-top-inner,
+  html body.public-site-page footer.official-footer .official-footer-bottom-inner{
+    width:calc(100% - 36px)!important;
+    grid-template-columns:1fr!important;
+    gap:28px!important;
+  }
+}
