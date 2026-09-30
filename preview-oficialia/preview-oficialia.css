@@ -381,3 +381,52 @@ html body.public-site-page header.site-header #primaryNav{
   opacity:1!important;
   visibility:visible!important;
 }
+
+
+/* === Ajuste dimensional contra referencia oficial Bienestar 30-09-2026 === */
+html body.public-site-page header.site-header{
+  height:92px!important;
+  min-height:92px!important;
+}
+html body.public-site-page header.site-header .header-shell{
+  width:calc(100% - 136px)!important;
+  max-width:none!important;
+  height:92px!important;
+  min-height:92px!important;
+  margin:0 auto!important;
+  padding:0!important;
+  gap:0!important;
+}
+html body.public-site-page header.site-header .brand{
+  flex:0 0 190px!important;
+  width:190px!important;
+  max-width:190px!important;
+  margin:0!important;
+  padding:0!important;
+}
+html body.public-site-page header.site-header .brand img{
+  display:block!important;
+  width:160px!important;
+  max-width:160px!important;
+  height:auto!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:0!important;
+  object-fit:contain!important;
+  filter:brightness(0) invert(1)!important;
+}
+html body.public-site-page header.site-header::before{
+  opacity:.31!important;
+  filter:blur(.55px)!important;
+  background-position:center top!important;
+  background-size:cover!important;
+}
+html body.public-site-page header.site-header::after{
+  background:rgba(150,14,83,.34)!important;
+}
+html body.public-site-page header.site-header #primaryNav{
+  height:92px!important;
+}
+html body.public-site-page header.site-header #primaryNav > a{
+  height:92px!important;
+}
