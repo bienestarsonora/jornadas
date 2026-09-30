@@ -290,3 +290,42 @@
 .site-header::after{
   background:rgba(150,14,83,.22)!important;
 }
+
+
+/* Corrección definitiva: evita conflicto con institutional.css y conserva paisaje visible */
+.public-site-page .site-header{
+  position:relative!important;
+  min-height:94px!important;
+  background:#960E53!important;
+  border-bottom:0!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+.public-site-page .site-header::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  background-image:url('../assets/bk-header-magenta.svg')!important;
+  background-repeat:no-repeat!important;
+  background-position:top left!important;
+  background-size:cover!important;
+  opacity:.58!important;
+  filter:blur(.45px)!important;
+  mix-blend-mode:normal!important;
+  pointer-events:none!important;
+}
+.public-site-page .site-header::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
+  background:rgba(150,14,83,.20)!important;
+  pointer-events:none!important;
+}
+.public-site-page .site-header .header-shell{
+  position:relative!important;
+  z-index:2!important;
+}
