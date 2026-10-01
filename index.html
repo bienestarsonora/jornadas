@@ -6,47 +6,87 @@
   <meta name="theme-color" content="#410123">
   <meta name="description" content="Mapa territorial, resultados y evidencias de las Jornadas del Bienestar en Hermosillo, Sonora.">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.tile.openstreetmap.org https://zaticxkysgobkyhebmhf.supabase.co; connect-src 'self' https://zaticxkysgobkyhebmhf.supabase.co wss://zaticxkysgobkyhebmhf.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data: blob: https://bienestar.sonora.gob.mx https://*.tile.openstreetmap.org https://zaticxkysgobkyhebmhf.supabase.co; connect-src 'self' https://zaticxkysgobkyhebmhf.supabase.co wss://zaticxkysgobkyhebmhf.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self';">
   <title>Jornadas del Bienestar | Secretaría de Bienestar Sonora</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="premium-v2.css?v=20260814">
   <link rel="stylesheet" href="institutional.css?v=20260922">
   <link rel="icon" href="assets/logo-bienestar.png" type="image/png">
+  <link rel="stylesheet" href="preview-oficialia/preview-oficialia.css?v=20261001-PROD-1">
+  <link rel="stylesheet" href="preview-oficialia/header-final.css?v=20261001-PROD-1">
+  <link rel="stylesheet" href="preview-oficialia/cards-final.css?v=20261001-PROD-1">
 </head>
 <body class="public-site-page">
   <a class="gov-skip" href="#main-content">Saltar al contenido principal</a>
-  <div class="gov-topbar"><div class="gov-topbar-inner">Gobierno del Estado de Sonora</div></div>
   <header class="site-header" id="top">
+    <div class="title-image" aria-hidden="true"></div>
     <div class="header-shell">
-      <a class="brand" href="#top" aria-label="Jornadas del Bienestar, inicio">
-        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-logo alt="Gobierno de Sonora · Secretaría de Bienestar">
-        <span class="brand-divider" aria-hidden="true"></span>
-        <span class="brand-copy">
-          <small>Seguimiento institucional</small>
-          <strong>Jornadas del Bienestar</strong>
-        </span>
+      <a class="brand" href="https://bienestar.sonora.gob.mx/" aria-label="Secretaría de Bienestar">
+        <img src="assets/logo-bienestar.png" alt="Gobierno de Sonora · Secretaría de Bienestar">
       </a>
-
-      <nav id="primaryNav" aria-label="Navegación principal">
-        <a href="#resultados">Resultados</a>
-        <a href="#mapa">Mapa</a>
-        <a href="#jornadas">Jornadas</a>
-        <a href="#evidencias">Evidencias</a>
-        <a class="admin-link" href="admin/">
-          <span class="admin-dot" aria-hidden="true"></span>
-          Acceso interno
-        </a>
+      <nav id="primaryNav" class="global-nav" aria-label="Navegación institucional">
+        <div class="gov-menu-item has-dropdown">
+          <a class="gov-menu-trigger" href="#" title="Ir a Gobierno">Gobierno <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></a>
+          <div class="gov-dropdown">
+            <a href="http://www.sonora.gob.mx/gobierno/principal" target="_blank" rel="noopener noreferrer">Gobierno</a>
+            <a href="http://www.sonora.gob.mx/gobierno/acciones" target="_blank" rel="noopener noreferrer">Acciones</a>
+            <a href="http://www.sonora.gob.mx/gobierno/convenios/cfe" target="_blank" rel="noopener noreferrer">Convenio Sonora - CFE</a>
+            <a href="https://oficialiamayor.sonora.gob.mx/programa-especial-de-gobierno-digital/" target="_blank" rel="noopener noreferrer">Programa Especial de Gobierno Digital</a>
+            <a href="http://www.sonora.gob.mx/gobierno/planes/hidrico" target="_blank" rel="noopener noreferrer">Plan Hídrico 2023-2053</a>
+            <a href="http://www.sonora.gob.mx/gobierno/subsidio-electrico-2025" target="_blank" rel="noopener noreferrer">Subsidio Eléctrico 2025</a>
+          </div>
+        </div>
+        <a href="http://www.sonora.gob.mx/servicios-y-tramites" target="_blank" rel="noopener noreferrer">Servicios y Trámites</a>
+        <div class="gov-menu-item has-dropdown">
+          <a class="gov-menu-trigger" href="#" title="Ir a Datos Abiertos">Datos Abiertos <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></a>
+          <div class="gov-dropdown">
+            <a href="https://datos.sonora.gob.mx/" target="_blank" rel="noopener noreferrer">Portal de Datos Abiertos</a>
+            <a href="https://transparencia.sonora.gob.mx/" target="_blank" rel="noopener noreferrer">Portal de Transparencia Sonora</a>
+            <a href="https://www.plataformadetransparencia.org.mx/" target="_blank" rel="noopener noreferrer">Plataforma Nacional de Transparencia</a>
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiOTczYWE5N2UtM2Q1MS00OGU4LWEwZjItOTI4Y2YwNDkzOWQzIiwidCI6ImNhOGYwOWY1LTMzNWUtNGZjNS04MDQxLWY1YjQ3MmEwMmVlZiIsImMiOjR9" target="_blank" rel="noopener noreferrer">Sistema de Indicadores Municipales</a>
+          </div>
+        </div>
+        <div class="gov-menu-item has-dropdown">
+          <a class="gov-menu-trigger" href="#" title="Ir a Cultura">Cultura <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></a>
+          <div class="gov-dropdown">
+            <a href="https://cultura.sonora.gob.mx/" target="_blank" rel="noopener noreferrer">Cartelera Cultural</a>
+            <a href="https://bibliotecadigital.sonora.gob.mx/" target="_blank" rel="noopener noreferrer">Biblioteca Digital</a>
+          </div>
+        </div>
+        <a href="https://expediente.sonora.gob.mx/" target="_blank" rel="noopener noreferrer">Mi Expediente</a>
       </nav>
-
       <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="primaryNav">☰</button>
     </div>
   </header>
 
-  <nav class="gov-breadcrumb" aria-label="Ruta de navegación"><div class="gov-breadcrumb-inner">Inicio &nbsp;/&nbsp; Secretaría de Bienestar &nbsp;/&nbsp; <strong aria-current="page">Jornadas del Bienestar</strong></div></nav>
+  <nav class="section-nav" aria-label="Navegación del micrositio">
+    <div class="section-nav-inner">
+      <a class="active" href="#inicio" aria-current="page">Inicio</a>
+      <a href="#resultados">Resultados</a>
+      <a href="#mapa">Mapa</a>
+      <a href="#jornadas">Jornadas</a>
+      <a href="#evidencias">Evidencias</a>
+      <a class="admin-link-secondary" href="admin/"><span class="admin-dot" aria-hidden="true"></span> Acceso interno</a>
+    </div>
+  </nav>
+
+  <nav class="gov-breadcrumb" aria-label="Ruta de navegación">
+    <ol class="gov-breadcrumb-inner">
+      <li class="breadcrumb-item breadcrumb-home">
+        <a href="https://www.sonora.gob.mx/" target="_blank" rel="noopener noreferrer" title="Inicio" aria-label="Inicio">
+          <i class="fa-solid fa-house" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li class="breadcrumb-item"><a href="https://www.sonora.gob.mx/gobierno" target="_blank" rel="noopener noreferrer">Gobierno</a></li>
+      <li class="breadcrumb-item"><a href="https://bienestar.sonora.gob.mx/" target="_blank" rel="noopener noreferrer">Secretaría de Bienestar</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Jornadas del Bienestar</li>
+    </ol>
+  </nav>
 
   <main id="main-content" tabindex="-1">
     <section class="hero hero-impact" id="inicio">
@@ -76,7 +116,7 @@
                 <span class="impact-eyebrow">Impacto acumulado</span>
                 <small>Hermosillo, Sonora</small>
               </div>
-              <span class="impact-live"><i></i> Datos publicados</span>
+              
             </div>
 
             <div class="impact-primary">
@@ -116,10 +156,10 @@
         <p>Los indicadores se actualizan automáticamente con cada jornada publicada.</p>
       </div>
       <div class="stats-grid">
-        <article class="stat-card featured reveal"><span class="stat-icon">01</span><strong id="statServices">0</strong><h3>Servicios</h3><p>Atenciones brindadas</p></article>
-        <article class="stat-card reveal delay-1"><span class="stat-icon">02</span><strong id="statEvents">0</strong><h3>Jornadas</h3><p>Intervenciones registradas</p></article>
-        <article class="stat-card reveal delay-2"><span class="stat-icon">03</span><strong id="statNeighborhoods">0</strong><h3>Colonias</h3><p>Cobertura territorial</p></article>
-        <article class="stat-card reveal delay-3"><span class="stat-icon">04</span><strong id="statOutreach">0</strong><h3>Difusión</h3><p>Casa por casa y perifoneo</p></article>
+        <article class="stat-card featured reveal"><span class="stat-icon" aria-hidden="true"><i class="fa-solid fa-hand-holding-heart"></i></span><strong id="statServices">0</strong><h3>Servicios</h3><p>Atenciones brindadas</p></article>
+        <article class="stat-card reveal delay-1"><span class="stat-icon" aria-hidden="true"><i class="fa-solid fa-calendar-days"></i></span><strong id="statEvents">0</strong><h3>Jornadas</h3><p>Intervenciones registradas</p></article>
+        <article class="stat-card reveal delay-2"><span class="stat-icon" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></span><strong id="statNeighborhoods">0</strong><h3>Colonias</h3><p>Cobertura territorial</p></article>
+        <article class="stat-card reveal delay-3"><span class="stat-icon" aria-hidden="true"><i class="fa-solid fa-bullhorn"></i></span><strong id="statOutreach">0</strong><h3>Difusión</h3><p>Casa por casa y perifoneo</p></article>
       </div>
     </section>
 
@@ -163,9 +203,9 @@
         <h2>Información que convierte territorio en evidencia.</h2>
       </div>
       <div class="value-grid">
-        <article class="reveal"><span>01</span><h3>Cobertura territorial</h3><p>Ubica las colonias atendidas y ayuda a reconocer patrones de presencia institucional.</p></article>
-        <article class="reveal delay-1"><span>02</span><h3>Resultados abiertos</h3><p>Concentra servicios, dependencias y cifras clave de cada intervención en un solo lugar.</p></article>
-        <article class="reveal delay-2"><span>03</span><h3>Memoria institucional</h3><p>Organiza fotografías, flyers y actividades de difusión para preservar evidencia verificable.</p></article>
+        <article class="reveal"><span class="value-icon" aria-hidden="true"><i class="fa-solid fa-map-location-dot"></i></span><h3>Cobertura territorial</h3><p>Ubica las colonias atendidas y ayuda a reconocer patrones de presencia institucional.</p></article>
+        <article class="reveal delay-1"><span class="value-icon" aria-hidden="true"><i class="fa-solid fa-chart-column"></i></span><h3>Resultados abiertos</h3><p>Concentra servicios, dependencias y cifras clave de cada intervención en un solo lugar.</p></article>
+        <article class="reveal delay-2"><span class="value-icon" aria-hidden="true"><i class="fa-solid fa-images"></i></span><h3>Memoria institucional</h3><p>Organiza fotografías, flyers y actividades de difusión para preservar evidencia verificable.</p></article>
       </div>
     </section>
 
@@ -179,18 +219,55 @@
     </section>
   </main>
 
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-logo alt="Secretaría de Bienestar"><div><strong>Jornadas del Bienestar</strong><span>Secretaría de Bienestar del Estado de Sonora</span></div></div>
-      <p>Información territorial y evidencia institucional de las Jornadas del Bienestar en Hermosillo, Sonora.</p>
-      <a href="#top">Volver arriba ↑</a>
-    </div>
-    <div class="gov-official-footer">
-      <div><strong>Secretaría de Bienestar</strong><span>Micrositio institucional de Jornadas del Bienestar.</span><small>Seguimiento territorial, resultados y evidencia de las jornadas.</small></div>
-      <nav aria-label="Consulta de jornadas"><strong>Consulta de jornadas</strong><a href="#resultados">Resultados acumulados</a><a href="#mapa">Mapa territorial</a><a href="#evidencias">Evidencia fotográfica</a></nav>
-      <div><strong>Acceso institucional</strong><a href="admin/">Panel de administración</a><small>Captura y actualización para personal autorizado.</small></div>
-    </div>
-    <div class="footer-bottom"><span>© 2026 Gobierno del Estado de Sonora</span><span>Mapa: OpenStreetMap</span></div>
+  <footer class="official-footer">
+    <section class="official-footer-top">
+      <div class="official-footer-top-inner">
+        <div class="official-contact">
+          <strong>Secretaría de Bienestar</strong>
+          <p><b>Dirección:</b> La Gran Plaza, Int. 207, Paseo Río Sonora Norte 76</p>
+          <p><b>Teléfonos:</b> +52 (662) 108 3737</p>
+          <p><b>Correo Electrónico:</b> bienestar@sonora.gob.mx</p>
+        </div>
+
+        <div class="official-links">
+          <div class="official-social-text" aria-label="Redes sociales">
+            <a class="social-link" href="https://www.facebook.com/Sedesson" target="_blank" rel="noopener noreferrer"><span class="social-brand"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></span><strong>Facebook</strong></a>
+            <span class="social-link social-link-pending"><span class="social-brand"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></span><strong>x.com</strong></span>
+            <a class="social-link" href="https://www.instagram.com/sedesson.gob/" target="_blank" rel="noopener noreferrer"><span class="social-brand"><i class="fa-brands fa-instagram" aria-hidden="true"></i></span><strong>Instagram</strong></a>
+          </div>
+          <nav aria-label="Enlaces institucionales">
+            <a href="https://www.sonora.gob.mx/politica-de-uso.html" target="_blank" rel="noopener noreferrer">Política de Uso y Privacidad</a>
+            <a href="https://denunciapp.sonora.gob.mx/" target="_blank" rel="noopener noreferrer">Denuncia Ciudadana</a>
+            <a href="https://www.sonora.gob.mx/contacto.html" target="_blank" rel="noopener noreferrer">Contacto</a>
+          </nav>
+          <p>Todos los derechos reservados. Sitio web desarrollado por la<br>Secretaría de Bienestar del Estado de Sonora</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="official-footer-bottom">
+      <div class="official-footer-bottom-inner">
+        <div class="official-sonora-brand">
+          <img src="assets/footer-sonora.svg" alt="Gobierno del Estado de Sonora">
+        </div>
+        <div class="official-pattern" aria-hidden="true">
+          <img src="assets/pattern-white.svg" alt="">
+        </div>
+        <div class="official-social-icons" aria-label="Gobierno de Sonora en redes sociales">
+          <div class="icon-row" aria-label="Redes sociales">
+            <a href="https://www.facebook.com/gobiernosonora" target="_blank" rel="noopener noreferrer" aria-label="Facebook Gobierno de Sonora"><i class="fa-brands fa-facebook" aria-hidden="true"></i></a>
+            <a href="https://www.twitter.com/gobiernosonora" target="_blank" rel="noopener noreferrer" aria-label="X Gobierno de Sonora"><span class="x-official" aria-hidden="true">𝕏</span></a>
+            <a href="https://www.instagram.com/gobiernodesonora" target="_blank" rel="noopener noreferrer" aria-label="Instagram Gobierno de Sonora"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+            <a href="https://www.tiktok.com/@gobierno.sonora" target="_blank" rel="noopener noreferrer" aria-label="TikTok Gobierno de Sonora"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+            <a href="https://www.youtube.com/c/GobiernodeSonoraTV" target="_blank" rel="noopener noreferrer" aria-label="YouTube Gobierno de Sonora"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+          </div>
+          <strong>@GobiernoSonora</strong>
+        </div>
+        <div class="official-911">
+          <img src="assets/footer-911.svg" alt="911 Número de Emergencias">
+        </div>
+      </div>
+    </section>
   </footer>
 
   <dialog id="lightbox" class="lightbox" aria-label="Evidencia ampliada">
@@ -206,5 +283,5 @@
   <script src="config.js"></script>
   <script src="app.js?v=20260922"></script>
   <script src="institutional-ui.js?v=20260922"></script>
-</body>
+  <script src="preview-oficialia/preview-countup.js?v=20260930"></script></body>
 </html>
