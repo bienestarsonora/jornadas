@@ -404,3 +404,15 @@ html body.public-site-page header.site-header .brand img{
   left:5px!important;
   top:0!important;
 }
+
+
+/* Ajuste fino del menú institucional contra referencia oficial */
+html body.public-site-page header.site-header #primaryNav{
+  transform:translateX(-4px)!important;
+}
+
+html body.public-site-page header.site-header #primaryNav > a,
+html body.public-site-page header.site-header #primaryNav > .gov-menu-item > .gov-menu-trigger{
+  padding-left:11.5px!important;
+  padding-right:11.5px!important;
+}
