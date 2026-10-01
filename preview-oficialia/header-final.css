@@ -336,3 +336,63 @@ html body.public-site-page .value-grid article > .value-icon i{
   line-height:1!important;
 }
 
+
+
+/* =========================================================
+   AJUSTE QUIRÚRGICO DEL LOGO DEL HEADER
+   Basado en la geometría del portal oficial de Bienestar
+   ========================================================= */
+html body.public-site-page header.site-header .header-shell{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:1320px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  padding-left:15px!important;
+  padding-right:15px!important;
+}
+
+html body.public-site-page header.site-header .brand{
+  display:inline-flex!important;
+  align-items:center!important;
+  flex:0 0 auto!important;
+  width:auto!important;
+  height:4.75rem!important;
+  margin:0!important;
+  padding:0!important;
+  transform:none!important;
+  position:static!important;
+}
+
+html body.public-site-page header.site-header .brand img{
+  display:block!important;
+  width:auto!important;
+  height:4.75rem!important;
+  max-width:none!important;
+  max-height:4.75rem!important;
+  margin:0!important;
+  padding:0!important;
+  object-fit:contain!important;
+  filter:invert(83%) sepia(71%) saturate(2%) hue-rotate(13deg) brightness(200%) contrast(100%)!important;
+}
+
+@media (max-width:1399.98px){
+  html body.public-site-page header.site-header .header-shell{max-width:1140px!important}
+}
+@media (max-width:1199.98px){
+  html body.public-site-page header.site-header .header-shell{max-width:960px!important}
+}
+@media (max-width:991.98px){
+  html body.public-site-page header.site-header .header-shell{max-width:720px!important}
+}
+@media (max-width:767.98px){
+  html body.public-site-page header.site-header .header-shell{max-width:540px!important}
+}
+@media (max-width:575.98px){
+  html body.public-site-page header.site-header .header-shell{max-width:100%!important}
+  html body.public-site-page header.site-header .brand,
+  html body.public-site-page header.site-header .brand img{
+    height:3.5rem!important;
+    max-height:3.5rem!important;
+  }
+}
