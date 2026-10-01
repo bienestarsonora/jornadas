@@ -118,3 +118,40 @@ html body.public-site-page header.site-header #primaryNav > a i{
   html body.public-site-page header.site-header .header-shell{width:calc(100% - 30px)!important}
   html body.public-site-page header.site-header .brand img{height:56px!important;max-height:56px!important}
 }
+
+
+/* Posicionamiento del contenedor igual al portal oficial (Bootstrap container) */
+html body.public-site-page header.site-header .header-shell{
+  width:100%!important;
+  max-width:1320px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  padding-left:15px!important;
+  padding-right:15px!important;
+}
+
+@media (max-width:1399.98px){
+  html body.public-site-page header.site-header .header-shell{
+    max-width:1140px!important;
+  }
+}
+@media (max-width:1199.98px){
+  html body.public-site-page header.site-header .header-shell{
+    max-width:960px!important;
+  }
+}
+@media (max-width:991.98px){
+  html body.public-site-page header.site-header .header-shell{
+    max-width:720px!important;
+  }
+}
+@media (max-width:767.98px){
+  html body.public-site-page header.site-header .header-shell{
+    max-width:540px!important;
+  }
+}
+@media (max-width:575.98px){
+  html body.public-site-page header.site-header .header-shell{
+    max-width:100%!important;
+  }
+}
