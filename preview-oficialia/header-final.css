@@ -396,3 +396,11 @@ html body.public-site-page header.site-header .brand img{
     max-height:3.5rem!important;
   }
 }
+
+
+/* Ajuste fino de posición contra referencia oficial */
+html body.public-site-page header.site-header .brand img{
+  position:relative!important;
+  left:5px!important;
+  top:-5px!important;
+}
