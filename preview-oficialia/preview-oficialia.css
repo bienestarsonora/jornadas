@@ -1156,3 +1156,83 @@ html body.public-site-page header.site-header #primaryNav > a:focus-visible{
     max-height:3.5rem!important;
   }
 }
+
+
+/* === FIX HEADER: estructura exacta de capas del portal oficial === */
+html body.public-site-page header.site-header{
+  position:relative!important;
+  z-index:1099!important;
+  width:100%!important;
+  margin:0!important;
+  padding:.5rem 0!important;
+  overflow:hidden!important;
+  background-color:#960E53!important;
+}
+
+html body.public-site-page header.site-header .title-image{
+  position:absolute!important;
+  top:0!important;
+  left:0!important;
+  right:0!important;
+  bottom:0!important;
+  z-index:1!important;
+  background-image:url('../assets/bk-header.svg')!important;
+  background-position:top left!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  filter:grayscale(100%)!important;
+  opacity:1!important;
+  pointer-events:none!important;
+}
+
+html body.public-site-page header.site-header::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  top:0!important;
+  left:0!important;
+  right:0!important;
+  bottom:0!important;
+  z-index:2!important;
+  background-color:#960E53!important;
+  mix-blend-mode:multiply!important;
+  opacity:1!important;
+  pointer-events:none!important;
+}
+
+html body.public-site-page header.site-header::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  top:0!important;
+  left:0!important;
+  right:0!important;
+  bottom:0!important;
+  z-index:3!important;
+  background-color:#960E53!important;
+  opacity:.65!important;
+  mix-blend-mode:normal!important;
+  pointer-events:none!important;
+}
+
+html body.public-site-page header.site-header .header-shell{
+  position:relative!important;
+  z-index:4!important;
+  width:calc(100% - 136px)!important;
+  max-width:1288px!important;
+  height:4.75rem!important;
+  min-height:4.75rem!important;
+  margin:0 auto!important;
+  padding:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:0!important;
+  background:transparent!important;
+}
+
+html body.public-site-page header.site-header .header-shell::before,
+html body.public-site-page header.site-header .header-shell::after{
+  display:none!important;
+  content:none!important;
+}
