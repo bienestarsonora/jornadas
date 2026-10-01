@@ -313,3 +313,26 @@ html body.public-site-page header.site-header .gov-menu-item:focus-within > .gov
 }
 
 html body.public-site-page header.site-header{overflow:visible!important;}
+
+
+/* Restauración selectiva: iconografía institucional en tarjetas */
+/* Iconografía institucional en tarjetas de Valor Público */
+html body.public-site-page .value-grid article > .value-icon{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:40px!important;
+  height:40px!important;
+  margin:0 0 72px 0!important;
+  border-radius:4px!important;
+  background:#f4f0f2!important;
+  color:#410324!important;
+  font-size:17px!important;
+  line-height:1!important;
+}
+html body.public-site-page .value-grid article > .value-icon i{
+  color:#410324!important;
+  font-size:17px!important;
+  line-height:1!important;
+}
+
