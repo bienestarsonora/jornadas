@@ -819,3 +819,30 @@ html body.public-site-page footer.official-footer .official-911 img{
   cursor:default!important;
   text-decoration:none!important;
 }
+
+
+/* Pattern oficial real del footer */
+html body.public-site-page footer.official-footer .official-footer-bottom-inner{
+  grid-template-columns:1.05fr 1.65fr 1.05fr .82fr!important;
+  gap:34px!important;
+}
+html body.public-site-page footer.official-footer .official-pattern{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-width:0!important;
+}
+html body.public-site-page footer.official-footer .official-pattern img{
+  display:block!important;
+  width:370px!important;
+  max-width:100%!important;
+  height:auto!important;
+  opacity:.28!important;
+  filter:none!important;
+  mix-blend-mode:normal!important;
+}
+@media(max-width:900px){
+  html body.public-site-page footer.official-footer .official-pattern{
+    display:none!important;
+  }
+}
