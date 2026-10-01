@@ -979,3 +979,11 @@ html body.public-site-page footer.official-footer .official-social-icons .icon-r
 html body.public-site-page footer.official-footer .official-social-icons .icon-row .x-official{
   color:#FFFFFF!important;
 }
+
+
+/* Ajuste exacto de escala del logo SONORA contra referencia oficial */
+html body.public-site-page footer.official-footer .official-sonora-brand img{
+  width:205px!important;
+  max-width:205px!important;
+  height:auto!important;
+}
