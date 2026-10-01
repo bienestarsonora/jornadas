@@ -893,3 +893,23 @@ html body.public-site-page footer.official-footer .official-social-icons .icon-r
   opacity:.86!important;
   text-decoration:none!important;
 }
+
+
+/* Ajuste final de footer contra referencia oficial */
+html body.public-site-page footer.official-footer .official-footer-bottom{
+  background:#5A002B!important;
+}
+html body.public-site-page footer.official-footer .official-social-icons .icon-row a{
+  color:#fff!important;
+}
+html body.public-site-page footer.official-footer .official-social-icons .icon-row .x-official{
+  display:inline-block!important;
+  font-family:Arial,Helvetica,sans-serif!important;
+  font-size:31px!important;
+  font-weight:700!important;
+  line-height:1!important;
+  color:#fff!important;
+}
+html body.public-site-page footer.official-footer .official-pattern img{
+  opacity:1!important;
+}
