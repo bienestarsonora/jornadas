@@ -1260,19 +1260,3 @@ html body.public-site-page .stats-grid .stat-card .stat-icon i{
 }
 
 
-/* Logo SONORA del footer: medida exacta tomada del código fuente oficial */
-html body.public-site-page footer.official-footer .official-sonora-brand{
-  display:flex!important;
-  align-items:center!important;
-  justify-content:flex-start!important;
-}
-html body.public-site-page footer.official-footer .official-sonora-brand img{
-  width:auto!important;
-  max-width:none!important;
-  height:80px!important;
-  max-height:80px!important;
-  margin:0!important;
-  padding:0!important;
-  display:block!important;
-  object-fit:contain!important;
-}
