@@ -386,3 +386,13 @@ html body.public-site-page header.site-header .gov-menu-item:hover > .gov-menu-t
 html body.public-site-page header.site-header .gov-menu-item:focus-within > .gov-menu-trigger i{
   transform:rotate(180deg)!important;
 }
+
+
+/* Ajuste fino medido del logo contra captura oficial */
+html body.public-site-page header.site-header .brand{
+  transform:translate(6px,2px)!important;
+}
+html body.public-site-page header.site-header .brand img{
+  height:64px!important;
+  max-height:64px!important;
+}
