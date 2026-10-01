@@ -987,3 +987,11 @@ html body.public-site-page footer.official-footer .official-sonora-brand img{
   max-width:205px!important;
   height:auto!important;
 }
+
+
+/* Ajuste medido del logo SONORA contra la captura oficial */
+html body.public-site-page footer.official-footer .official-sonora-brand img{
+  width:165px!important;
+  max-width:165px!important;
+  height:auto!important;
+}
