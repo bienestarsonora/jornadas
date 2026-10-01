@@ -402,5 +402,5 @@ html body.public-site-page header.site-header .brand img{
 html body.public-site-page header.site-header .brand img{
   position:relative!important;
   left:5px!important;
-  top:-5px!important;
+  top:0!important;
 }
