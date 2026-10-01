@@ -859,3 +859,37 @@ html body.public-site-page footer.official-footer .official-pattern img{
   mix-blend-mode:normal!important;
   background:transparent!important;
 }
+
+
+/* Redes sociales inferiores: iconos oficiales Font Awesome y enlaces */
+html body.public-site-page footer.official-footer .official-social-icons .icon-row{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:30px!important;
+}
+html body.public-site-page footer.official-footer .official-social-icons .icon-row a{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:38px!important;
+  height:38px!important;
+  padding:0!important;
+  margin:0!important;
+  color:#fff!important;
+  text-decoration:none!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+}
+html body.public-site-page footer.official-footer .official-social-icons .icon-row a i{
+  font-size:31px!important;
+  line-height:1!important;
+  color:#fff!important;
+}
+html body.public-site-page footer.official-footer .official-social-icons .icon-row a:hover,
+html body.public-site-page footer.official-footer .official-social-icons .icon-row a:focus-visible{
+  transform:none!important;
+  opacity:.86!important;
+  text-decoration:none!important;
+}
