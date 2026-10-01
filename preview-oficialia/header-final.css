@@ -155,3 +155,101 @@ html body.public-site-page header.site-header .header-shell{
     max-width:100%!important;
   }
 }
+
+
+/* Breadcrumb replicado desde el portal oficial */
+html body.public-site-page nav.gov-breadcrumb{
+  display:block!important;
+  min-height:40px!important;
+  height:40px!important;
+  margin:0!important;
+  padding:0!important;
+  background:#fff!important;
+  border:0!important;
+  border-bottom:1px solid #ececec!important;
+  box-shadow:none!important;
+}
+
+html body.public-site-page nav.gov-breadcrumb .gov-breadcrumb-inner{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:1320px!important;
+  height:40px!important;
+  min-height:40px!important;
+  margin:0 auto!important;
+  padding:0 15px!important;
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  gap:0!important;
+  list-style:none!important;
+  background:transparent!important;
+  font-family:Roboto,Arial,sans-serif!important;
+  font-size:.8rem!important;
+  font-weight:400!important;
+  line-height:1.5!important;
+  color:#000!important;
+}
+
+html body.public-site-page nav.gov-breadcrumb .breadcrumb-item{
+  display:flex!important;
+  align-items:center!important;
+  margin:0!important;
+  padding:0!important;
+  color:#000!important;
+  white-space:nowrap!important;
+}
+
+html body.public-site-page nav.gov-breadcrumb .breadcrumb-item + .breadcrumb-item{
+  padding-left:.5rem!important;
+}
+
+html body.public-site-page nav.gov-breadcrumb .breadcrumb-item + .breadcrumb-item::before{
+  content:"/"!important;
+  display:block!important;
+  float:none!important;
+  padding-right:.5rem!important;
+  color:rgba(0,0,0,.65)!important;
+  font-family:Roboto,Arial,sans-serif!important;
+}
+
+html body.public-site-page nav.gov-breadcrumb .breadcrumb-item a,
+html body.public-site-page nav.gov-breadcrumb .breadcrumb-item.active{
+  color:#000!important;
+  font-size:.8rem!important;
+  font-weight:400!important;
+  text-decoration:none!important;
+}
+
+html body.public-site-page nav.gov-breadcrumb .breadcrumb-home a{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:1.25em!important;
+  color:#000!important;
+}
+
+html body.public-site-page nav.gov-breadcrumb .breadcrumb-home i{
+  display:inline-block!important;
+  color:#000!important;
+  font-family:"Font Awesome 6 Free"!important;
+  font-size:13px!important;
+  font-weight:900!important;
+  line-height:1!important;
+}
+
+@media (max-width:1399.98px){
+  html body.public-site-page nav.gov-breadcrumb .gov-breadcrumb-inner{max-width:1140px!important}
+}
+@media (max-width:1199.98px){
+  html body.public-site-page nav.gov-breadcrumb .gov-breadcrumb-inner{max-width:960px!important}
+}
+@media (max-width:991.98px){
+  html body.public-site-page nav.gov-breadcrumb .gov-breadcrumb-inner{max-width:720px!important}
+}
+@media (max-width:767.98px){
+  html body.public-site-page nav.gov-breadcrumb .gov-breadcrumb-inner{max-width:540px!important}
+}
+@media (max-width:575.98px){
+  html body.public-site-page nav.gov-breadcrumb .gov-breadcrumb-inner{max-width:100%!important}
+}
