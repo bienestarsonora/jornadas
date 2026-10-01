@@ -766,3 +766,35 @@ html body.public-site-page footer.official-footer .official-911 img{
     gap:28px!important;
   }
 }
+
+
+/* Iconografía social conforme a lineamientos: Font Awesome */
+.official-social-text .social-brand{
+  width:25px!important;
+  height:25px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  color:#9b7642!important;
+  font-size:24px!important;
+  line-height:1!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+}
+.official-social-icons .icon-row span{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:auto!important;
+  height:auto!important;
+  color:#fff!important;
+  font-size:34px!important;
+  line-height:1!important;
+  background:transparent!important;
+  border:0!important;
+}
+.official-social-icons .icon-row i,
+.official-social-text .social-brand i{
+  font-style:normal!important;
+}
