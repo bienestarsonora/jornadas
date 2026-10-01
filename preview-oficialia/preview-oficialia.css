@@ -913,3 +913,53 @@ html body.public-site-page footer.official-footer .official-social-icons .icon-r
 html body.public-site-page footer.official-footer .official-pattern img{
   opacity:1!important;
 }
+
+
+/* === Calibración final del header contra captura oficial de Bienestar === */
+html body.public-site-page header.site-header{
+  height:93px!important;
+  min-height:93px!important;
+  background:#710A3E!important;
+}
+html body.public-site-page header.site-header::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  background-image:url('../assets/bk-header-oficial.svg')!important;
+  background-repeat:no-repeat!important;
+  background-position:top left!important;
+  background-size:cover!important;
+  opacity:1!important;
+  filter:none!important;
+  mix-blend-mode:normal!important;
+}
+html body.public-site-page header.site-header::after{
+  display:none!important;
+  content:none!important;
+}
+html body.public-site-page header.site-header .header-shell{
+  height:93px!important;
+  min-height:93px!important;
+  width:calc(100% - 136px)!important;
+  max-width:none!important;
+  margin:0 auto!important;
+  padding:0!important;
+}
+html body.public-site-page header.site-header .brand{
+  flex:0 0 190px!important;
+  width:190px!important;
+  max-width:190px!important;
+}
+html body.public-site-page header.site-header .brand img{
+  width:160px!important;
+  max-width:160px!important;
+  height:auto!important;
+  max-height:none!important;
+  object-fit:contain!important;
+}
+html body.public-site-page header.site-header #primaryNav,
+html body.public-site-page header.site-header #primaryNav > a{
+  height:93px!important;
+}
