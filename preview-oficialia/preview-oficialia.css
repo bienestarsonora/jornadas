@@ -1260,3 +1260,58 @@ html body.public-site-page .stats-grid .stat-card .stat-icon i{
 }
 
 
+
+
+/* Tarjetas auditables: iconos y alineación uniforme */
+html body.public-site-page .stats-grid .stat-card,
+html body.public-site-page .value-grid article{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+}
+
+html body.public-site-page .stats-grid .stat-card .stat-icon,
+html body.public-site-page .value-grid article > .value-icon{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:40px!important;
+  height:40px!important;
+  min-width:40px!important;
+  min-height:40px!important;
+  padding:0!important;
+  border-radius:4px!important;
+  line-height:1!important;
+}
+
+html body.public-site-page .stats-grid .stat-card .stat-icon{
+  margin:0 0 28px 0!important;
+  background:#f4f0f2!important;
+  color:#960E53!important;
+}
+
+html body.public-site-page .stats-grid .stat-card.featured .stat-icon{
+  background:rgba(255,255,255,.12)!important;
+  color:#fff!important;
+}
+
+html body.public-site-page .value-grid article > .value-icon{
+  margin:0 0 32px 0!important;
+  background:#f4f0f2!important;
+  color:#410324!important;
+}
+
+html body.public-site-page .stats-grid .stat-card .stat-icon i,
+html body.public-site-page .value-grid article > .value-icon i{
+  display:block!important;
+  margin:0!important;
+  padding:0!important;
+  color:inherit!important;
+  font-size:18px!important;
+  line-height:1!important;
+}
+
+html body.public-site-page .stats-grid .stat-card > strong,
+html body.public-site-page .value-grid article > h3{
+  margin-top:0!important;
+}
