@@ -1,74 +1,46 @@
-/* =========================================================
-   HEADER INSTITUCIONAL — replicado del código fuente oficial
-   de bienestar.sonora.gob.mx
-   ========================================================= */
-
+/* Header institucional final, aislado de estilos heredados */
 html body.public-site-page header.site-header{
   position:relative!important;
   z-index:1099!important;
   display:block!important;
   width:100%!important;
-  height:auto!important;
-  min-height:0!important;
+  height:92px!important;
+  min-height:92px!important;
   margin:0!important;
-  padding:.5rem 0!important;
-  overflow:visible!important;
-  background-color:#960e53!important;
+  padding:0!important;
+  overflow:hidden!important;
   border:0!important;
   box-shadow:none!important;
-  backdrop-filter:none!important;
+  background-color:#960E53!important;
+  background-image:
+    linear-gradient(rgba(150,14,83,.65),rgba(150,14,83,.65)),
+    linear-gradient(#960E53,#960E53),
+    url('../assets/bk-header.svg')!important;
+  background-position:center,center,top left!important;
+  background-size:cover,cover,cover!important;
+  background-repeat:no-repeat,no-repeat,no-repeat!important;
+  background-blend-mode:normal,multiply,normal!important;
 }
 
-/* paisaje oficial */
-html body.public-site-page header.site-header .title-image{
-  position:absolute!important;
-  top:0!important;
-  left:0!important;
-  right:0!important;
-  bottom:0!important;
-  z-index:1!important;
-  display:block!important;
-  background-image:url('../assets/bk-header.svg')!important;
-  background-position:top left!important;
-  background-size:cover!important;
-  background-repeat:no-repeat!important;
-  filter:grayscale(100%)!important;
-  pointer-events:none!important;
+html body.public-site-page header.site-header::before,
+html body.public-site-page header.site-header::after,
+html body.public-site-page header.site-header .title-image,
+html body.public-site-page header.site-header .header-shell::before,
+html body.public-site-page header.site-header .header-shell::after{
+  display:none!important;
+  content:none!important;
+  background:none!important;
 }
 
-/* mezcla magenta oficial */
-html body.public-site-page header.site-header::before{
-  content:""!important;
-  position:absolute!important;
-  inset:0!important;
-  z-index:2!important;
-  display:block!important;
-  background-color:#960e53!important;
-  mix-blend-mode:multiply!important;
-  pointer-events:none!important;
-}
-html body.public-site-page header.site-header::after{
-  content:""!important;
-  position:absolute!important;
-  inset:0!important;
-  z-index:3!important;
-  display:block!important;
-  opacity:.65!important;
-  background-color:#960e53!important;
-  pointer-events:none!important;
-}
-
-/* Bootstrap .container oficial */
 html body.public-site-page header.site-header .header-shell{
   position:relative!important;
-  z-index:4!important;
-  box-sizing:border-box!important;
-  width:100%!important;
-  max-width:1320px!important;
-  min-height:4.75rem!important;
-  height:4.75rem!important;
+  z-index:2!important;
+  width:calc(100% - 136px)!important;
+  max-width:1288px!important;
+  height:92px!important;
+  min-height:92px!important;
   margin:0 auto!important;
-  padding:0 15px!important;
+  padding:0!important;
   display:flex!important;
   align-items:center!important;
   justify-content:space-between!important;
@@ -76,283 +48,73 @@ html body.public-site-page header.site-header .header-shell{
   background:transparent!important;
   border:0!important;
   box-shadow:none!important;
-}
-html body.public-site-page header.site-header .header-shell::before,
-html body.public-site-page header.site-header .header-shell::after{
-  display:none!important;
-  content:none!important;
+  backdrop-filter:none!important;
 }
 
-/* logo-escudo-sonora oficial */
 html body.public-site-page header.site-header .brand{
-  display:inline-flex!important;
+  display:flex!important;
   align-items:center!important;
   flex:0 0 auto!important;
   width:auto!important;
-  height:4.75rem!important;
+  height:70px!important;
   margin:0!important;
   padding:0!important;
-  transform:none!important;
   background:transparent!important;
 }
+
 html body.public-site-page header.site-header .brand img{
   display:block!important;
   width:auto!important;
-  height:4.75rem!important;
+  height:70px!important;
   max-width:none!important;
-  max-height:4.75rem!important;
+  max-height:70px!important;
   margin:0!important;
   padding:0!important;
   object-fit:contain!important;
   filter:invert(83%) sepia(71%) saturate(2%) hue-rotate(13deg) brightness(200%) contrast(100%)!important;
 }
 
-/* navegación institucional */
 html body.public-site-page header.site-header #primaryNav{
   position:static!important;
-  z-index:10!important;
   flex:1 1 auto!important;
   display:flex!important;
   align-items:center!important;
-  justify-content:flex-end!important;
-  height:4.75rem!important;
+  justify-content:center!important;
+  gap:0!important;
+  height:92px!important;
   margin:0!important;
   padding:0!important;
-  gap:0!important;
   background:transparent!important;
   border:0!important;
   box-shadow:none!important;
 }
 
-html body.public-site-page header.site-header #primaryNav > a,
-html body.public-site-page header.site-header #primaryNav > .gov-menu-item > .gov-menu-trigger{
-  display:inline-block!important;
-  height:auto!important;
-  min-height:0!important;
+html body.public-site-page header.site-header #primaryNav > a{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  height:76px!important;
   margin:0!important;
   padding:0 .75rem!important;
-  line-height:4.75rem!important;
   color:#fff!important;
   background:transparent!important;
   border:0!important;
   font-family:"Montserrat",sans-serif!important;
   font-size:.8rem!important;
   font-weight:700!important;
-  letter-spacing:0!important;
+  line-height:1!important;
   text-transform:uppercase!important;
   text-decoration:none!important;
   white-space:nowrap!important;
 }
 
-html body.public-site-page header.site-header #primaryNav > .gov-menu-item{
-  position:relative!important;
-  display:inline-block!important;
-  height:4.75rem!important;
-  margin:0!important;
-  padding:0!important;
-}
-
-/* flecha Font Awesome del menú oficial */
-html body.public-site-page header.site-header #primaryNav > .gov-menu-item.has-dropdown > .gov-menu-trigger::after{
-  content:"\f107"!important;
+html body.public-site-page header.site-header #primaryNav > a i{
   margin-left:7px!important;
-  font-family:"Font Awesome 6 Free"!important;
-  font-weight:900!important;
-  font-size:.8rem!important;
   color:#fff!important;
+  font-size:.75rem!important;
 }
 
-/* dropdown oficial */
-html body.public-site-page header.site-header .gov-dropdown{
-  position:absolute!important;
-  top:100%!important;
-  left:0!important;
-  z-index:1200!important;
-  display:block!important;
-  visibility:hidden!important;
-  min-width:17rem!important;
-  margin:0!important;
-  padding:.75rem!important;
-  opacity:0!important;
-  transform:translateY(10px)!important;
-  pointer-events:none!important;
-  background:#fff!important;
-  border:0!important;
-  border-radius:.35rem!important;
-  box-shadow:0 1.25rem 2.5rem rgba(0,0,0,.14),0 .25rem .75rem rgba(0,0,0,.08)!important;
-  transition:opacity .22s ease,transform .22s ease,visibility .22s ease!important;
-}
-
-html body.public-site-page header.site-header .gov-dropdown a{
-  align-items:center!important;
-  display:flex!important;
-  gap:.4rem!important;
-  justify-content:flex-start!important;
-  min-height:48px!important;
-  margin:0!important;
-  padding:.55rem .95rem!important;
-  position:relative!important;
-  color:#3b3b3b!important;
-  background:transparent!important;
-  border:1px solid transparent!important;
-  border-radius:.35rem!important;
-  font-family:"Montserrat",sans-serif!important;
-  font-size:.8rem!important;
-  font-weight:700!important;
-  letter-spacing:0!important;
-  line-height:1.25!important;
-  text-decoration:none!important;
-  text-transform:uppercase!important;
-  white-space:normal!important;
-  transition:color .16s ease,background-color .16s ease,border-color .16s ease!important;
-}
-html body.public-site-page header.site-header .gov-dropdown a:hover,
-html body.public-site-page header.site-header .gov-dropdown a:focus-visible{
-  color:#000!important;
-  background:rgba(148,112,67,.1)!important;
-  border-color:rgba(148,112,67,.25)!important;
-}
-
-html body.public-site-page header.site-header .gov-menu-item:hover > .gov-dropdown,
-html body.public-site-page header.site-header .gov-menu-item:focus-within > .gov-dropdown{
-  visibility:visible!important;
-  opacity:1!important;
-  transform:translateY(0)!important;
-  pointer-events:auto!important;
-}
-
-/* breakpoints Bootstrap */
-@media (max-width:1399.98px){
-  html body.public-site-page header.site-header .header-shell{max-width:1140px!important}
-}
-@media (max-width:1199.98px){
-  html body.public-site-page header.site-header .header-shell{max-width:960px!important}
-}
-@media (max-width:991.98px){
-  html body.public-site-page header.site-header .header-shell{max-width:720px!important}
-}
-@media (max-width:767.98px){
-  html body.public-site-page header.site-header .header-shell{max-width:540px!important}
-}
-@media (max-width:575.98px){
-  html body.public-site-page header.site-header .header-shell{
-    max-width:100%!important;
-    height:3.5rem!important;
-    min-height:3.5rem!important;
-  }
-  html body.public-site-page header.site-header .brand,
-  html body.public-site-page header.site-header .brand img{
-    height:3.5rem!important;
-    max-height:3.5rem!important;
-  }
-}
-
-/* Breadcrumb replicado del portal oficial */
-html body.public-site-page nav.gov-breadcrumb{
-  display:block!important;
-  min-height:40px!important;
-  height:40px!important;
-  margin:0!important;
-  padding:0!important;
-  background:#fff!important;
-  border:0!important;
-  border-bottom:1px solid #ececec!important;
-  box-shadow:none!important;
-}
-html body.public-site-page nav.gov-breadcrumb .gov-breadcrumb-inner{
-  box-sizing:border-box!important;
-  width:100%!important;
-  max-width:1320px!important;
-  height:40px!important;
-  min-height:40px!important;
-  margin:0 auto!important;
-  padding:0 15px!important;
-  display:flex!important;
-  flex-wrap:nowrap!important;
-  align-items:center!important;
-  gap:0!important;
-  list-style:none!important;
-  background:transparent!important;
-  font-family:Roboto,Arial,sans-serif!important;
-  font-size:.8rem!important;
-  font-weight:400!important;
-  line-height:1.5!important;
-  color:#000!important;
-}
-html body.public-site-page nav.gov-breadcrumb .breadcrumb-item{
-  display:flex!important;
-  align-items:center!important;
-  margin:0!important;
-  padding:0!important;
-  color:#000!important;
-  white-space:nowrap!important;
-}
-html body.public-site-page nav.gov-breadcrumb .breadcrumb-item + .breadcrumb-item{padding-left:.5rem!important}
-html body.public-site-page nav.gov-breadcrumb .breadcrumb-item + .breadcrumb-item::before{
-  content:"/"!important;
-  display:block!important;
-  float:none!important;
-  padding-right:.5rem!important;
-  color:rgba(0,0,0,.65)!important;
-}
-html body.public-site-page nav.gov-breadcrumb .breadcrumb-item a,
-html body.public-site-page nav.gov-breadcrumb .breadcrumb-item.active{
-  color:#000!important;
-  font-size:.8rem!important;
-  font-weight:400!important;
-  text-decoration:none!important;
-}
-html body.public-site-page nav.gov-breadcrumb .breadcrumb-home a{
-  display:inline-flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  width:1.25em!important;
-  color:#000!important;
-}
-html body.public-site-page nav.gov-breadcrumb .breadcrumb-home i{display:none!important}
-html body.public-site-page nav.gov-breadcrumb .breadcrumb-home a::before{
-  content:"\f015"!important;
-  display:inline-block!important;
-  font-family:"Font Awesome 6 Free"!important;
-  font-weight:900!important;
-  font-style:normal!important;
-  font-size:13px!important;
-  line-height:1!important;
-  color:#000!important;
-  -webkit-font-smoothing:antialiased!important;
-}
-@media (max-width:1399.98px){
-  html body.public-site-page nav.gov-breadcrumb .gov-breadcrumb-inner{max-width:1140px!important}
-}
-@media (max-width:1199.98px){
-  html body.public-site-page nav.gov-breadcrumb .gov-breadcrumb-inner{max-width:960px!important}
-}
-@media (max-width:991.98px){
-  html body.public-site-page nav.gov-breadcrumb .gov-breadcrumb-inner{max-width:720px!important}
-}
-@media (max-width:767.98px){
-  html body.public-site-page nav.gov-breadcrumb .gov-breadcrumb-inner{max-width:540px!important}
-}
-@media (max-width:575.98px){
-  html body.public-site-page nav.gov-breadcrumb .gov-breadcrumb-inner{max-width:100%!important}
-}
-
-/* Iconografía institucional en tarjetas de Valor Público */
-html body.public-site-page .value-grid article > .value-icon{
-  display:inline-flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  width:40px!important;
-  height:40px!important;
-  margin:0 0 72px 0!important;
-  border-radius:4px!important;
-  background:#f4f0f2!important;
-  color:#410324!important;
-  font-size:17px!important;
-  line-height:1!important;
-}
-html body.public-site-page .value-grid article > .value-icon i{
-  color:#410324!important;
-  font-size:17px!important;
-  line-height:1!important;
+@media(max-width:991.98px){
+  html body.public-site-page header.site-header .header-shell{width:calc(100% - 30px)!important}
+  html body.public-site-page header.site-header .brand img{height:56px!important;max-height:56px!important}
 }
