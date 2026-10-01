@@ -963,3 +963,19 @@ html body.public-site-page header.site-header #primaryNav,
 html body.public-site-page header.site-header #primaryNav > a{
   height:93px!important;
 }
+
+
+/* === Corrección auditada de color del footer inferior === */
+html body.public-site-page footer.official-footer .official-footer-bottom{
+  background:#410324!important;
+  color:#FFFFFF!important;
+}
+html body.public-site-page footer.official-footer .official-footer-bottom p,
+html body.public-site-page footer.official-footer .official-footer-bottom span,
+html body.public-site-page footer.official-footer .official-footer-bottom strong,
+html body.public-site-page footer.official-footer .official-footer-bottom a,
+html body.public-site-page footer.official-footer .official-social-icons .icon-row a,
+html body.public-site-page footer.official-footer .official-social-icons .icon-row a i,
+html body.public-site-page footer.official-footer .official-social-icons .icon-row .x-official{
+  color:#FFFFFF!important;
+}
