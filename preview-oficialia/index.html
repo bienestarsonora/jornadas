@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="../institutional.css?v=20260922">
   <link rel="icon" href="../assets/logo-bienestar.png" type="image/png">
   <link rel="stylesheet" href="preview-oficialia.css?v=20261001-6">
-  <link rel="stylesheet" href="header-final.css?v=20261001-RESTORE2159">
+  <link rel="stylesheet" href="header-final.css?v=20261001-RESTORE-DROPDOWN-CRUMB">
 </head>
 <body class="public-site-page">
   <a class="gov-skip" href="#main-content">Saltar al contenido principal</a>
@@ -29,11 +29,35 @@
         <img src="../assets/logo-bienestar.png" alt="Gobierno de Sonora · Secretaría de Bienestar">
       </a>
       <nav id="primaryNav" class="global-nav" aria-label="Navegación institucional">
-        <a href="https://www.sonora.gob.mx/gobierno/principal" target="_blank" rel="noopener noreferrer">Gobierno <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></a>
-        <a href="https://www.sonora.gob.mx/servicios-y-tramites" target="_blank" rel="noopener noreferrer">Servicios y Trámites</a>
-        <a href="https://datos.sonora.gob.mx/" target="_blank" rel="noopener noreferrer">Datos Abiertos <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></a>
-        <a href="https://cultura.sonora.gob.mx" target="_blank" rel="noopener noreferrer">Cultura <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></a>
-        <a href="https://expediente.sonora.gob.mx" target="_blank" rel="noopener noreferrer">Mi Expediente</a>
+        <div class="gov-menu-item has-dropdown">
+          <a class="gov-menu-trigger" href="#" title="Ir a Gobierno">Gobierno <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></a>
+          <div class="gov-dropdown">
+            <a href="http://www.sonora.gob.mx/gobierno/principal" target="_blank" rel="noopener noreferrer">Gobierno</a>
+            <a href="http://www.sonora.gob.mx/gobierno/acciones" target="_blank" rel="noopener noreferrer">Acciones</a>
+            <a href="http://www.sonora.gob.mx/gobierno/convenios/cfe" target="_blank" rel="noopener noreferrer">Convenio Sonora - CFE</a>
+            <a href="https://oficialiamayor.sonora.gob.mx/programa-especial-de-gobierno-digital/" target="_blank" rel="noopener noreferrer">Programa Especial de Gobierno Digital</a>
+            <a href="http://www.sonora.gob.mx/gobierno/planes/hidrico" target="_blank" rel="noopener noreferrer">Plan Hídrico 2023-2053</a>
+            <a href="http://www.sonora.gob.mx/gobierno/subsidio-electrico-2025" target="_blank" rel="noopener noreferrer">Subsidio Eléctrico 2025</a>
+          </div>
+        </div>
+        <a href="http://www.sonora.gob.mx/servicios-y-tramites" target="_blank" rel="noopener noreferrer">Servicios y Trámites</a>
+        <div class="gov-menu-item has-dropdown">
+          <a class="gov-menu-trigger" href="#" title="Ir a Datos Abiertos">Datos Abiertos <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></a>
+          <div class="gov-dropdown">
+            <a href="https://datos.sonora.gob.mx/" target="_blank" rel="noopener noreferrer">Portal de Datos Abiertos</a>
+            <a href="https://transparencia.sonora.gob.mx/" target="_blank" rel="noopener noreferrer">Portal de Transparencia Sonora</a>
+            <a href="https://www.plataformadetransparencia.org.mx/" target="_blank" rel="noopener noreferrer">Plataforma Nacional de Transparencia</a>
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiOTczYWE5N2UtM2Q1MS00OGU4LWEwZjItOTI4Y2YwNDkzOWQzIiwidCI6ImNhOGYwOWY1LTMzNWUtNGZjNS04MDQxLWY1YjQ3MmEwMmVlZiIsImMiOjR9" target="_blank" rel="noopener noreferrer">Sistema de Indicadores Municipales</a>
+          </div>
+        </div>
+        <div class="gov-menu-item has-dropdown">
+          <a class="gov-menu-trigger" href="#" title="Ir a Cultura">Cultura <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></a>
+          <div class="gov-dropdown">
+            <a href="https://cultura.sonora.gob.mx/" target="_blank" rel="noopener noreferrer">Cartelera Cultural</a>
+            <a href="https://bibliotecadigital.sonora.gob.mx/" target="_blank" rel="noopener noreferrer">Biblioteca Digital</a>
+          </div>
+        </div>
+        <a href="https://expediente.sonora.gob.mx/" target="_blank" rel="noopener noreferrer">Mi Expediente</a>
       </nav>
       <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="primaryNav">☰</button>
     </div>
@@ -51,9 +75,16 @@
   </nav>
 
   <nav class="gov-breadcrumb" aria-label="Ruta de navegación">
-    <div class="gov-breadcrumb-inner">
-      <span aria-hidden="true">⌂</span><span>/</span><span>Gobierno</span><span>/</span><span>Secretaría de Bienestar</span><span>/</span><strong aria-current="page">Jornadas del Bienestar</strong>
-    </div>
+    <ol class="gov-breadcrumb-inner">
+      <li class="breadcrumb-item breadcrumb-home">
+        <a href="https://www.sonora.gob.mx/" target="_blank" rel="noopener noreferrer" title="Inicio" aria-label="Inicio">
+          <i class="fa-solid fa-house" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li class="breadcrumb-item"><a href="https://www.sonora.gob.mx/gobierno" target="_blank" rel="noopener noreferrer">Gobierno</a></li>
+      <li class="breadcrumb-item"><a href="https://bienestar.sonora.gob.mx/" target="_blank" rel="noopener noreferrer">Secretaría de Bienestar</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Jornadas del Bienestar</li>
+    </ol>
   </nav>
 
   <main id="main-content" tabindex="-1">
