@@ -396,3 +396,28 @@ html body.public-site-page header.site-header .brand img{
   height:64px!important;
   max-height:64px!important;
 }
+
+
+/* Corrección definitiva del logo del HEADER y despliegue de submenús */
+html body.public-site-page header.site-header{
+  overflow:visible!important;
+}
+
+html body.public-site-page header.site-header .brand{
+  transform:none!important;
+  height:64px!important;
+  margin:0!important;
+  padding:0!important;
+}
+
+html body.public-site-page header.site-header .brand img{
+  display:block!important;
+  width:auto!important;
+  height:64px!important;
+  max-width:none!important;
+  max-height:64px!important;
+  margin:0!important;
+  padding:0!important;
+  object-fit:contain!important;
+  filter:invert(83%) sepia(71%) saturate(2%) hue-rotate(13deg) brightness(200%) contrast(100%)!important;
+}
