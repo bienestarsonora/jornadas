@@ -798,3 +798,24 @@ html body.public-site-page footer.official-footer .official-911 img{
 .official-social-text .social-brand i{
   font-style:normal!important;
 }
+
+
+/* Enlaces reales del bloque social del footer */
+.official-social-text .social-link{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:6px!important;
+  color:#111!important;
+  text-decoration:none!important;
+  width:auto!important;
+  padding:0!important;
+}
+.official-social-text .social-link:hover,
+.official-social-text .social-link:focus-visible{
+  text-decoration:underline!important;
+  text-underline-offset:3px!important;
+}
+.official-social-text .social-link-pending{
+  cursor:default!important;
+  text-decoration:none!important;
+}
