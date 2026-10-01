@@ -846,3 +846,16 @@ html body.public-site-page footer.official-footer .official-pattern img{
     display:none!important;
   }
 }
+
+
+/* Corrección del pattern inferior: usar SVG oficial con opacidad nativa */
+html body.public-site-page footer.official-footer .official-pattern img{
+  display:block!important;
+  width:370px!important;
+  max-width:100%!important;
+  height:auto!important;
+  opacity:1!important;
+  filter:none!important;
+  mix-blend-mode:normal!important;
+  background:transparent!important;
+}
