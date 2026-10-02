@@ -1441,3 +1441,15 @@ html body.public-site-page textarea{
 html body.public-site-page [hidden]{
   display:none!important;
 }
+
+
+/* Corrección tipográfica fina de microtítulos institucionales */
+html body.public-site-page .eyebrow,
+html body.public-site-page .section-kicker,
+html body.public-site-page .impact-eyebrow{
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-size:.8rem!important;
+  font-weight:600!important;
+  line-height:1.25!important;
+  letter-spacing:0!important;
+}
