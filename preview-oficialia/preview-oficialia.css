@@ -1315,3 +1315,15 @@ html body.public-site-page .stats-grid .stat-card > strong,
 html body.public-site-page .value-grid article > h3{
   margin-top:0!important;
 }
+
+
+/* Animación oficial RRSS del footer — replicada del portal Bienestar */
+html body.public-site-page footer.official-footer .official-social-icons .icon-row a{
+  line-height:64px!important;
+  transition:.3s all ease-in-out!important;
+  transform-origin:50% 50%!important;
+}
+
+html body.public-site-page footer.official-footer .official-social-icons .icon-row a:hover{
+  transform:scale(1.2)!important;
+}
