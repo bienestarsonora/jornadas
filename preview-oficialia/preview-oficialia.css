@@ -1453,3 +1453,17 @@ html body.public-site-page .impact-eyebrow{
   line-height:1.25!important;
   letter-spacing:0!important;
 }
+
+
+/* Acceso interno homologado con Comités */
+html body.public-site-page .section-nav .section-admin{
+  margin-left:8px!important;
+  border-color:#960E53!important;
+  color:#960E53!important;
+  background:transparent!important;
+}
+html body.public-site-page .section-nav .section-admin:hover,
+html body.public-site-page .section-nav .section-admin:focus-visible{
+  background:#f7f7f7!important;
+  color:#222!important;
+}
