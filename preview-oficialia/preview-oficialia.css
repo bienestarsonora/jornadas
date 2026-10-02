@@ -1327,3 +1327,117 @@ html body.public-site-page footer.official-footer .official-social-icons .icon-r
 html body.public-site-page footer.official-footer .official-social-icons .icon-row a:hover{
   transform:scale(1.2)!important;
 }
+
+
+/* =========================================================
+   CALIBRACIÓN TIPOGRÁFICA Y DE COMPONENTES
+   Basada en estilos efectivos del portal oficial Bienestar
+   ========================================================= */
+
+html body.public-site-page{
+  font-family:'Roboto',Arial,sans-serif!important;
+  font-size:16px!important;
+  font-weight:400!important;
+  line-height:1.56!important;
+  color:#333!important;
+  text-decoration:none!important;
+}
+
+html body.public-site-page p,
+html body.public-site-page li,
+html body.public-site-page label,
+html body.public-site-page input,
+html body.public-site-page select,
+html body.public-site-page textarea,
+html body.public-site-page button,
+html body.public-site-page small{
+  font-family:'Roboto',Arial,sans-serif!important;
+}
+
+html body.public-site-page h1,
+html body.public-site-page h2,
+html body.public-site-page h3,
+html body.public-site-page h4,
+html body.public-site-page h5,
+html body.public-site-page h6{
+  font-family:'Montserrat',Arial,sans-serif!important;
+  line-height:1.2!important;
+  letter-spacing:0!important;
+  margin-top:0!important;
+}
+
+html body.public-site-page h1,
+html body.public-site-page .hero h1{
+  font-size:2rem!important;
+  font-weight:800!important;
+}
+
+html body.public-site-page h2{
+  font-size:1.8rem!important;
+  font-weight:700!important;
+}
+
+html body.public-site-page h3{
+  font-size:1.6rem!important;
+  font-weight:700!important;
+}
+
+html body.public-site-page h4{
+  font-size:1.4rem!important;
+  font-weight:600!important;
+}
+
+html body.public-site-page h5{
+  font-size:1.2rem!important;
+  font-weight:600!important;
+}
+
+html body.public-site-page .btn{
+  font-family:'Roboto',Arial,sans-serif!important;
+  font-size:16px!important;
+  font-weight:500!important;
+  line-height:1.25!important;
+  padding:8px 12px!important;
+  min-height:40px!important;
+  border-radius:4px!important;
+  box-shadow:none!important;
+  transform:none!important;
+  transition:background-color .15s ease-in-out,border-color .15s ease-in-out,color .15s ease-in-out!important;
+}
+
+html body.public-site-page .eyebrow,
+html body.public-site-page .section-kicker{
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-size:.75rem!important;
+  font-weight:700!important;
+  line-height:1.25!important;
+  letter-spacing:.08em!important;
+}
+
+html body.public-site-page .section-intro p,
+html body.public-site-page .value-heading p,
+html body.public-site-page .hero-lead,
+html body.public-site-page .stat-card p,
+html body.public-site-page .journey-card p,
+html body.public-site-page .value-grid p{
+  line-height:1.56!important;
+}
+
+html body.public-site-page input,
+html body.public-site-page select,
+html body.public-site-page textarea{
+  font-size:16px!important;
+  line-height:1.25!important;
+  border-radius:4px!important;
+}
+
+@media (min-width:768px) and (max-width:991px){
+  html body.public-site-page{font-size:14px!important}
+}
+@media (max-width:767px){
+  html body.public-site-page{font-size:13px!important}
+}
+
+html body.public-site-page [hidden]{
+  display:none!important;
+}
