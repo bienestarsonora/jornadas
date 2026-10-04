@@ -1467,3 +1467,78 @@ html body.public-site-page .section-nav .section-admin:focus-visible{
   background:#f7f7f7!important;
   color:#222!important;
 }
+
+
+/* =========================================================
+   VALOR PÚBLICO — refinamiento visual 2026-10-03
+   Mayor jerarquía de iconos y mejor balance de tarjetas
+   ========================================================= */
+html body.public-site-page .value-section .value-grid{
+  gap:20px!important;
+}
+
+html body.public-site-page .value-section .value-grid article{
+  position:relative!important;
+  min-height:238px!important;
+  padding:28px 30px 30px!important;
+  border:1px solid #d7d7d7!important;
+  border-radius:7px!important;
+  background:#fff!important;
+  box-shadow:none!important;
+  transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease!important;
+}
+
+html body.public-site-page .value-section .value-grid article:hover{
+  border-color:#bba8b2!important;
+  box-shadow:0 8px 22px rgba(65,3,36,.07)!important;
+  transform:translateY(-2px)!important;
+}
+
+html body.public-site-page .value-grid article > .value-icon{
+  width:52px!important;
+  height:52px!important;
+  min-width:52px!important;
+  min-height:52px!important;
+  margin:0 0 22px 0!important;
+  border-radius:8px!important;
+  background:#f5eff2!important;
+  color:#960E53!important;
+}
+
+html body.public-site-page .value-grid article > .value-icon i{
+  font-size:25px!important;
+  line-height:1!important;
+}
+
+html body.public-site-page .value-grid article > h3{
+  margin:0 0 11px!important;
+  font-size:1.22rem!important;
+  font-weight:700!important;
+  line-height:1.25!important;
+  color:#410324!important;
+}
+
+html body.public-site-page .value-grid article > p{
+  max-width:34ch!important;
+  margin:0!important;
+  font-size:.94rem!important;
+  line-height:1.55!important;
+  color:#4f4f4f!important;
+}
+
+@media(max-width:767px){
+  html body.public-site-page .value-section .value-grid article{
+    min-height:0!important;
+    padding:24px!important;
+  }
+  html body.public-site-page .value-grid article > .value-icon{
+    width:48px!important;
+    height:48px!important;
+    min-width:48px!important;
+    min-height:48px!important;
+    margin-bottom:18px!important;
+  }
+  html body.public-site-page .value-grid article > .value-icon i{
+    font-size:23px!important;
+  }
+}
