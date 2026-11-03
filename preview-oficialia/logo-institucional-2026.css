@@ -1,0 +1,67 @@
+/* Jornadas · Identidad gráfica actualizada (noviembre 2026).
+   Afecta únicamente el logotipo del encabezado en preview-oficialia.
+   La imagen proviene del SVG oficial de Bienestar Sonora. */
+html body.public-site-page header.site-header .brand {
+  display: flex !important;
+  flex: 0 0 236px !important;
+  width: 236px !important;
+  height: 76px !important;
+  max-width: 236px !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+html body.public-site-page header.site-header .brand img {
+  display: block !important;
+  position: static !important;
+  left: auto !important;
+  top: auto !important;
+  width: 230px !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 66px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  object-fit: contain !important;
+  object-position: left center !important;
+  filter: none !important; /* El SVG oficial ya trae su identidad cromática. */
+}
+html body.public-site-page header.site-header #primaryNav {
+  transform: none !important;
+}
+@media(max-width:1199.98px) {
+  html body.public-site-page header.site-header .brand {
+    flex-basis: 210px !important;
+    width: 210px !important;
+    max-width: 210px !important;
+  }
+  html body.public-site-page header.site-header .brand img {
+    width: 205px !important;
+  }
+}
+@media(max-width:991.98px) {
+  html body.public-site-page header.site-header .brand {
+    flex-basis: 208px !important;
+    width: 208px !important;
+    max-width: 208px !important;
+    height: 68px !important;
+  }
+  html body.public-site-page header.site-header .brand img {
+    width: 202px !important;
+    height: auto !important;
+    max-height: 58px !important;
+  }
+}
+@media(max-width:575.98px) {
+  html body.public-site-page header.site-header .brand {
+    flex-basis: min(205px, 68vw) !important;
+    width: min(205px, 68vw) !important;
+    max-width: min(205px, 68vw) !important;
+  }
+  html body.public-site-page header.site-header .brand img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 55px !important;
+  }
+}
