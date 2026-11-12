@@ -14,9 +14,9 @@ html body.public-site-page header.site-header {
   border: 0!important;
   background-color: #710A3E!important;
   background-image: url('../assets/bk-header-jornadas-2026.svg')!important;
-  background-position: center bottom!important;
+  background-position: calc(50% + 8px) bottom!important;
   background-repeat: no-repeat!important;
-  background-size: cover!important;
+  background-size: 1920px 111px!important;
   background-blend-mode: normal!important;
   box-shadow: none!important;
 }
@@ -122,14 +122,14 @@ html body.public-site-page header.site-header #primaryNav > .gov-menu-item > .go
    Se mantiene el espacio de menú y solo se traslada visualmente la marca. */
 @media(min-width:1200px) {
   html body.public-site-page header.site-header .brand {
-    transform:translateX(-17px)!important;
+    transform:translateX(-11px)!important;
   }
   html body.public-site-page header.site-header .brand img {
     width:210px!important;
     max-width:210px!important;
   }
   html body.public-site-page header.site-header #primaryNav {
-    transform:translateX(-10px)!important;
+    transform:translateX(-6px)!important;
   }
   html body.public-site-page header.site-header #primaryNav > a,
   html body.public-site-page header.site-header #primaryNav > .gov-menu-item > .gov-menu-trigger {
@@ -138,3 +138,19 @@ html body.public-site-page header.site-header #primaryNav > .gov-menu-item > .go
   }
 }
 /* El fondo termina en vino oscuro: sin capas de filtros magenta. */
+
+/* Coincidencia tipográfica y separación del menú (comparación píxel a píxel, 1439px).
+   Sitio oficial: texto a ~12px; el clon tenía letras un 10% más anchas.
+   Los cambios se limitan a pantallas grandes para mantener el menú móvil. */
+@media(min-width:1200px) {
+  html body.public-site-page header.site-header #primaryNav {
+    gap:9px!important;
+  }
+  html body.public-site-page header.site-header #primaryNav > a,
+  html body.public-site-page header.site-header #primaryNav > .gov-menu-item > .gov-menu-trigger {
+    font-size:12px!important;
+    font-weight:700!important;
+    letter-spacing:0!important;
+    white-space:nowrap!important;
+  }
+}
