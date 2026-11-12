@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="logo-institucional-2026.css?v=20261112-LOGO-LOCAL">
   <link rel="stylesheet" href="logo-correcto-2026.css?v=20261112-1">
   <link rel="stylesheet" href="carrusel-banners.css?v=20261112-4">
-  <link rel="stylesheet" href="accesibilidad.css?v=20261112-1">
+  <link rel="stylesheet" href="accesibilidad.css?v=20261112-2">
 </head>
 <body class="public-site-page">
   <a class="gov-skip" href="#main-content">Saltar al contenido principal</a>
@@ -299,10 +299,23 @@
   <script src="../app.js?v=20260922"></script>
   <script src="../institutional-ui.js?v=20260922"></script>
 
-  <!-- Controles flotantes de accesibilidad -->
-  <div class="jo-accessibility" aria-label="Herramientas de accesibilidad">
+  <!-- Barra de herramientas flotantes, según referencia visual oficial de Bienestar Sonora -->
+  <div class="jo-accessibility" aria-label="Herramientas del sitio">
+    <div class="jo-search-panel" id="joSearchPanel" role="search" hidden>
+      <form id="joSearchForm" autocomplete="off">
+        <label for="joSearchInput">Buscar en Jornadas del Bienestar</label>
+        <div class="jo-search-row">
+          <input type="search" id="joSearchInput" name="q" placeholder="¿Qué necesitas encontrar?" required>
+          <button type="submit" aria-label="Realizar búsqueda"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
+        </div>
+        <p id="joSearchFeedback" role="status" aria-live="polite"></p>
+      </form>
+    </div>
     <div class="jo-a11y-panel" id="joA11yPanel" hidden>
-      <div class="jo-a11y-head"><strong>Accesibilidad</strong><button class="jo-a11y-close" id="joA11yClose" type="button" aria-label="Cerrar opciones">×</button></div>
+      <div class="jo-a11y-head">
+        <strong>Herramientas de accesibilidad</strong>
+        <button class="jo-a11y-close" id="joA11yClose" type="button" aria-label="Cerrar opciones de accesibilidad">×</button>
+      </div>
       <div class="jo-a11y-grid">
         <button type="button" data-jo-a11y="bigger" aria-label="Aumentar tamaño de texto">A+ Aumentar texto</button>
         <button type="button" data-jo-a11y="smaller" aria-label="Reducir tamaño de texto">A− Reducir texto</button>
@@ -312,11 +325,26 @@
         <button type="button" data-jo-a11y="reset" class="jo-a11y-reset">Restablecer ajustes</button>
       </div>
     </div>
-    <button type="button" class="jo-a11y-trigger" id="joA11yToggle" aria-label="Abrir herramientas de accesibilidad" aria-expanded="false" aria-controls="joA11yPanel"><i class="fa-solid fa-universal-access" aria-hidden="true"></i></button>
-    <button type="button" class="jo-top-trigger" id="joScrollTop" aria-label="Volver al inicio"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+
+    <button type="button" class="jo-floating-button jo-search-trigger" id="joSearchToggle" aria-label="Buscar en el sitio" aria-expanded="false" aria-controls="joSearchPanel" title="Búsqueda">
+      <svg width="31" height="31" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="13.5" cy="13.5" r="8.5" stroke="currentColor" stroke-width="3.8"/>
+        <path d="m20 20 8 8" stroke="currentColor" stroke-width="3.8" stroke-linecap="square"/>
+      </svg>
+    </button>
+    <button type="button" class="jo-floating-button jo-a11y-trigger" id="joA11yToggle" aria-label="Abrir herramientas de accesibilidad" aria-expanded="false" aria-controls="joA11yPanel" title="Accesibilidad">
+      <i class="fa-solid fa-wheelchair" aria-hidden="true"></i>
+    </button>
+    <a class="jo-floating-button jo-contact-trigger" href="https://bienestar.sonora.gob.mx/index.php/contacto" target="_blank" rel="noopener noreferrer" aria-label="Atención ciudadana de la Secretaría de Bienestar (se abre en una pestaña nueva)" title="Atención ciudadana">
+      <svg width="34" height="34" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+        <path d="M5 5h26v21H17l-8 6v-6H5V5Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="18" cy="13.2" r="3.25" fill="currentColor"/>
+        <path d="M11.5 22c.5-4.8 12.5-4.8 13 0H11.5Z" fill="currentColor"/>
+      </svg>
+    </a>
   </div>
 
   <script src="preview-countup.js?v=20260930"></script>
   <script src="carrusel-banners.js?v=20261112-4"></script>
-  <script src="accesibilidad.js?v=20261112-1"></script></body>
+  <script src="accesibilidad.js?v=20261112-2"></script></body>
 </html>
