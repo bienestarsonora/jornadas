@@ -1,0 +1,117 @@
+/* Jornadas / vista previa oficial: corrección del fondo institucional, 12-nov-2026.
+   Fondo cromático original del repositorio; se eliminan overlays magenta que alteraban el arte.
+   Ajuste acotado al encabezado superior. No afecta otras secciones. */
+
+html body.public-site-page header.site-header {
+  box-sizing: border-box!important;
+  position: relative!important;
+  width: 100%!important;
+  height: 72px!important;
+  min-height: 72px!important;
+  max-height: 72px!important;
+  margin: 0!important;
+  padding: 0!important;
+  border: 0!important;
+  background-color: #710A3E!important;
+  background-image: url('../assets/bk-header-oficial.svg')!important;
+  background-position: center bottom!important;
+  background-repeat: no-repeat!important;
+  background-size: cover!important;
+  background-blend-mode: normal!important;
+  box-shadow: none!important;
+}
+html body.public-site-page header.site-header::before,
+html body.public-site-page header.site-header::after,
+html body.public-site-page header.site-header .title-image {
+  display: none!important;
+  content: none!important;
+  background: none!important;
+}
+html body.public-site-page header.site-header .header-shell {
+  box-sizing: border-box!important;
+  width: calc(100% - 30px)!important;
+  max-width: 1140px!important;
+  height: 72px!important;
+  min-height: 72px!important;
+  max-height: 72px!important;
+  margin: 0 auto!important;
+  padding: 0!important;
+  display: flex!important;
+  align-items: center!important;
+  justify-content: space-between!important;
+  background: transparent!important;
+}
+html body.public-site-page header.site-header .brand {
+  box-sizing: border-box!important;
+  display: flex!important;
+  align-items: center!important;
+  justify-content: flex-start!important;
+  flex: 0 0 216px!important;
+  width: 216px!important;
+  max-width: 216px!important;
+  height: 72px!important;
+  margin: 0!important;
+  padding: 0!important;
+}
+html body.public-site-page header.site-header .brand img {
+  display: block!important;
+  position: static!important;
+  left: auto!important;
+  top: auto!important;
+  width: 216px!important;
+  max-width: 216px!important;
+  height: auto!important;
+  max-height: 51px!important;
+  object-fit: contain!important;
+  object-position: left center!important;
+  filter: brightness(0) invert(1)!important;
+  transform: none!important;
+}
+html body.public-site-page header.site-header #primaryNav {
+  height: 72px!important;
+  min-height: 72px!important;
+  transform: translateX(20px)!important;
+}
+html body.public-site-page header.site-header #primaryNav > a,
+html body.public-site-page header.site-header #primaryNav > .gov-menu-item,
+html body.public-site-page header.site-header #primaryNav > .gov-menu-item > .gov-menu-trigger {
+  height: 72px!important;
+}
+@media(max-width:1199.98px) {
+  html body.public-site-page header.site-header .header-shell {
+    max-width: 960px!important;
+  }
+  html body.public-site-page header.site-header #primaryNav {
+    transform: none!important;
+  }
+}
+@media(max-width:991.98px) {
+  html body.public-site-page header.site-header .header-shell {
+    width: calc(100% - 30px)!important;
+    max-width: 720px!important;
+  }
+  html body.public-site-page header.site-header .brand {
+    flex-basis: 210px!important;
+    width: 210px!important;
+    max-width: 210px!important;
+  }
+  html body.public-site-page header.site-header .brand img {
+    width: 210px!important;
+    max-width: 210px!important;
+    max-height: 48px!important;
+  }
+}
+@media(max-width:575.98px) {
+  html body.public-site-page header.site-header .header-shell {
+    max-width: 100%!important;
+  }
+  html body.public-site-page header.site-header .brand {
+    flex-basis: min(210px, 70vw)!important;
+    width: min(210px, 70vw)!important;
+    max-width: min(210px, 70vw)!important;
+  }
+  html body.public-site-page header.site-header .brand img {
+    width: 100%!important;
+    max-width: 100%!important;
+  }
+}
