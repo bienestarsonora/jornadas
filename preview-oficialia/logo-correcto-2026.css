@@ -1,0 +1,24 @@
+/* Vista previa Jornadas · logotipo oficial aportado por la Secretaría */
+html body.public-site-page header.site-header .brand{
+  display:flex!important;align-items:center!important;justify-content:flex-start!important;
+  flex:0 0 320px!important;width:320px!important;max-width:320px!important;height:92px!important;
+  margin:0!important;padding:0!important;overflow:visible!important
+}
+html body.public-site-page header.site-header .brand img{
+  width:320px!important;max-width:100%!important;height:auto!important;max-height:75px!important;
+  display:block!important;position:static!important;object-fit:contain!important;object-position:left center!important;
+  filter:brightness(0) invert(1)!important;opacity:1!important;transform:none!important
+}
+html body.public-site-page header.site-header #primaryNav{transform:none!important}
+@media(max-width:1199.98px){
+ html body.public-site-page header.site-header .brand{flex-basis:235px!important;width:235px!important;max-width:235px!important}
+ html body.public-site-page header.site-header .brand img{width:235px!important}
+}
+@media(max-width:991.98px){
+ html body.public-site-page header.site-header .brand{flex-basis:265px!important;width:265px!important;max-width:265px!important;height:84px!important}
+ html body.public-site-page header.site-header .brand img{width:265px!important;max-height:65px!important}
+}
+@media(max-width:575.98px){
+ html body.public-site-page header.site-header .brand{flex-basis:min(248px,70vw)!important;width:min(248px,70vw)!important;max-width:min(248px,70vw)!important}
+ html body.public-site-page header.site-header .brand img{width:100%!important;max-height:58px!important}
+}
