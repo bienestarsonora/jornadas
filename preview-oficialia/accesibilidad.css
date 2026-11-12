@@ -174,3 +174,46 @@ html body.public-site-page .jo-accessibility .jo-floating-button img{
     width:50px!important;height:50px!important;min-width:50px!important;min-height:50px!important
   }
 }
+
+/* Comportamiento hover/foco calcado de las tres referencias del portal oficial:
+   leve acercamiento del círculo; pictograma azul en búsqueda y atención. */
+html body.public-site-page .jo-accessibility .jo-floating-button{
+  transform-origin:center center!important;
+  transform:scale(1)!important;
+  transition:transform .16s ease-out!important;
+}
+@media(hover:hover){
+  html body.public-site-page .jo-accessibility .jo-floating-button:hover{
+    transform:scale(1.09)!important;
+  }
+}
+html body.public-site-page .jo-accessibility .jo-floating-button:focus-visible{
+  transform:scale(1.09)!important;
+}
+html body.public-site-page .jo-accessibility .jo-floating-button img.jo-icon-default,
+html body.public-site-page .jo-accessibility .jo-floating-button img.jo-icon-hover{
+  position:absolute!important;
+  left:0!important;top:0!important;
+  display:block!important;
+  pointer-events:none!important;
+  transition:opacity .14s ease-out!important;
+}
+html body.public-site-page .jo-accessibility .jo-floating-button img.jo-icon-default{
+  opacity:1!important;
+}
+html body.public-site-page .jo-accessibility .jo-floating-button img.jo-icon-hover{
+  opacity:0!important;
+}
+@media(hover:hover){
+ html body.public-site-page .jo-accessibility .jo-floating-button:hover img.jo-icon-default{opacity:0!important}
+ html body.public-site-page .jo-accessibility .jo-floating-button:hover img.jo-icon-hover{opacity:1!important}
+}
+html body.public-site-page .jo-accessibility .jo-floating-button:focus-visible img.jo-icon-default{opacity:0!important}
+html body.public-site-page .jo-accessibility .jo-floating-button:focus-visible img.jo-icon-hover{opacity:1!important}
+@media(prefers-reduced-motion:reduce){
+ html body.public-site-page .jo-accessibility .jo-floating-button,
+ html body.public-site-page .jo-accessibility .jo-floating-button img.jo-icon-default,
+ html body.public-site-page .jo-accessibility .jo-floating-button img.jo-icon-hover{
+   transition:none!important;
+ }
+}
