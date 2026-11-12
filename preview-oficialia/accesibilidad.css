@@ -1,23 +1,133 @@
-/* Controles de accesibilidad: vista previa institucional de Jornadas */
-.jo-accessibility{position:fixed;right:18px;bottom:20px;z-index:6000;display:flex;align-items:flex-end;flex-direction:column;gap:10px;font-family:Roboto,Arial,sans-serif}
-.jo-accessibility button{font-family:inherit;cursor:pointer}
-.jo-a11y-trigger,.jo-top-trigger{display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;color:#fff;background:#960e53;border:2px solid #fff;box-shadow:0 3px 16px #24001542;font-size:23px;transition:background .2s,transform .2s}
-.jo-a11y-trigger:hover,.jo-top-trigger:hover{background:#410324;transform:translateY(-2px)}
-.jo-a11y-trigger:focus-visible,.jo-top-trigger:focus-visible,.jo-a11y-panel button:focus-visible{outline:3px solid #f0b429;outline-offset:3px}
-.jo-top-trigger{width:42px;height:42px;font-size:17px}
-.jo-a11y-panel{position:absolute;right:0;bottom:112px;width:min(310px,calc(100vw - 35px));padding:17px;background:#fff;color:#2a1821;border:1px solid #e1cdd7;border-radius:10px;box-shadow:0 12px 38px #22071936}
-.jo-a11y-panel[hidden]{display:none!important}
-.jo-a11y-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px}
-.jo-a11y-head strong{font-size:17px}
-.jo-a11y-close{border:0;background:transparent;color:#4c092d;font-size:23px;width:34px;height:34px}
-.jo-a11y-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.jo-a11y-grid button{min-height:42px;border:1px solid #ddc8d2;background:#faf7f8;color:#410324;border-radius:6px;font-size:13px;font-weight:700;padding:8px}
-.jo-a11y-grid button:hover,.jo-a11y-grid button[aria-pressed="true"]{background:#960e53;color:#fff}
-.jo-a11y-grid .jo-a11y-reset{grid-column:1/-1}
+/* Barra flotante de Bienestar Sonora (vista previa de Jornadas)
+   Proporciones y color tomados de la captura del portal oficial. */
+html body.public-site-page .jo-accessibility{
+  position:fixed!important;
+  right:30px!important;
+  bottom:8px!important;
+  z-index:6000!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:19px!important;
+  width:52px!important;
+  margin:0!important;
+  padding:0!important;
+  font-family:Roboto,Arial,sans-serif;
+  isolation:isolate;
+}
+html body.public-site-page .jo-accessibility .jo-floating-button{
+  box-sizing:border-box!important;
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex:0 0 52px!important;
+  width:52px!important;
+  height:52px!important;
+  min-width:52px!important;
+  min-height:52px!important;
+  padding:0!important;
+  margin:0!important;
+  border:2px solid #efeae3!important;
+  border-radius:50%!important;
+  background:#947043!important;
+  color:#fff!important;
+  box-shadow:none!important;
+  line-height:1!important;
+  text-decoration:none!important;
+  opacity:1!important;
+  transform:none!important;
+  cursor:pointer!important;
+  transition:none!important;
+}
+html body.public-site-page .jo-accessibility .jo-floating-button:hover{
+  background:#947043!important;
+  color:#fff!important;
+  transform:none!important;
+}
+html body.public-site-page .jo-accessibility .jo-floating-button svg{
+  display:block!important;
+  flex:0 0 auto!important;
+  fill:none;
+  color:#fff!important;
+  overflow:visible!important;
+}
+html body.public-site-page .jo-accessibility .jo-search-trigger svg{width:30px!important;height:30px!important}
+html body.public-site-page .jo-accessibility .jo-contact-trigger svg{width:34px!important;height:34px!important}
+html body.public-site-page .jo-accessibility .jo-a11y-trigger i{
+  display:block!important;
+  font-family:"Font Awesome 6 Free"!important;
+  font-size:29px!important;
+  font-weight:900!important;
+  line-height:1!important;
+  color:#fff!important;
+}
+html body.public-site-page .jo-accessibility .jo-floating-button:focus-visible,
+html body.public-site-page .jo-accessibility .jo-a11y-panel button:focus-visible,
+html body.public-site-page .jo-accessibility .jo-search-panel button:focus-visible{
+  outline:3px solid #410324!important;outline-offset:3px!important;
+}
+/* Paneles: ocultos por defecto, sin modificar los tres botones flotantes. */
+html body.public-site-page .jo-accessibility .jo-a11y-panel,
+html body.public-site-page .jo-accessibility .jo-search-panel{
+  box-sizing:border-box!important;
+  position:absolute!important;
+  right:66px!important;
+  width:min(325px,calc(100vw - 115px))!important;
+  padding:17px!important;
+  color:#262026!important;
+  background:#fff!important;
+  border:1px solid #e6d9cc!important;
+  border-radius:8px!important;
+  box-shadow:0 8px 28px rgba(40,18,10,.18)!important;
+  font-family:Roboto,Arial,sans-serif!important;
+  line-height:1.45!important;
+}
+html body.public-site-page .jo-accessibility .jo-a11y-panel{bottom:50px!important}
+html body.public-site-page .jo-accessibility .jo-search-panel{bottom:150px!important}
+html body.public-site-page .jo-accessibility .jo-a11y-panel[hidden],
+html body.public-site-page .jo-accessibility .jo-search-panel[hidden]{display:none!important}
+html body.public-site-page .jo-accessibility .jo-a11y-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 14px}
+html body.public-site-page .jo-accessibility .jo-a11y-head strong{font-size:16px;color:#410324}
+html body.public-site-page .jo-accessibility .jo-a11y-close{
+  border:0;background:transparent;color:#410324;width:34px;height:34px;
+  font-size:23px;line-height:1;cursor:pointer
+}
+html body.public-site-page .jo-accessibility .jo-a11y-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+html body.public-site-page .jo-accessibility .jo-a11y-grid button{
+  box-sizing:border-box;min-height:42px;padding:8px;border:1px solid #d9c7b3;
+  border-radius:5px;background:#faf7f2;color:#410324;font-size:12px;
+  font-weight:700;cursor:pointer
+}
+html body.public-site-page .jo-accessibility .jo-a11y-grid button:hover,
+html body.public-site-page .jo-accessibility .jo-a11y-grid button[aria-pressed="true"]{
+  background:#947043;color:#fff
+}
+html body.public-site-page .jo-accessibility .jo-a11y-grid .jo-a11y-reset{grid-column:1/-1}
+html body.public-site-page .jo-accessibility .jo-search-panel label{display:block;font-weight:700;margin-bottom:8px;color:#410324;font-size:14px}
+html body.public-site-page .jo-accessibility .jo-search-row{display:flex;gap:6px}
+html body.public-site-page .jo-accessibility .jo-search-row input{
+  width:100%;min-width:0;height:39px;box-sizing:border-box;
+  border:1px solid #c9b6a4;border-radius:4px;padding:7px 9px;font:400 14px Roboto,Arial,sans-serif;color:#222
+}
+html body.public-site-page .jo-accessibility .jo-search-row button{
+  width:40px;min-width:40px;border:0;border-radius:4px;background:#947043;color:#fff;cursor:pointer
+}
+html body.public-site-page .jo-accessibility .jo-search-panel p{margin:8px 0 0;font-size:12px;color:#555}
 html.jo-a11y-contrast body.public-site-page{background:#fff!important;color:#000!important}
-html.jo-a11y-contrast body.public-site-page main,html.jo-a11y-contrast body.public-site-page main section{background-color:#fff!important;color:#000!important}
-html.jo-a11y-contrast body.public-site-page main a,html.jo-a11y-contrast body.public-site-page main button{outline-color:#000!important;text-decoration:underline!important}
+html.jo-a11y-contrast body.public-site-page main,
+html.jo-a11y-contrast body.public-site-page main section{background-color:#fff!important;color:#000!important}
+html.jo-a11y-contrast body.public-site-page main a,
+html.jo-a11y-contrast body.public-site-page main button{text-decoration:underline!important}
 html.jo-a11y-gray body.public-site-page{filter:grayscale(1)!important}
 html.jo-a11y-links body.public-site-page a:not(.brand){text-decoration:underline!important;text-underline-offset:3px}
-@media(max-width:600px){.jo-accessibility{right:12px;bottom:12px}.jo-a11y-trigger{width:45px;height:45px}}
-@media(prefers-reduced-motion:reduce){.jo-a11y-trigger,.jo-top-trigger{transition:none}}
+@media(max-width:600px){
+ html body.public-site-page .jo-accessibility{right:12px!important;bottom:12px!important;gap:12px!important}
+ html body.public-site-page .jo-accessibility .jo-floating-button{
+   width:48px!important;height:48px!important;min-width:48px!important;min-height:48px!important;flex-basis:48px!important
+ }
+ html body.public-site-page .jo-accessibility .jo-a11y-panel,
+ html body.public-site-page .jo-accessibility .jo-search-panel{right:58px!important;width:min(310px,calc(100vw - 84px))!important}
+ html body.public-site-page .jo-accessibility .jo-search-panel{bottom:124px!important}
+}
