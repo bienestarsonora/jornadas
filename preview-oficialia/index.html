@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="logo-institucional-2026.css?v=20261112-LOGO-LOCAL">
   <link rel="stylesheet" href="logo-correcto-2026.css?v=20261112-1">
   <link rel="stylesheet" href="carrusel-banners.css?v=20261112-4">
-  <link rel="stylesheet" href="accesibilidad.css?v=20261112-4">
+  <link rel="stylesheet" href="accesibilidad.css?v=20261112-5">
 </head>
 <body class="public-site-page">
   <a class="gov-skip" href="#main-content">Saltar al contenido principal</a>
@@ -311,20 +311,33 @@
         <p id="joSearchFeedback" role="status" aria-live="polite"></p>
       </form>
     </div>
-    <div class="jo-a11y-panel" id="joA11yPanel" hidden>
+    <div class="jo-a11y-panel" id="joA11yPanel" role="dialog" aria-modal="false" aria-labelledby="joA11yHeading" hidden>
       <div class="jo-a11y-head">
-        <strong>Herramientas de accesibilidad</strong>
-        <button class="jo-a11y-close" id="joA11yClose" type="button" aria-label="Cerrar opciones de accesibilidad">×</button>
+        <button class="jo-a11y-close" id="joA11yClose" type="button" aria-label="Cerrar opciones de accesibilidad" title="Cerrar"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+        <h2 id="joA11yHeading">Opciones de accesibilidad</h2>
+        <button class="jo-a11y-reset" id="joA11yReset" type="button" aria-label="Restablecer opciones de accesibilidad" title="Restablecer"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i></button>
       </div>
-      <div class="jo-a11y-grid">
-        <button type="button" data-jo-a11y="bigger" aria-label="Aumentar tamaño de texto">A+ Aumentar texto</button>
-        <button type="button" data-jo-a11y="smaller" aria-label="Reducir tamaño de texto">A− Reducir texto</button>
-        <button type="button" data-jo-a11y="contrast" aria-pressed="false">Alto contraste</button>
-        <button type="button" data-jo-a11y="grayscale" aria-pressed="false">Escala de grises</button>
-        <button type="button" data-jo-a11y="links" aria-pressed="false">Subrayar enlaces</button>
-        <button type="button" data-jo-a11y="reset" class="jo-a11y-reset">Restablecer ajustes</button>
+      <div class="jo-a11y-options" aria-label="Opciones de accesibilidad">
+        <button type="button" data-jo-a11y="bigger"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i><span>Aumentar el tamaño del texto</span></button>
+        <button type="button" data-jo-a11y="smaller"><i class="fa-solid fa-magnifying-glass-minus" aria-hidden="true"></i><span>Disminuir el tamaño del texto</span></button>
+        <button type="button" data-jo-a11y="spacing-up"><i class="fa-solid fa-arrows-left-right" aria-hidden="true"></i><span>Aumentar el espaciado del texto</span></button>
+        <button type="button" data-jo-a11y="spacing-down"><i class="fa-solid fa-arrows-left-right-to-line" aria-hidden="true"></i><span>Disminuir el espaciado del texto</span></button>
+        <button type="button" data-jo-a11y="invert" aria-pressed="false"><i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i><span>Invertir colores</span></button>
+        <button type="button" data-jo-a11y="grayscale" aria-pressed="false"><i class="fa-solid fa-eye-slash" aria-hidden="true"></i><span>Tonos grises</span></button>
+        <button type="button" data-jo-a11y="links" aria-pressed="false"><i class="fa-solid fa-underline" aria-hidden="true"></i><span>Subrayar enlaces</span></button>
+        <button type="button" data-jo-a11y="cursor" aria-pressed="false"><i class="fa-solid fa-arrow-pointer" aria-hidden="true"></i><span>Cursor grande</span></button>
+        <button type="button" data-jo-a11y="guide" aria-pressed="false"><i class="fa-solid fa-grip-lines" aria-hidden="true"></i><span>Guía de lectura</span></button>
+        <button type="button" data-jo-a11y="speech" aria-pressed="false"><i class="fa-solid fa-volume-high" aria-hidden="true"></i><span>Texto a voz</span></button>
+        <button type="button" data-jo-a11y="dictation" aria-pressed="false"><i class="fa-solid fa-microphone" aria-hidden="true"></i><span>Voz a texto</span></button>
+      </div>
+      <p class="jo-a11y-status" id="joA11yStatus" role="status" aria-live="polite"></p>
+      <div class="jo-a11y-dictation" id="joA11yDictation" hidden>
+        <label for="joA11yTranscript">Texto reconocido</label>
+        <textarea id="joA11yTranscript" rows="3" readonly></textarea>
+        <button type="button" id="joA11yCopy">Copiar texto</button>
       </div>
     </div>
+    <div class="jo-reading-guide" id="joReadingGuide" aria-hidden="true" hidden></div>
 
     <button type="button" class="jo-floating-button jo-search-trigger" id="joSearchToggle" aria-label="Buscar en el sitio" aria-expanded="false" aria-controls="joSearchPanel" title="Búsqueda">
       <img class="jo-icon-default" src="../assets/ui/buscar.png" alt="" width="56" height="56" decoding="async">
@@ -341,5 +354,5 @@
 
   <script src="preview-countup.js?v=20260930"></script>
   <script src="carrusel-banners.js?v=20261112-4"></script>
-  <script src="accesibilidad.js?v=20261112-2"></script></body>
+  <script src="accesibilidad.js?v=20261112-5"></script></body>
 </html>
