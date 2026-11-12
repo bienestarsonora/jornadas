@@ -1,6 +1,6 @@
 /* Jornadas · Identidad gráfica actualizada (noviembre 2026).
    Afecta únicamente el logotipo del encabezado en preview-oficialia.
-   La imagen proviene del SVG oficial de Bienestar Sonora. */
+   La imagen se sirve localmente desde assets/logo-bienestar.png para evitar bloqueos externos. */
 html body.public-site-page header.site-header .brand {
   display: flex !important;
   flex: 0 0 236px !important;
@@ -20,12 +20,12 @@ html body.public-site-page header.site-header .brand img {
   width: 230px !important;
   height: auto !important;
   max-width: 100% !important;
-  max-height: 66px !important;
+  max-height: 76px !important;
   margin: 0 !important;
   padding: 0 !important;
   object-fit: contain !important;
   object-position: left center !important;
-  filter: none !important; /* El SVG oficial ya trae su identidad cromática. */
+  filter: brightness(0) invert(1) !important; /* La identidad del encabezado institucional se presenta en blanco. */
 }
 html body.public-site-page header.site-header #primaryNav {
   transform: none !important;
