@@ -1,4 +1,8 @@
 /* Jornadas / vista previa oficial: corrección del fondo institucional, 12-nov-2026.
+   El SVG original de 1920x111 conserva su relación de aspecto.
+   background-size:cover evita el letterboxing horizontal de 80px por lado.
+   A 1431px se muestra a aproximadamente 1431x83px y recorta solo 11px verticales.
+
    Fondo cromático original del repositorio; se eliminan overlays magenta que alteraban el arte.
    Ajuste acotado al encabezado superior. No afecta otras secciones. */
 
@@ -16,7 +20,7 @@ html body.public-site-page header.site-header {
   background-image: url('../assets/bk-header-jornadas-2026.svg')!important;
   background-position: center bottom!important;
   background-repeat: no-repeat!important;
-  background-size: 100% 72px!important;
+  background-size: cover!important;
   background-blend-mode: normal!important;
   box-shadow: none!important;
 }
@@ -122,14 +126,14 @@ html body.public-site-page header.site-header #primaryNav > .gov-menu-item > .go
    Se mantiene el espacio de menú y solo se traslada visualmente la marca. */
 @media(min-width:1200px) {
   html body.public-site-page header.site-header .brand {
-    transform:translate(-5px,-2px)!important;
+    transform:translate(-10px,-2px)!important;
   }
   html body.public-site-page header.site-header .brand img {
     width:210px!important;
     max-width:210px!important;
   }
   html body.public-site-page header.site-header #primaryNav {
-    transform:translate(12px,-2px)!important;
+    transform:translate(-4px,-2px)!important;
   }
   html body.public-site-page header.site-header #primaryNav > a,
   html body.public-site-page header.site-header #primaryNav > .gov-menu-item > .gov-menu-trigger {
