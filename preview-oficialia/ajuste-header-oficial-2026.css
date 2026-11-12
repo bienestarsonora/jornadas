@@ -13,7 +13,7 @@ html body.public-site-page header.site-header {
   padding: 0!important;
   border: 0!important;
   background-color: #710A3E!important;
-  background-image: url('../assets/bk-header-oficial.svg')!important;
+  background-image: url('../assets/bk-header-jornadas-2026.svg')!important;
   background-position: center bottom!important;
   background-repeat: no-repeat!important;
   background-size: cover!important;
@@ -115,3 +115,26 @@ html body.public-site-page header.site-header #primaryNav > .gov-menu-item > .go
     max-width: 100%!important;
   }
 }
+
+/* Refinamiento comparativo 12-nov: logotipo y ritmos del menú
+   Original de referencia 1417px: logo comienza aproximadamente en x132,
+   nav comienza en x509 y sus cinco rótulos están más compactos.
+   Se mantiene el espacio de menú y solo se traslada visualmente la marca. */
+@media(min-width:1200px) {
+  html body.public-site-page header.site-header .brand {
+    transform:translateX(-17px)!important;
+  }
+  html body.public-site-page header.site-header .brand img {
+    width:210px!important;
+    max-width:210px!important;
+  }
+  html body.public-site-page header.site-header #primaryNav {
+    transform:translateX(-10px)!important;
+  }
+  html body.public-site-page header.site-header #primaryNav > a,
+  html body.public-site-page header.site-header #primaryNav > .gov-menu-item > .gov-menu-trigger {
+    padding-left:5.5px!important;
+    padding-right:5.5px!important;
+  }
+}
+/* El fondo termina en vino oscuro: sin capas de filtros magenta. */
