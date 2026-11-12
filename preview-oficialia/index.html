@@ -21,6 +21,9 @@
   <link rel="stylesheet" href="header-final.css?v=20261001-LOGO-LOCAL-STABLE">
   <link rel="stylesheet" href="cards-final.css?v=20261001-1">
   <link rel="stylesheet" href="logo-institucional-2026.css?v=20261112-LOGO-LOCAL">
+  <link rel="stylesheet" href="logo-correcto-2026.css?v=20261112-1">
+  <link rel="stylesheet" href="carrusel-banners.css?v=20261112-1">
+  <link rel="stylesheet" href="accesibilidad.css?v=20261112-1">
 </head>
 <body class="public-site-page">
   <a class="gov-skip" href="#main-content">Saltar al contenido principal</a>
@@ -28,7 +31,7 @@
     <div class="title-image" aria-hidden="true"></div>
     <div class="header-shell">
       <a class="brand" href="https://bienestar.sonora.gob.mx/" aria-label="Secretaría de Bienestar">
-        <img src="../assets/logo-bienestar.png" alt="Gobierno de Sonora · Secretaría de Bienestar" decoding="async" fetchpriority="high">
+        <img src="../assets/logo-bienestar-oficial.svg?v=20261112" alt="Gobierno del Estado de Sonora · Secretaría de Bienestar" decoding="async" fetchpriority="high" width="320" height="63">
       </a>
       <nav id="primaryNav" class="global-nav" aria-label="Navegación institucional">
         <div class="gov-menu-item has-dropdown">
@@ -201,6 +204,40 @@
     </section>
   </main>
 
+
+  <!-- Carrusel de banners institucionales de Jornadas, previo al footer -->
+  <section class="jo-banner-section" aria-label="Banners destacados de Jornadas del Bienestar">
+    <div class="jo-banner-inner">
+      <h2 class="jo-banner-caption">Información destacada</h2>
+      <div class="jo-banner-carousel" id="joBannerCarousel" aria-roledescription="carrusel" aria-label="Banners informativos">
+        <article class="jo-banner-slide jo-banner-primary is-active" aria-roledescription="diapositiva" aria-label="1 de 2">
+          <div>
+            <span class="jo-banner-small">Secretaría de Bienestar · Sonora</span>
+            <h3>Jornadas del Bienestar</h3>
+            <p>Servicios y atención ciudadana directamente en las colonias de Hermosillo.</p>
+            <a href="#jornadas">Conoce las jornadas</a>
+          </div>
+          <div class="jo-banner-emphasis" aria-label="6,374 servicios brindados">6,374<span>Servicios brindados</span></div>
+        </article>
+        <article class="jo-banner-slide jo-banner-secondary" aria-roledescription="diapositiva" aria-label="2 de 2" aria-hidden="true">
+          <div>
+            <span class="jo-banner-small">Información territorial</span>
+            <h3>Conoce las colonias atendidas</h3>
+            <p>Consulta el mapa de Jornadas y descubre los resultados de las intervenciones.</p>
+            <a href="#mapa" tabindex="-1">Explorar mapa</a>
+          </div>
+          <div class="jo-banner-decor" aria-hidden="true"><span class="jo-banner-emphasis">SONORA</span></div>
+        </article>
+        <button class="jo-banner-nav jo-banner-prev" type="button" aria-label="Banner anterior"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+        <button class="jo-banner-nav jo-banner-next" type="button" aria-label="Banner siguiente"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <div class="jo-banner-dots" role="group" aria-label="Elegir banner">
+        <button type="button" data-jo-slide="0" aria-current="true" aria-label="Mostrar banner 1"></button>
+        <button type="button" data-jo-slide="1" aria-current="false" aria-label="Mostrar banner 2"></button>
+      </div>
+    </div>
+  </section>
+
   <footer class="official-footer">
     <section class="official-footer-top">
       <div class="official-footer-top-inner">
@@ -265,5 +302,25 @@
   <script src="../config.js"></script>
   <script src="../app.js?v=20260922"></script>
   <script src="../institutional-ui.js?v=20260922"></script>
-  <script src="preview-countup.js?v=20260930"></script></body>
+
+  <!-- Controles flotantes de accesibilidad -->
+  <div class="jo-accessibility" aria-label="Herramientas de accesibilidad">
+    <div class="jo-a11y-panel" id="joA11yPanel" hidden>
+      <div class="jo-a11y-head"><strong>Accesibilidad</strong><button class="jo-a11y-close" id="joA11yClose" type="button" aria-label="Cerrar opciones">×</button></div>
+      <div class="jo-a11y-grid">
+        <button type="button" data-jo-a11y="bigger" aria-label="Aumentar tamaño de texto">A+ Aumentar texto</button>
+        <button type="button" data-jo-a11y="smaller" aria-label="Reducir tamaño de texto">A− Reducir texto</button>
+        <button type="button" data-jo-a11y="contrast" aria-pressed="false">Alto contraste</button>
+        <button type="button" data-jo-a11y="grayscale" aria-pressed="false">Escala de grises</button>
+        <button type="button" data-jo-a11y="links" aria-pressed="false">Subrayar enlaces</button>
+        <button type="button" data-jo-a11y="reset" class="jo-a11y-reset">Restablecer ajustes</button>
+      </div>
+    </div>
+    <button type="button" class="jo-a11y-trigger" id="joA11yToggle" aria-label="Abrir herramientas de accesibilidad" aria-expanded="false" aria-controls="joA11yPanel"><i class="fa-solid fa-universal-access" aria-hidden="true"></i></button>
+    <button type="button" class="jo-top-trigger" id="joScrollTop" aria-label="Volver al inicio"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+  </div>
+
+  <script src="preview-countup.js?v=20260930"></script>
+  <script src="carrusel-banners.js?v=20261112-1"></script>
+  <script src="accesibilidad.js?v=20261112-1"></script></body>
 </html>
