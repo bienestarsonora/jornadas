@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="cards-final.css?v=20261001-1">
   <link rel="stylesheet" href="logo-institucional-2026.css?v=20261112-LOGO-LOCAL">
   <link rel="stylesheet" href="logo-correcto-2026.css?v=20261112-1">
-  <link rel="stylesheet" href="carrusel-banners.css?v=20261112-1">
+  <link rel="stylesheet" href="carrusel-banners.css?v=20261112-2">
   <link rel="stylesheet" href="accesibilidad.css?v=20261112-1">
 </head>
 <body class="public-site-page">
@@ -205,35 +205,25 @@
   </main>
 
 
-  <!-- Carrusel de banners institucionales de Jornadas, previo al footer -->
-  <section class="jo-banner-section" aria-label="Banners destacados de Jornadas del Bienestar">
+
+  <!-- Carrusel institucional: tres banners originales aportados por el usuario -->
+  <section class="jo-banner-section" aria-label="Avisos institucionales">
     <div class="jo-banner-inner">
-      <h2 class="jo-banner-caption">Información destacada</h2>
-      <div class="jo-banner-carousel" id="joBannerCarousel" aria-roledescription="carrusel" aria-label="Banners informativos">
-        <article class="jo-banner-slide jo-banner-primary is-active" aria-roledescription="diapositiva" aria-label="1 de 2">
-          <div>
-            <span class="jo-banner-small">Secretaría de Bienestar · Sonora</span>
-            <h3>Jornadas del Bienestar</h3>
-            <p>Servicios y atención ciudadana directamente en las colonias de Hermosillo.</p>
-            <a href="#jornadas">Conoce las jornadas</a>
-          </div>
-          <div class="jo-banner-emphasis" aria-label="6,374 servicios brindados">6,374<span>Servicios brindados</span></div>
-        </article>
-        <article class="jo-banner-slide jo-banner-secondary" aria-roledescription="diapositiva" aria-label="2 de 2" aria-hidden="true">
-          <div>
-            <span class="jo-banner-small">Información territorial</span>
-            <h3>Conoce las colonias atendidas</h3>
-            <p>Consulta el mapa de Jornadas y descubre los resultados de las intervenciones.</p>
-            <a href="#mapa" tabindex="-1">Explorar mapa</a>
-          </div>
-          <div class="jo-banner-decor" aria-hidden="true"><span class="jo-banner-emphasis">SONORA</span></div>
-        </article>
-        <button class="jo-banner-nav jo-banner-prev" type="button" aria-label="Banner anterior"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
-        <button class="jo-banner-nav jo-banner-next" type="button" aria-label="Banner siguiente"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+      <div class="jo-banner-carousel" id="joBannerCarousel" role="region" aria-roledescription="carrusel" aria-label="Avisos del Gobierno de Sonora">
+        <figure class="jo-banner-slide is-active" aria-roledescription="diapositiva" aria-label="1 de 3" aria-hidden="false">
+          <img src="../assets/banners/banner-whatsapp.webp" width="1290" height="224" alt="¿Cambiaste de número telefónico, dirección o datos personales? Notifícalo por WhatsApp al 662 173 1805." fetchpriority="high" decoding="async">
+        </figure>
+        <figure class="jo-banner-slide" aria-roledescription="diapositiva" aria-label="2 de 3" aria-hidden="true">
+          <img src="../assets/banners/banner-xlv.webp" width="1290" height="224" alt="XLV Festejo del Servidor Público. Celebramos el compromiso de quienes trabajan todos los días por Sonora." loading="lazy" decoding="async">
+        </figure>
+        <figure class="jo-banner-slide" aria-roledescription="diapositiva" aria-label="3 de 3" aria-hidden="true">
+          <img src="../assets/banners/banner-reglas.webp" width="1290" height="224" alt="Consulta las reglas de operación del programa Fortalecimiento Económico para Familias Vulnerables." loading="lazy" decoding="async">
+        </figure>
       </div>
-      <div class="jo-banner-dots" role="group" aria-label="Elegir banner">
-        <button type="button" data-jo-slide="0" aria-current="true" aria-label="Mostrar banner 1"></button>
-        <button type="button" data-jo-slide="1" aria-current="false" aria-label="Mostrar banner 2"></button>
+      <div class="jo-banner-dots" role="group" aria-label="Seleccionar banner">
+        <button type="button" data-jo-slide="0" aria-current="true" aria-label="Mostrar banner 1 de 3"></button>
+        <button type="button" data-jo-slide="1" aria-current="false" aria-label="Mostrar banner 2 de 3"></button>
+        <button type="button" data-jo-slide="2" aria-current="false" aria-label="Mostrar banner 3 de 3"></button>
       </div>
     </div>
   </section>
@@ -321,6 +311,6 @@
   </div>
 
   <script src="preview-countup.js?v=20260930"></script>
-  <script src="carrusel-banners.js?v=20261112-1"></script>
+  <script src="carrusel-banners.js?v=20261112-2"></script>
   <script src="accesibilidad.js?v=20261112-1"></script></body>
 </html>
