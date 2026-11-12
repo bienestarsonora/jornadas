@@ -131,3 +131,46 @@ html.jo-a11y-links body.public-site-page a:not(.brand){text-decoration:underline
  html body.public-site-page .jo-accessibility .jo-search-panel{right:58px!important;width:min(310px,calc(100vw - 84px))!important}
  html body.public-site-page .jo-accessibility .jo-search-panel{bottom:124px!important}
 }
+
+/* Iconos originales recortados de la captura del portal oficial.
+   Imágenes de 56x56 px con fondo transparente, para preservar las tres siluetas exactas. */
+html body.public-site-page .jo-accessibility{
+  width:56px!important;
+  gap:13px!important;
+}
+html body.public-site-page .jo-accessibility .jo-floating-button,
+html body.public-site-page .jo-accessibility .jo-floating-button:hover{
+  width:56px!important;
+  height:56px!important;
+  min-width:56px!important;
+  min-height:56px!important;
+  flex-basis:56px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:50%!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+html body.public-site-page .jo-accessibility .jo-floating-button img{
+  display:block!important;
+  width:56px!important;
+  height:56px!important;
+  min-width:56px!important;
+  min-height:56px!important;
+  max-width:none!important;
+  max-height:none!important;
+  object-fit:contain!important;
+  filter:none!important;
+  transform:none!important;
+}
+@media(max-width:600px){
+  html body.public-site-page .jo-accessibility{width:50px!important;gap:12px!important}
+  html body.public-site-page .jo-accessibility .jo-floating-button,
+  html body.public-site-page .jo-accessibility .jo-floating-button:hover{
+    width:50px!important;height:50px!important;min-width:50px!important;min-height:50px!important;flex-basis:50px!important
+  }
+  html body.public-site-page .jo-accessibility .jo-floating-button img{
+    width:50px!important;height:50px!important;min-width:50px!important;min-height:50px!important
+  }
+}
