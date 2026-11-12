@@ -15,6 +15,8 @@
       const active=i===index;
       slide.classList.toggle('is-active',active);
       slide.setAttribute('aria-hidden',String(!active));
+      const link=slide.querySelector('.jo-banner-link');
+      if(link) link.tabIndex=active?0:-1;
     });
     dots.forEach((dot,i)=>dot.setAttribute('aria-current',String(i===index)));
   }

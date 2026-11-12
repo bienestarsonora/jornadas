@@ -31,6 +31,19 @@
   visibility:visible;
   pointer-events:auto;
 }
+.jo-banner-link{
+  display:block;
+  width:100%;
+  height:100%;
+  text-decoration:none;
+  cursor:pointer;
+}
+.jo-banner-link:focus-visible{
+  outline:3px solid #daa520;
+  outline-offset:-4px;
+  position:relative;
+  z-index:2;
+}
 .jo-banner-slide img{
   display:block;
   width:100%;
