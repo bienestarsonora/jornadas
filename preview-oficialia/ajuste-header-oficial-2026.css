@@ -1,10 +1,6 @@
-/* Jornadas / vista previa oficial: corrección del fondo institucional, 12-nov-2026.
-   El SVG original de 1920x111 conserva su relación de aspecto.
-   background-size:cover evita el letterboxing horizontal de 80px por lado.
-   A 1431px se muestra a aproximadamente 1431x83px y recorta solo 11px verticales.
-
-   Fondo cromático original del repositorio; se eliminan overlays magenta que alteraban el arte.
-   Ajuste acotado al encabezado superior. No afecta otras secciones. */
+/* Encabezado Jornadas: imagen SVG ORIGINAL proporcionada el 13-nov-2026.
+   Sin redibujar, alterar colores, comprimir o aplicar filtros al paisaje.
+   Ajuste exclusivo de la vista previa: logo y resto del micrositio intactos. */
 
 html body.public-site-page header.site-header {
   box-sizing: border-box!important;
@@ -17,7 +13,7 @@ html body.public-site-page header.site-header {
   padding: 0!important;
   border: 0!important;
   background-color: #710A3E!important;
-  background-image: url('../assets/bk-header-jornadas-2026.svg')!important;
+  background-image: url('../assets/bk-header-dessert.svg')!important;
   background-position: center bottom!important;
   background-repeat: no-repeat!important;
   background-size: cover!important;
